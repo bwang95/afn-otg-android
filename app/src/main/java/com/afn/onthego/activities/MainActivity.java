@@ -8,6 +8,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 
 import com.afn.onthego.R;
@@ -16,9 +17,9 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 
-public class MainActivity extends ActionBarActivity implements AdapterView.OnItemClickListener {
+public class MainActivity extends ActionBarActivity {
 
-    ListView activitySelector;
+    private LinearLayout fragmentContainer;
 
     ArrayAdapter<String> activityAdapter;
 
@@ -27,19 +28,7 @@ public class MainActivity extends ActionBarActivity implements AdapterView.OnIte
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        String[] activityArray = {
-                "Learn",
-                "About"
-        };
-
-        ArrayList<String> activityList = new ArrayList<>();
-        Collections.addAll(activityList, activityArray);
-
-        activitySelector = (ListView) findViewById(R.id.lv_main_activity_selector);
-        activityAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, activityList);
-
-        activitySelector.setAdapter(activityAdapter);
-        activitySelector.setOnItemClickListener(this);
+        fragmentContainer = (LinearLayout) findViewById(R.id.ll_main_fragment_container);
     }
 
 
@@ -63,15 +52,5 @@ public class MainActivity extends ActionBarActivity implements AdapterView.OnIte
         }
 
         return super.onOptionsItemSelected(item);
-    }
-
-    @Override
-    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        String item = activityAdapter.getItem(position);
-        if(item.equals("Learn")){
-            Intent i = new Intent(this, LearnActivity.class);
-            startActivity(i);
-        } else if (item.equals("About"))
-            startActivity(new Intent(this, AboutActivity.class));
     }
 }
