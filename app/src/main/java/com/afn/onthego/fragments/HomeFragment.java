@@ -7,8 +7,17 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.ListView;
 
 import com.afn.onthego.R;
+import com.afn.onthego.storage.KeyList;
+
+import java.security.Key;
+import java.util.ArrayList;
+import java.util.Collections;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -19,31 +28,58 @@ import com.afn.onthego.R;
  * create an instance of this fragment.
  */
 public class HomeFragment extends Fragment {
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-
     private OnFragmentInteractionListener mListener;
+    private ArrayAdapter<String> navAdapter;
+
+    private View.OnClickListener aboutListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            if(mListener != null)
+                mListener.onHomeFragmentSelection(KeyList.Navigation.ABOUT);
+        }
+    };
+
+    private ListView.OnItemClickListener navigationListener = new AdapterView.OnItemClickListener() {
+        @Override
+        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+            String item = navAdapter.getItem(position);
+
+            String ret = "";
+
+            switch (item) {
+                case "Learn":
+                    ret = KeyList.Navigation.LEARN;
+                    break;
+                case "Connect":
+                    ret = KeyList.Navigation.CONNECT;
+                    break;
+                case "Volunteer":
+                    ret = KeyList.Navigation.VOLUNTEER;
+                    break;
+                case "Donate":
+                    ret = KeyList.Navigation.DONATE;
+                    break;
+            }
+
+            if(mListener != null)
+                mListener.onHomeFragmentSelection(ret);
+
+        }
+    };
+
+    private static String[] fragmentText = {
+        "Learn", "Volunteer", "Connect", "Donate"
+    };
 
     /**
      * Use this factory method to create a new instance of
      * this fragment using the provided parameters.
      *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
      * @return A new instance of fragment HomeFragment.
      */
-    // TODO: Rename and change types and number of parameters
-    public static HomeFragment newInstance(String param1, String param2) {
+    public static HomeFragment newInstance() {
         HomeFragment fragment = new HomeFragment();
         Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
         fragment.setArguments(args);
         return fragment;
     }
@@ -55,24 +91,26 @@ public class HomeFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
+        if (getArguments() != null);
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_home, container, false);
-    }
+        View view = inflater.inflate(R.layout.fragment_home, container, false);
 
-    // TODO: Rename method, update argument and hook method into UI event
-    public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
-        }
+        Button about = (Button) view.findViewById(R.id.b_home_about);
+        ListView fragments = (ListView) view.findViewById(R.id.lv_home_fragment_list);
+
+        ArrayList<String> fragList = new ArrayList<>();
+        Collections.addAll(fragList, fragmentText);
+        navAdapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1, fragList);
+        fragments.setAdapter(navAdapter);
+
+        fragments.setOnItemClickListener(navigationListener);
+        about.setOnClickListener(aboutListener);
+
+        return view;
     }
 
     @Override
@@ -103,8 +141,7 @@ public class HomeFragment extends Fragment {
      * >Communicating with Other Fragments</a> for more information.
      */
     public interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
-        public void onFragmentInteraction(Uri uri);
+        public void onHomeFragmentSelection(String key);
     }
 
 }
