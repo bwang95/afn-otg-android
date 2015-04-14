@@ -12,4 +12,8 @@ public class KeyList {
         public static final String VOLUNTEER = "volunteer_fragment";
         public static final String CONNECT = "connect_activity";
     }
+
+    public static class LearnRequest {
+        public static final String URL = "http://austinfreenet.pythonanywhere.com/";
+    }
 }
