@@ -2,19 +2,14 @@ package com.afn.onthego.activities;
 
 import android.content.Intent;
 import android.net.Uri;
+import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.ActionBarActivity;
-import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.FrameLayout;
-import android.widget.LinearLayout;
-import android.widget.ListView;
 
 import com.afn.onthego.R;
 import com.afn.onthego.fragments.AboutFragment;
@@ -24,16 +19,13 @@ import com.afn.onthego.fragments.LearnFragment;
 import com.afn.onthego.fragments.VolunteerFragment;
 import com.afn.onthego.storage.KeyList;
 
-import java.util.ArrayList;
-import java.util.Collections;
-
 
 public class MainActivity extends ActionBarActivity
         implements HomeFragment.OnFragmentInteractionListener,
         AboutFragment.OnFragmentInteractionListener,
         DonateFragment.OnFragmentInteractionListener,
         LearnFragment.OnFragmentInteractionListener,
-        VolunteerFragment.OnFragmentInteractionListener{
+        VolunteerFragment.OnFragmentInteractionListener {
 
     private static final String LOG_TAG = "MainActivity";
     private FrameLayout fragmentContainer;
@@ -53,6 +45,7 @@ public class MainActivity extends ActionBarActivity
 
     private void addFragment(Fragment fragment) {
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        transaction.setCustomAnimations(R.anim.slide_in_right, R.anim.slide_out_right, R.anim.slide_in_right, R.anim.slide_out_right);
         transaction.add(R.id.ll_main_fragment_container, fragment);
         transaction.addToBackStack(null);
         transaction.commit();
@@ -79,6 +72,9 @@ public class MainActivity extends ActionBarActivity
         if (id == R.id.action_settings) {
             return true;
         }
+        if (id == android.R.id.home) {
+            onBackPressed();
+        }
 
         return super.onOptionsItemSelected(item);
     }
@@ -91,23 +87,33 @@ public class MainActivity extends ActionBarActivity
     @Override
     public void onHomeFragmentSelection(String key) {
         Log.d(LOG_TAG, "Switching fragments with key " + key);
-        switch(key) {
-            case KeyList.Navigation.ABOUT :
+        switch (key) {
+            case KeyList.Navigation.ABOUT:
                 addFragment(AboutFragment.newInstance());
+                getSupportActionBar().setDisplayHomeAsUpEnabled(true);
                 break;
-            case KeyList.Navigation.DONATE :
+            case KeyList.Navigation.DONATE:
                 addFragment(DonateFragment.newInstance());
+                getSupportActionBar().setDisplayHomeAsUpEnabled(true);
                 break;
-            case KeyList.Navigation.VOLUNTEER :
+            case KeyList.Navigation.VOLUNTEER:
                 addFragment(VolunteerFragment.newInstance());
+                getSupportActionBar().setDisplayHomeAsUpEnabled(true);
                 break;
-            case KeyList.Navigation.LEARN :
+            case KeyList.Navigation.LEARN:
                 addFragment(LearnFragment.newInstance("", ""));
+                getSupportActionBar().setDisplayHomeAsUpEnabled(true);
                 break;
-            case KeyList.Navigation.CONNECT :
+            case KeyList.Navigation.CONNECT:
                 Intent i = new Intent(this, ConnectActivity.class);
                 startActivity(i);
                 break;
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+        getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+        super.onBackPressed();
     }
 }

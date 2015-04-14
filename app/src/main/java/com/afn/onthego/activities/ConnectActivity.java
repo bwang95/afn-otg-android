@@ -1,21 +1,24 @@
 package com.afn.onthego.activities;
 
+import android.content.Intent;
 import android.location.Criteria;
 import android.location.Location;
 import android.location.LocationManager;
-import android.location.LocationProvider;
-import android.support.v4.app.FragmentTransaction;
-import android.support.v7.app.ActionBarActivity;
+import android.net.Uri;
 import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 
 import com.afn.onthego.R;
+import com.afn.onthego.storage.KeyList;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
+import com.google.android.gms.maps.model.MarkerOptions;
 
 public class ConnectActivity extends ActionBarActivity implements OnMapReadyCallback {
 
@@ -63,6 +66,12 @@ public class ConnectActivity extends ActionBarActivity implements OnMapReadyCall
     @Override
     public void onMapReady(GoogleMap googleMap) {
         map = googleMap;
+        setInitialMapState();
+        placeMarkers();
+
+    }
+
+    private void setInitialMapState() {
         map.setMyLocationEnabled(true);
 
 
@@ -76,12 +85,39 @@ public class ConnectActivity extends ActionBarActivity implements OnMapReadyCall
         String provider = locManager.getBestProvider(criteria, true);
 
         Location location = locManager.getLastKnownLocation(provider);
-        LatLng latLngLocation = new LatLng(30.269932, -97.715876);
+
+        int i = KeyList.Locations.AFN_ROSEWOOD.index;
+
+        LatLng latLngLocation = KeyList.Locations.LAT_LNGS[i];
 
         if (location != null) {
-            latLngLocation = new LatLng(location.getLatitude(),
+            latLngLocation = new LatLng(
+                    location.getLatitude(),
                     location.getLongitude());
         }
-        map.moveCamera(CameraUpdateFactory.newLatLngZoom(latLngLocation, 12));
+        map.moveCamera(CameraUpdateFactory.newLatLngZoom(latLngLocation, 13));
+    }
+
+    private void placeMarkers() {
+        MarkerOptions options = new MarkerOptions();
+
+        options.snippet("Tap for directions");
+
+        for(int k = 0; k < KeyList.Locations.LAT_LNGS.length; k++) {
+            options.title(KeyList.Locations.NAMES[k]);
+            options.position(KeyList.Locations.LAT_LNGS[k]);
+            map.addMarker(options);
+        }
+
+        map.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
+            @Override
+            public void onInfoWindowClick(Marker marker) {
+                Uri gmmIntentUri = Uri.parse("http://maps.google.com/maps?daddr=" +
+                        marker.getPosition().latitude + "," +
+                        marker.getPosition().longitude);
+                Intent navIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
+                startActivity(navIntent);
+            }
+        });
     }
 }
