@@ -8,9 +8,12 @@
 
 <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="title_activity_splash">SplashActivity</string>
+    <string name="title_activity_splash"></string>
 
     <string name="hello_world">Hello world!</string>
-    <string name="title_activity_connect">ConnectActivity</string>
+    <string name="title_activity_connect">Connect</string>
     <string name="maps_api_key">AIzaSyDcryPqFu_Hh18XA5UkgecTqX1EztIQEm4</string>
+    <string name="home_about_button">About this Application</string>
+    <string name="home_header">Home</string>
+    <string name="connect_question">Questions?</string>
 </resources>

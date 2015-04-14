@@ -1,9 +1,44 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
-    android:layout_height="match_parent" tools:context="com.afn.onthego.fragments.HomeFragment">
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.afn.onthego.fragments.HomeFragment"
+    android:background="@color/background_material_light">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView android:layout_width="match_parent" android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+    <TextView
+        android:id="@+id/tv_home_header"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:padding="10dp"
+        android:text="@string/home_header"
+        android:textColor="@android:color/black"
+        android:textSize="@dimen/header_text" />
 
-</FrameLayout>
+    <ListView
+        android:id="@+id/lv_home_fragment_list"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/v_home_about_border"
+        android:layout_below="@+id/tv_home_header"
+        android:divider="@color/color_divider"
+        android:dividerHeight="1px"
+        android:footerDividersEnabled="true"
+        android:headerDividersEnabled="true" />
+
+    <View
+        android:id="@id/v_home_about_border"
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:layout_above="@+id/b_home_about"
+        android:background="@android:color/black" />
+
+    <Button
+        android:id="@id/b_home_about"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@color/background_material_light"
+        android:text="@string/home_about_button"/>
+</RelativeLayout>
