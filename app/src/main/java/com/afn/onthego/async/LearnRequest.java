@@ -1,5 +1,6 @@
 package com.afn.onthego.async;
 
+import android.content.Context;
 import android.os.AsyncTask;
 
 import com.afn.onthego.storage.Storage;
@@ -21,6 +22,13 @@ public class LearnRequest extends AsyncTask<Void, Void, String> {
     private OkHttpClient client;
     private Storage storage;
     private String url;
+
+    Context context;
+
+    public LearnRequest(Context context)
+    {
+        this.context = context;
+    }
 
     String doGetRequest() throws IOException
     {
@@ -48,8 +56,20 @@ public class LearnRequest extends AsyncTask<Void, Void, String> {
 
     @Override
     protected String doInBackground(Void... params) {
-        storage = Storage.getInstance();
+        storage = Storage.getInstance(context);
+        String jsonResponse;
+        try {
+            jsonResponse = doGetRequest();
+        }
+        catch (IOException e)
+        {
+            jsonResponse = "";
+        }
 
+        if(jsonResponse != null && !jsonResponse.equals(""))
+        {
+            storage.storeAndSetLearningModules(jsonResponse);
+        }
 
         return null;
     }
