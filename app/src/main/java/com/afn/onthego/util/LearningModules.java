@@ -3,12 +3,14 @@ package com.afn.onthego.util;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
+import android.util.Log;
 
 import java.io.IOException;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.Map;
 
 import com.afn.onthego.storage.KeyList;
 import com.google.gson.Gson;
@@ -83,6 +85,34 @@ public class LearningModules {
         }
     }
 
+    /*
+    Returns true if webGet was successful and if the json has changed
+    Else returns false
+     */
+    public boolean webUpdate() throws IOException
+    {
+        String old_json = json;
+        try
+        {
+            webGetSuccess = setJsonFromWeb();
+        }
+        catch (IOException e)
+        {
+            webGetSuccess = false;
+        }
+
+        if(webGetSuccess && !old_json.equals(json))
+        {
+            setJsonToPrefs();
+            setLearningModules();
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
     public String getJson()
     {
         return json;
@@ -112,14 +142,27 @@ public class LearningModules {
         // iterate through list and add modules
         for(HashMap<String, String> m : myList)
         {
+            for(Map.Entry<String, String> entry : m.entrySet())
+            {
+                Log.d("LearningModules", entry.getKey() + " " + entry.getValue());
+            }
             LearningModule learningModule = new LearningModule();
             learningModule.setName(m.get(KeyList.LearningModulesKeys.LEARNING_MODULE_NAME));
             learningModule.setType(m.get(KeyList.LearningModulesKeys.LEARNING_MODULE_TYPE));
             learningModule.setData(m.get(KeyList.LearningModulesKeys.LEARNING_MODULE_DATA));
             learningModule.setPosition(m.get(KeyList.LearningModulesKeys.LEARNING_MODULE_POSITION));
             learningModulesArray.add(learningModule);
+            Log.d("LearningModules", "Position: " + learningModule.getPosition());
         }
 
+        if(learningModulesArray.isEmpty())
+        {
+            Log.d("LearningModules", "Learning Modules is Empty");
+        }
+        else
+        {
+            Log.d("LearningModules", "Number of modules " + Integer.toString(learningModulesArray.size()));
+        }
         // sort learning modules
         Collections.sort(learningModulesArray);
     }
@@ -127,6 +170,15 @@ public class LearningModules {
     public ArrayList<LearningModule> getLearningModulesArray()
     {
         return learningModulesArray;
+    }
+
+    public ArrayList<String> getModulesNamesArray() {
+        ArrayList<String> modulesNamesArray = new ArrayList<String>();
+        for(LearningModule learningModule : learningModulesArray)
+        {
+            modulesNamesArray.add(learningModule.getName());
+        }
+        return modulesNamesArray;
     }
 
     public boolean isWebGetSuccess()

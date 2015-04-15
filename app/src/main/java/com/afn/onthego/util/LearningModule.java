@@ -4,6 +4,7 @@ package com.afn.onthego.util;
  * Created by Kyle on 4/14/2015.
  */
 public class LearningModule implements Comparable<LearningModule> {
+
     public String name;
     public String type;
     public String data;
@@ -53,6 +54,6 @@ public class LearningModule implements Comparable<LearningModule> {
     }
 
     public int compareTo(LearningModule another) {
-        return this.position.compareTo(another.position);
+        return this.position.compareTo(another.getPosition());
     }
 }

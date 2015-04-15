@@ -19,7 +19,7 @@ public class Storage {
         learningModules = new LearningModules(context);
     }
 
-    private LearningModules getLearningModules()
+    public LearningModules getLearningModules()
     {
         return learningModules;
     }

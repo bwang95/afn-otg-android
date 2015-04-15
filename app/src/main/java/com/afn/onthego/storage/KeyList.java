@@ -16,9 +16,12 @@ public class KeyList {
     public static class LearningModulesKeys {
         public static final String URL = "http://austinfreenet.pythonanywhere.com/";
         public static final String PREFS_LEARNING_MODULES = "learning_modules";
-        public static final String LEARNING_MODULE_NAME = "learning_module_name";
-        public static final String LEARNING_MODULE_TYPE = "learning_module_type";
-        public static final String LEARNING_MODULE_DATA = "learning_module_data";
-        public static final String LEARNING_MODULE_POSITION = "learning_module_name";
+        public static final String LEARNING_MODULE_NAME = "name";
+        public static final String LEARNING_MODULE_TYPE = "type";
+        public static final String LEARNING_MODULE_DATA = "data";
+        public static final String LEARNING_MODULE_POSITION = "position";
+        public static final String TYPE_YOUTUBE = "YouTube";
+        public static final String TYPE_WEBSITE = "Website";
+        public static final String TYPE_PDF = "PDF";
     }
 }
