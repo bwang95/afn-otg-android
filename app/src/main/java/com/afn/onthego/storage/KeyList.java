@@ -13,11 +13,8 @@ public class KeyList {
         public static final String CONNECT = "connect_activity";
     }
 
-    public static class LearnRequest {
+    public static class LearningModulesKeys {
         public static final String URL = "http://austinfreenet.pythonanywhere.com/";
-    }
-
-    public static class Storage {
         public static final String PREFS_LEARNING_MODULES = "learning_modules";
         public static final String LEARNING_MODULE_NAME = "learning_module_name";
         public static final String LEARNING_MODULE_TYPE = "learning_module_type";
