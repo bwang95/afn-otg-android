@@ -14,6 +14,7 @@ public class LearnRequest extends AsyncTask<Void, Void, Void> {
     private Storage storage;
     private Context context;
 
+    // This is initiated in the MainActivity onCreate thread
     public LearnRequest(Context context)
     {
         this.context = context;
