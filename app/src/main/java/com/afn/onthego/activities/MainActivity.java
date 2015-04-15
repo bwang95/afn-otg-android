@@ -17,6 +17,7 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 
 import com.afn.onthego.R;
+import com.afn.onthego.async.LearnRequest;
 import com.afn.onthego.fragments.AboutFragment;
 import com.afn.onthego.fragments.DonateFragment;
 import com.afn.onthego.fragments.HomeFragment;
@@ -49,6 +50,10 @@ public class MainActivity extends ActionBarActivity
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.add(R.id.ll_main_fragment_container, home);
         transaction.commit();
+
+        // start the async activity to get the learning modules
+        LearnRequest learnRequest = new LearnRequest(this);
+        learnRequest.execute();
     }
 
     private void addFragment(Fragment fragment) {
