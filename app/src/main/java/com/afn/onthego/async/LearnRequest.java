@@ -1,28 +1,31 @@
 package com.afn.onthego.async;
 
+import android.content.Context;
 import android.os.AsyncTask;
 
-import com.squareup.okhttp.Request;
+import com.afn.onthego.storage.Storage;
+
 
 /**
  * Created by brian on 4/8/15.
  */
-public class LearnRequest extends AsyncTask<Void, Void, String> {
+public class LearnRequest extends AsyncTask<Void, Void, Void> {
 
-    private LearnRequestListener callback;
-    private Request request;
+    private Storage storage;
+    private Context context;
 
-    public LearnRequest(LearnRequestListener callback) {
-        this.callback = callback;
+    // This is initiated in the MainActivity onCreate thread
+    public LearnRequest(Context context)
+    {
+        this.context = context;
     }
 
     @Override
-    protected String doInBackground(Void... params) {
+    protected Void doInBackground(Void... params) {
+
+        // this will initialize the LearningModules
+        storage = Storage.getInstance(context);
         return null;
     }
 
-    public interface LearnRequestListener {
-        void onLearnRequestFailure();
-        void onLearnRequestSuccess(String result);
-    }
 }

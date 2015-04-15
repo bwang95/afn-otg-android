@@ -15,6 +15,7 @@ public class KeyList {
         public static final String CONNECT = "connect_activity";
     }
 
+<<<<<<< HEAD
     public static enum Locations {
         AFN_ROSEWOOD(0), ARCH(1), BLACKLAND(2), CG_SENIOR_CTR(3),
         RZ_NHOOD_CTR(4), SAUS_NHOOD_CTR(5), ST_JOHNS_CTR(6), TRINITY_CTR(7);
@@ -46,6 +47,7 @@ public class KeyList {
         Locations(int i) {
             index = i;
         }
+=======
     public static class LearningModulesKeys {
         public static final String URL = "http://austinfreenet.pythonanywhere.com/";
         public static final String PREFS_LEARNING_MODULES = "learning_modules";
@@ -56,5 +58,6 @@ public class KeyList {
         public static final String TYPE_YOUTUBE = "YouTube";
         public static final String TYPE_WEBSITE = "Website";
         public static final String TYPE_PDF = "PDF";
+>>>>>>> master
     }
 }

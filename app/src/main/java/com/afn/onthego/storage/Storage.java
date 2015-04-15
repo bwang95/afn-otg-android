@@ -1,15 +1,30 @@
 package com.afn.onthego.storage;
 
+import android.content.Context;
+
+import com.afn.onthego.util.LearningModules;
+
+
 /**
  * Created by brian on 4/8/15.
  */
 public class Storage {
-    Storage instance;
+    private static Storage instance;
 
-    private Storage() {
+    private Context context;
+    private LearningModules learningModules;
+
+    private Storage(Context context) {
+        this.context = context;
+        learningModules = new LearningModules(context);
     }
 
-    public Storage getInstance() {
-        return instance == null ? instance = new Storage() : instance;
+    public LearningModules getLearningModules()
+    {
+        return learningModules;
+    }
+
+    public static Storage getInstance(Context context) {
+        return instance == null ? instance = new Storage(context) : instance;
     }
 }
