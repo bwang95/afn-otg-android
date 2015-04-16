@@ -14,6 +14,7 @@ import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.webkit.URLUtil;
+import android.webkit.WebView;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
@@ -53,6 +54,7 @@ public class LearnFragment extends MainFragment
 
     private SwipeRefreshLayout swipeRefreshLayout;
     private PDFView pdfView;
+    private WebView webView;
     ProgressDialog progressDialog;
 
     /**
@@ -111,9 +113,13 @@ public class LearnFragment extends MainFragment
     public void handleWebsite(LearningModule learningModule) {
         String website_url = learningModule.getData();
         if (URLUtil.isValidUrl(website_url)) {
-            Intent website_intent = new Intent(Intent.ACTION_VIEW);
+            webView = (WebView) getView().findViewById(R.id.wv_learn_website);
+            webView.loadUrl(website_url);
+            webView.setVisibility(View.VISIBLE);
+            swipeRefreshLayout.setEnabled(false);
+/*            Intent website_intent = new Intent(Intent.ACTION_VIEW);
             website_intent.setData(Uri.parse(website_url));
-            startActivity(website_intent);
+            startActivity(website_intent);*/
         } else {
             Toast.makeText(getActivity(), website_url + " is an invalid URL", Toast.LENGTH_LONG).show();
         }
@@ -146,6 +152,7 @@ public class LearnFragment extends MainFragment
                 R.color.holo_red_light);
         listView = (ListView) v.findViewById(R.id.lv_learn_module_list);
         pdfView = (PDFView) v.findViewById(R.id.pdfv_learn_pdf);
+        webView = (WebView) v.findViewById(R.id.wv_learn_website);
         Storage storage = Storage.getInstance(getActivity());
         learningModules = storage.getLearningModules().getLearningModulesArray();
         ArrayList<String> modulesNameArray = storage.getLearningModules().getModulesNamesArray();
@@ -233,6 +240,25 @@ public class LearnFragment extends MainFragment
             pdfView.startAnimation(slideOut);
             return false;
         }
+        else if (webView.getVisibility() == View.VISIBLE)
+        {
+            swipeRefreshLayout.setEnabled(true);
+            Animation slideOut = AnimationUtils.loadAnimation(getActivity(), R.anim.slide_out_down);
+            slideOut.setAnimationListener(new Animation.AnimationListener() {
+                @Override
+                public void onAnimationStart(Animation animation) {}
+                @Override
+                public void onAnimationEnd(Animation animation) {
+                    webView.setVisibility(View.GONE);
+                    webView.loadUrl("about:blank");
+                }
+                @Override
+                public void onAnimationRepeat(Animation animation) {}
+            });
+            webView.startAnimation(slideOut);
+            return false;
+        }
+
         return super.onBackPressed();
     }
 
