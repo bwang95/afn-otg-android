@@ -16,4 +16,43 @@
     <string name="home_about_button">About this Application</string>
     <string name="home_header">Home</string>
     <string name="connect_question">Questions?</string>
+    <string name="about_title">So who made this thing, anyway?</string>
+
+    <string-array name="contributors_libraries">
+        <item>Contributors</item>
+        <item>Brian Wang</item>
+        <item>Kyle Nicola</item>
+        <item>Kelsey Mayfield</item>
+        <item>Lauren McKenna</item>
+        <item>Faisal Aldilaijan</item>
+        <item>Will Aldridge</item>
+        <item></item>
+        <item>Android Repository</item>
+        <item>iOS Repository</item>
+        <item>MIT License</item>
+        <item></item>
+        <item>Library Attributions</item>
+        <item>Nine Old Androids</item>
+        <item>PDFView</item>
+        <item>OkHttp</item>
+    </string-array>
+
+    <string-array name="cl_actions">
+        <item></item>
+        <item>http://github.com/bwang95</item>
+        <item>http://github.com/kylenicola</item>
+        <item>http://github.com/kelseymayfield</item>
+        <item>http://github.com/mckennatx</item>
+        <item>http://github.com/aldilaff</item>
+        <item>http://github.com/scionix</item>
+        <item></item>
+        <item>http://github.com/bwang95/afn-otg-android</item>
+        <item>http://github.com/mckennatx/afn-otg-ios</item>
+        <item>https://github.com/bwang95/afn-otg-android/blob/master/LICENSE</item>
+        <item></item>
+        <item></item>
+        <item>https://github.com/JakeWharton/NineOldAndroids</item>
+        <item>https://github.com/JoanZapata/android-pdfview</item>
+        <item>https://github.com/square/okhttp</item>
+    </string-array>
 </resources>

@@ -5,6 +5,7 @@ import android.os.AsyncTask;
 import android.util.Log;
 
 import com.afn.onthego.storage.KeyList;
+import com.afn.onthego.storage.Storage;
 import com.squareup.okhttp.OkHttpClient;
 import com.squareup.okhttp.Request;
 import com.squareup.okhttp.Response;
@@ -21,6 +22,9 @@ import java.util.Scanner;
 public class PDFRequest extends AsyncTask<Void, Void, String> {
 
     private static final String LOG_TAG = "PDFRequest";
+    //Chunk size of PDF read, in bytes.
+    private static final int CHUNK_SIZE = 8192;
+
     private Context context;
     private PDFRequestListener callback;
     private String url;
@@ -34,7 +38,7 @@ public class PDFRequest extends AsyncTask<Void, Void, String> {
     @Override
     protected String doInBackground(Void... params) {
         //Obtain URL and build request from that
-        OkHttpClient client = new OkHttpClient();
+        OkHttpClient client = Storage.getInstance(context).getHttpClient();
         Request request = new Request.Builder().url(url).build();
 
         //Request data, handling failure cases
@@ -42,11 +46,14 @@ public class PDFRequest extends AsyncTask<Void, Void, String> {
         String output = null;
         try {
             response = client.newCall(request).execute();
-            if(!response.isSuccessful())
+            if(!response.isSuccessful()) {
+                //Sleep to prevent infinite loading dialog.
+                Thread.sleep(250);
                 return null;
+            }
 
 
-            output = "temp.pdf";//url.substring(url.lastIndexOf('/'));
+            output = "temp";//url.substring(url.lastIndexOf('/'));
             File file = File.createTempFile(output, ".pdf", context.getCacheDir());
             output = file.getAbsolutePath();
 
@@ -54,14 +61,14 @@ public class PDFRequest extends AsyncTask<Void, Void, String> {
             FileOutputStream out = new FileOutputStream(file);
             InputStream stream = response.body().byteStream();
 
-            byte[] buffer = new byte[128];
+            byte[] buffer = new byte[CHUNK_SIZE];
             int result;
             while((result = stream.read(buffer)) > 0) {
                 out.write(buffer, 0, result);
                 out.flush();
             }
             out.close();
-            stream.close();
+            response.body().close();
 
             Log.e(LOG_TAG, output);
         } catch (Exception e) {

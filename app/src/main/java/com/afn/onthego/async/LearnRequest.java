@@ -21,10 +21,12 @@ public class LearnRequest extends AsyncTask<Void, Void, String> {
 
     private static final String LOG_TAG = "LearnRequest";
     private LearnRequestListener callback;
+    private Context context;
 
     // This is initiated in the MainActivity onCreate thread
-    public LearnRequest(LearnRequestListener callback)
+    public LearnRequest(Context context, LearnRequestListener callback)
     {
+        this.context = context;
         if(callback == null)
             throw new IllegalArgumentException("Callback cannot be null!");
         this.callback = callback;
@@ -34,7 +36,7 @@ public class LearnRequest extends AsyncTask<Void, Void, String> {
     protected String doInBackground(Void... params) {
         //Obtain URL and build request from that
         String url = KeyList.LearningModulesKeys.URL;
-        OkHttpClient client = new OkHttpClient();
+        OkHttpClient client = Storage.getInstance(context).getHttpClient();
         Request request = new Request.Builder().url(url).build();
 
         //Request data, handling failure cases
@@ -46,6 +48,7 @@ public class LearnRequest extends AsyncTask<Void, Void, String> {
                 return null;
 
             output = response.body().string();
+            response.body().close();
         } catch (Exception e) {
             Log.e(LOG_TAG, "Error getting data!", e);
             return null;

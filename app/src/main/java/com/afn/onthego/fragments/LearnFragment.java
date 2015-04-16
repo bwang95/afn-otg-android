@@ -180,13 +180,14 @@ public class LearnFragment extends MainFragment
 
     @Override
     public void onRefresh() {
-        new LearnRequest(this).execute();
+        new LearnRequest(getActivity(), this).execute();
     }
 
     public void onPDFRequestSuccess(String filename) {
         progressDialog.hide();
         pdfView.fromFile(new File(filename)).load();
         pdfView.setVisibility(View.VISIBLE);
+        swipeRefreshLayout.setEnabled(false);
     }
 
     @Override
@@ -205,6 +206,7 @@ public class LearnFragment extends MainFragment
 
     public void onPDFRequestFailure() {
         progressDialog.hide();
+        Toast.makeText(getActivity(), "Something went wrong loading the PDF file.", Toast.LENGTH_LONG).show();
     }
 
     @Override
@@ -215,6 +217,7 @@ public class LearnFragment extends MainFragment
 
     public boolean onBackPressed() {
         if (pdfView.getVisibility() == View.VISIBLE) {
+            swipeRefreshLayout.setEnabled(true);
             Animation slideOut = AnimationUtils.loadAnimation(getActivity(), R.anim.slide_out_down);
             slideOut.setAnimationListener(new Animation.AnimationListener() {
                 @Override
@@ -222,12 +225,12 @@ public class LearnFragment extends MainFragment
                 @Override
                 public void onAnimationEnd(Animation animation) {
                     pdfView.setVisibility(View.GONE);
+                    pdfView.recycle();
                 }
                 @Override
                 public void onAnimationRepeat(Animation animation) {}
             });
             pdfView.startAnimation(slideOut);
-//            pdfView.setVisibility(View.GONE);
             return false;
         }
         return super.onBackPressed();

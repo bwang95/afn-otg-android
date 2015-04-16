@@ -4,6 +4,7 @@ import android.content.Context;
 
 import com.afn.onthego.async.LearnRequest;
 import com.afn.onthego.util.LearningModules;
+import com.squareup.okhttp.OkHttpClient;
 
 
 /**
@@ -14,11 +15,14 @@ public class Storage implements LearnRequest.LearnRequestListener {
 
     private Context context;
     private LearningModules learningModules;
+    private OkHttpClient httpClient;
 
     private Storage(Context context) {
         this.context = context;
         learningModules = new LearningModules(context);
-        new LearnRequest(this).execute();
+        httpClient = new OkHttpClient();
+
+        new LearnRequest(context, this).execute();
     }
 
     public LearningModules getLearningModules()
@@ -38,5 +42,9 @@ public class Storage implements LearnRequest.LearnRequestListener {
     @Override
     public void onLearnRequestFailure() {
 
+    }
+
+    public OkHttpClient getHttpClient() {
+        return httpClient;
     }
 }
