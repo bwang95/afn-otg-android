@@ -1,11 +1,12 @@
 package com.afn.onthego.fragments;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.util.Log;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,6 +17,7 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import com.afn.onthego.R;
+import com.afn.onthego.async.LearnRequest;
 import com.afn.onthego.storage.KeyList;
 import com.afn.onthego.storage.Storage;
 import com.afn.onthego.util.LearningModule;
@@ -30,10 +32,18 @@ import java.util.ArrayList;
  * Use the {@link LearnFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class LearnFragment extends Fragment {
-    public ArrayList<LearningModule> learningModules;
-
+public class LearnFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener, LearnRequest.LearnRequestListener {
     private OnFragmentInteractionListener mListener;
+
+    public ListView listView;
+    public ArrayAdapter<String> listAdapter;
+
+    public ArrayList<LearningModule> learningModules;
+    public ArrayList<String> modulesNameArray;
+
+    private Context context;
+
+    private SwipeRefreshLayout swipeRefreshLayout;
 
     /**
      * Use this factory method to create a new instance of
@@ -108,11 +118,17 @@ public class LearnFragment extends Fragment {
         // Inflate the layout for this fragment
 
         View v = inflater.inflate(R.layout.fragment_learn, container, false);
-        ListView listView = (ListView) v.findViewById(R.id.listView);
+        swipeRefreshLayout = (SwipeRefreshLayout) v.findViewById(R.id.swipe_container);
+        swipeRefreshLayout.setOnRefreshListener(this);
+        swipeRefreshLayout.setColorSchemeResources(android.R.color.holo_blue_bright,
+                android.R.color.holo_green_light,
+                android.R.color.holo_orange_light,
+                android.R.color.holo_red_light);
+        listView = (ListView) v.findViewById(R.id.listView);
         Storage storage = Storage.getInstance(getActivity());
         learningModules = storage.getLearningModules().getLearningModulesArray();
         ArrayList<String> modulesNameArray = storage.getLearningModules().getModulesNamesArray();
-        ArrayAdapter<String> listAdapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1, modulesNameArray);
+        listAdapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1, modulesNameArray);
 
         listView.setAdapter(listAdapter);
         listView.setOnItemClickListener(learnModuleListener);
@@ -142,6 +158,31 @@ public class LearnFragment extends Fragment {
     public void onDetach() {
         super.onDetach();
         mListener = null;
+    }
+
+    @Override
+    public void onRefresh() {
+        new LearnRequest(getActivity(), this).execute();
+    }
+
+    @Override
+    public void onLearnRequestSuccess(String json) {
+        Storage storage = Storage.getInstance(getActivity());
+        storage.getLearningModules().updateModules(json);
+        modulesNameArray = storage.getLearningModules().getModulesNamesArray();
+        listAdapter.clear();
+        for(String s : modulesNameArray)
+        {
+            listAdapter.add(s);
+        }
+        listAdapter.notifyDataSetChanged();
+        swipeRefreshLayout.setRefreshing(false);
+    }
+
+    @Override
+    public void onLearnRequestFailure() {
+        Toast.makeText(getActivity(), "Could not load from web", Toast.LENGTH_LONG).show();
+        swipeRefreshLayout.setRefreshing(false);
     }
 
     /**
