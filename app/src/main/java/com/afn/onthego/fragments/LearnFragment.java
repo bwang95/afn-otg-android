@@ -1,7 +1,6 @@
 package com.afn.onthego.fragments;
 
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
@@ -9,15 +8,15 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.webkit.URLUtil;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.afn.onthego.R;
@@ -39,10 +38,10 @@ import java.util.ArrayList;
  * Use the {@link LearnFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class LearnFragment extends MainFragment 
-	implements PDFRequest.PDFRequestListener, 
-	SwipeRefreshLayout.OnRefreshListener, 
-	LearnRequest.LearnRequestListener {
+public class LearnFragment extends MainFragment
+        implements PDFRequest.PDFRequestListener,
+        SwipeRefreshLayout.OnRefreshListener,
+        LearnRequest.LearnRequestListener {
 
     private OnFragmentInteractionListener mListener;
 
@@ -51,8 +50,6 @@ public class LearnFragment extends MainFragment
 
     public ArrayList<LearningModule> learningModules;
     public ArrayList<String> modulesNameArray;
-
-    private Context context;
 
     private SwipeRefreshLayout swipeRefreshLayout;
     private PDFView pdfView;
@@ -140,18 +137,19 @@ public class LearnFragment extends MainFragment
         // Inflate the layout for this fragment
 
         View v = inflater.inflate(R.layout.fragment_learn, container, false);
-        swipeRefreshLayout = (SwipeRefreshLayout) v.findViewById(R.id.swipe_container);
+        swipeRefreshLayout = (SwipeRefreshLayout) v.findViewById(R.id.srl_learn_swipe_container);
         swipeRefreshLayout.setOnRefreshListener(this);
-        swipeRefreshLayout.setColorSchemeResources(android.R.color.holo_blue_bright,
-                android.R.color.holo_green_light,
-                android.R.color.holo_orange_light,
-                android.R.color.holo_red_light);
-        listView = (ListView) v.findViewById(R.id.listView);
-		pdfView = (PDFView) v.findViewById(R.id.pdfv_learn_pdf);
+        swipeRefreshLayout.setColorSchemeResources(
+                R.color.holo_blue_bright,
+                R.color.holo_green_light,
+                R.color.holo_orange_light,
+                R.color.holo_red_light);
+        listView = (ListView) v.findViewById(R.id.lv_learn_module_list);
+        pdfView = (PDFView) v.findViewById(R.id.pdfv_learn_pdf);
         Storage storage = Storage.getInstance(getActivity());
         learningModules = storage.getLearningModules().getLearningModulesArray();
         ArrayList<String> modulesNameArray = storage.getLearningModules().getModulesNamesArray();
-        ArrayAdapter<String> listAdapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1, modulesNameArray);
+        listAdapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_list_item_1, modulesNameArray);
 
         progressDialog = new ProgressDialog(getActivity());
         progressDialog.setMessage("Loading PDF, please wait...");
@@ -161,13 +159,6 @@ public class LearnFragment extends MainFragment
         listView.setOnItemClickListener(learnModuleListener);
 
         return v;
-    }
-
-    // TODO: Rename method, update argument and hook method into UI event
-    public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
-        }
     }
 
     @Override
@@ -189,7 +180,9 @@ public class LearnFragment extends MainFragment
 
     @Override
     public void onRefresh() {
-        new LearnRequest(getActivity(), this).execute();
+        new LearnRequest(this).execute();
+    }
+
     public void onPDFRequestSuccess(String filename) {
         progressDialog.hide();
         pdfView.fromFile(new File(filename)).load();
@@ -201,13 +194,15 @@ public class LearnFragment extends MainFragment
         Storage storage = Storage.getInstance(getActivity());
         storage.getLearningModules().updateModules(json);
         modulesNameArray = storage.getLearningModules().getModulesNamesArray();
+        //TODO I don't think you have to clear the adapter here.
         listAdapter.clear();
-        for(String s : modulesNameArray)
-        {
+        for (String s : modulesNameArray) {
             listAdapter.add(s);
         }
         listAdapter.notifyDataSetChanged();
         swipeRefreshLayout.setRefreshing(false);
+    }
+
     public void onPDFRequestFailure() {
         progressDialog.hide();
     }
@@ -216,11 +211,23 @@ public class LearnFragment extends MainFragment
     public void onLearnRequestFailure() {
         Toast.makeText(getActivity(), "Could not load from web", Toast.LENGTH_LONG).show();
         swipeRefreshLayout.setRefreshing(false);
-	}
+    }
 
     public boolean onBackPressed() {
-        if(pdfView.getVisibility() == View.VISIBLE){
-            pdfView.setVisibility(View.GONE);
+        if (pdfView.getVisibility() == View.VISIBLE) {
+            Animation slideOut = AnimationUtils.loadAnimation(getActivity(), R.anim.slide_out_down);
+            slideOut.setAnimationListener(new Animation.AnimationListener() {
+                @Override
+                public void onAnimationStart(Animation animation) {}
+                @Override
+                public void onAnimationEnd(Animation animation) {
+                    pdfView.setVisibility(View.GONE);
+                }
+                @Override
+                public void onAnimationRepeat(Animation animation) {}
+            });
+            pdfView.startAnimation(slideOut);
+//            pdfView.setVisibility(View.GONE);
             return false;
         }
         return super.onBackPressed();

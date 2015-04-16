@@ -1,26 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.v4.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent" android:layout_height="match_parent"
     android:id="@+id/srl_learn_swipe_container"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
     android:background="@color/background_material_light">
 
-    <ListView
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/lv_learn_module_list"
-        android:divider="@color/color_divider"
-        android:dividerHeight="1px"
-        android:footerDividersEnabled="true"
-        android:headerDividersEnabled="true"
-        />
+        android:layout_height="match_parent">
 
-    <com.joanzapata.pdfview.PDFView
-        android:id="@+id/pdfv_learn_pdf"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/background_material_dark"
-        android:visibility="gone"
-        />
+        <ListView
+            android:id="@+id/lv_learn_module_list"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:divider="@color/color_divider"
+            android:dividerHeight="1px"
+            android:footerDividersEnabled="true"
+            android:headerDividersEnabled="true"
+            android:visibility="visible" />
+
+        <com.joanzapata.pdfview.PDFView
+            android:id="@+id/pdfv_learn_pdf"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/background_material_dark"
+            android:visibility="gone" />
+    </FrameLayout>
 
 
 </android.support.v4.widget.SwipeRefreshLayout>
