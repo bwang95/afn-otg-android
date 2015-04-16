@@ -27,7 +27,7 @@ import java.util.Collections;
  * Use the {@link HomeFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class HomeFragment extends Fragment {
+public class HomeFragment extends MainFragment {
     private OnFragmentInteractionListener mListener;
     private ArrayAdapter<String> navAdapter;
 

@@ -17,6 +17,7 @@ import com.afn.onthego.fragments.AboutFragment;
 import com.afn.onthego.fragments.DonateFragment;
 import com.afn.onthego.fragments.HomeFragment;
 import com.afn.onthego.fragments.LearnFragment;
+import com.afn.onthego.fragments.MainFragment;
 import com.afn.onthego.fragments.VolunteerFragment;
 import com.afn.onthego.storage.KeyList;
 import com.afn.onthego.storage.Storage;
@@ -117,6 +118,9 @@ public class MainActivity extends ActionBarActivity
 
     @Override
     public void onBackPressed() {
+        Fragment current = getSupportFragmentManager().findFragmentById(R.id.ll_main_fragment_container);
+        if(current instanceof MainFragment && !((MainFragment) current).onBackPressed())
+            return;
         getSupportActionBar().setDisplayHomeAsUpEnabled(false);
         super.onBackPressed();
     }

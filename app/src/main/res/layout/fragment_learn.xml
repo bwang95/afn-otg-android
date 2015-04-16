@@ -3,7 +3,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.afn.onthego.fragments.LearnFragment"
-
     android:background="@color/background_material_light">
 
     <!-- TODO: Update blank fragment layout -->
@@ -12,10 +11,18 @@
     <ListView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/listView"
+        android:id="@+id/lv_learn_module_list"
         android:divider="@color/color_divider"
         android:dividerHeight="1px"
         android:footerDividersEnabled="true"
         android:headerDividersEnabled="true"
+        />
+
+    <com.joanzapata.pdfview.PDFView
+        android:id="@+id/pdfv_learn_pdf"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/background_material_dark"
+        android:visibility="gone"
         />
 </FrameLayout>

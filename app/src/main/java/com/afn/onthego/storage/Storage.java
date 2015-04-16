@@ -18,7 +18,7 @@ public class Storage implements LearnRequest.LearnRequestListener {
     private Storage(Context context) {
         this.context = context;
         learningModules = new LearningModules(context);
-        new LearnRequest(context, this).execute();
+        new LearnRequest(this).execute();
     }
 
     public LearningModules getLearningModules()

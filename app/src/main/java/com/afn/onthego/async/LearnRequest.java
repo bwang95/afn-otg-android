@@ -20,13 +20,13 @@ import java.io.IOException;
 public class LearnRequest extends AsyncTask<Void, Void, String> {
 
     private static final String LOG_TAG = "LearnRequest";
-    private Context context;
     private LearnRequestListener callback;
 
     // This is initiated in the MainActivity onCreate thread
-    public LearnRequest(Context context, LearnRequestListener callback)
+    public LearnRequest(LearnRequestListener callback)
     {
-        this.context = context;
+        if(callback == null)
+            throw new IllegalArgumentException("Callback cannot be null!");
         this.callback = callback;
     }
 
@@ -48,6 +48,7 @@ public class LearnRequest extends AsyncTask<Void, Void, String> {
             output = response.body().string();
         } catch (Exception e) {
             Log.e(LOG_TAG, "Error getting data!", e);
+            return null;
         }
 
         return output;
