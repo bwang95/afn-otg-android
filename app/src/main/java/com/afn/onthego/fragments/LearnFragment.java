@@ -222,21 +222,37 @@ public class LearnFragment extends MainFragment
         swipeRefreshLayout.setRefreshing(false);
     }
 
+    private Animation.AnimationListener pdfViewAnimationListener = new Animation.AnimationListener() {
+        @Override
+        public void onAnimationStart(Animation animation) {}
+
+        @Override
+        public void onAnimationEnd(Animation animation) {
+            pdfView.setVisibility(View.GONE);
+            pdfView.recycle();
+        }
+        @Override
+        public void onAnimationRepeat(Animation animation) {}
+    };
+
+    private Animation.AnimationListener webViewAnimationListener = new Animation.AnimationListener() {
+        @Override
+        public void onAnimationStart(Animation animation) {}
+
+        @Override
+        public void onAnimationEnd(Animation animation) {
+            webView.setVisibility(View.GONE);
+            webView.loadUrl("about:blank");
+        }
+        @Override
+        public void onAnimationRepeat(Animation animation) {}
+    };
+
     public boolean onBackPressed() {
         if (pdfView.getVisibility() == View.VISIBLE) {
             swipeRefreshLayout.setEnabled(true);
             Animation slideOut = AnimationUtils.loadAnimation(getActivity(), R.anim.slide_out_down);
-            slideOut.setAnimationListener(new Animation.AnimationListener() {
-                @Override
-                public void onAnimationStart(Animation animation) {}
-                @Override
-                public void onAnimationEnd(Animation animation) {
-                    pdfView.setVisibility(View.GONE);
-                    pdfView.recycle();
-                }
-                @Override
-                public void onAnimationRepeat(Animation animation) {}
-            });
+            slideOut.setAnimationListener(pdfViewAnimationListener);
             pdfView.startAnimation(slideOut);
             return false;
         }
@@ -244,17 +260,7 @@ public class LearnFragment extends MainFragment
         {
             swipeRefreshLayout.setEnabled(true);
             Animation slideOut = AnimationUtils.loadAnimation(getActivity(), R.anim.slide_out_down);
-            slideOut.setAnimationListener(new Animation.AnimationListener() {
-                @Override
-                public void onAnimationStart(Animation animation) {}
-                @Override
-                public void onAnimationEnd(Animation animation) {
-                    webView.setVisibility(View.GONE);
-                    webView.loadUrl("about:blank");
-                }
-                @Override
-                public void onAnimationRepeat(Animation animation) {}
-            });
+            slideOut.setAnimationListener(webViewAnimationListener);
             webView.startAnimation(slideOut);
             return false;
         }
