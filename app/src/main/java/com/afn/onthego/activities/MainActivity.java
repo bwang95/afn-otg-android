@@ -19,6 +19,7 @@ import com.afn.onthego.fragments.HomeFragment;
 import com.afn.onthego.fragments.LearnFragment;
 import com.afn.onthego.fragments.VolunteerFragment;
 import com.afn.onthego.storage.KeyList;
+import com.afn.onthego.storage.Storage;
 
 
 public class MainActivity extends ActionBarActivity
@@ -43,9 +44,7 @@ public class MainActivity extends ActionBarActivity
         transaction.add(R.id.ll_main_fragment_container, home);
         transaction.commit();
 
-        // start the async activity to get the learning modules
-        LearnRequest learnRequest = new LearnRequest(this);
-        learnRequest.execute();
+        Storage.getInstance(this);
     }
 
     private void addFragment(Fragment fragment) {

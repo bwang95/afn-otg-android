@@ -46,8 +46,10 @@ public class KeyList {
         Locations(int i) {
             index = i;
         }
+    }
+
     public static class LearningModulesKeys {
-        public static final String URL = "http://austinfreenet.pythonanywhere.com/";
+            public static final String URL = "http://austinfreenet.pythonanywhere.com/";
         public static final String PREFS_LEARNING_MODULES = "learning_modules";
         public static final String LEARNING_MODULE_NAME = "name";
         public static final String LEARNING_MODULE_TYPE = "type";

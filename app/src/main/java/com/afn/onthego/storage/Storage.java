@@ -2,13 +2,14 @@ package com.afn.onthego.storage;
 
 import android.content.Context;
 
+import com.afn.onthego.async.LearnRequest;
 import com.afn.onthego.util.LearningModules;
 
 
 /**
  * Created by brian on 4/8/15.
  */
-public class Storage {
+public class Storage implements LearnRequest.LearnRequestListener {
     private static Storage instance;
 
     private Context context;
@@ -17,6 +18,7 @@ public class Storage {
     private Storage(Context context) {
         this.context = context;
         learningModules = new LearningModules(context);
+        new LearnRequest(context, this).execute();
     }
 
     public LearningModules getLearningModules()
@@ -26,5 +28,15 @@ public class Storage {
 
     public static Storage getInstance(Context context) {
         return instance == null ? instance = new Storage(context) : instance;
+    }
+
+    @Override
+    public void onLearnRequestSuccess(String s) {
+        learningModules.updateModules(s);
+    }
+
+    @Override
+    public void onLearnRequestFailure() {
+
     }
 }
