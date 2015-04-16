@@ -1,12 +1,15 @@
 package com.afn.onthego.fragments;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,14 +17,18 @@ import android.webkit.URLUtil;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.afn.onthego.R;
 import com.afn.onthego.async.LearnRequest;
+import com.afn.onthego.async.PDFRequest;
 import com.afn.onthego.storage.KeyList;
 import com.afn.onthego.storage.Storage;
 import com.afn.onthego.util.LearningModule;
+import com.joanzapata.pdfview.PDFView;
 
+import java.io.File;
 import java.util.ArrayList;
 
 /**
@@ -32,7 +39,11 @@ import java.util.ArrayList;
  * Use the {@link LearnFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class LearnFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener, LearnRequest.LearnRequestListener {
+public class LearnFragment extends MainFragment 
+	implements PDFRequest.PDFRequestListener, 
+	SwipeRefreshLayout.OnRefreshListener, 
+	LearnRequest.LearnRequestListener {
+
     private OnFragmentInteractionListener mListener;
 
     public ListView listView;
@@ -44,6 +55,8 @@ public class LearnFragment extends Fragment implements SwipeRefreshLayout.OnRefr
     private Context context;
 
     private SwipeRefreshLayout swipeRefreshLayout;
+    private PDFView pdfView;
+    ProgressDialog progressDialog;
 
     /**
      * Use this factory method to create a new instance of
@@ -76,41 +89,50 @@ public class LearnFragment extends Fragment implements SwipeRefreshLayout.OnRefr
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
             LearningModule learningModule = learningModules.get(position);
 
-            switch (learningModule.getType())
-            {
+            switch (learningModule.getType()) {
                 case KeyList.LearningModulesKeys.TYPE_PDF:
-                    Toast.makeText(getActivity(), "pdf not implemented", Toast.LENGTH_LONG).show();
-                    // what to do here?
+                    handlePDF(learningModule);
                     break;
                 case KeyList.LearningModulesKeys.TYPE_WEBSITE:
-                    String website_url = learningModule.getData();
-                    if(URLUtil.isValidUrl(website_url)) {
-                        Intent website_intent = new Intent(Intent.ACTION_VIEW);
-                        website_intent.setData(Uri.parse(website_url));
-                        startActivity(website_intent);
-                    }
-                    else
-                    {
-                        Toast.makeText(getActivity(), website_url + " is an invalid URL", Toast.LENGTH_LONG).show();
-                    }
+                    handleWebsite(learningModule);
                     break;
                 case KeyList.LearningModulesKeys.TYPE_YOUTUBE:
-                    String youtube_url = learningModule.getData();
-                    if(URLUtil.isValidUrl(youtube_url)) {
-                        Intent youtube_intent = new Intent(Intent.ACTION_VIEW);
-                        youtube_intent.setData(Uri.parse(youtube_url));
-                        startActivity(youtube_intent);
-                    }
-                    else
-                    {
-                        Toast.makeText(getActivity(), youtube_url + " is an invalid URL", Toast.LENGTH_LONG).show();
-                    }
+                    handleYouTube(learningModule);
                     break;
                 default:
                     Toast.makeText(getActivity(), learningModule.getType() + " not recognized", Toast.LENGTH_LONG).show();
             }
         }
     };
+
+    public void handlePDF(LearningModule learningModule) {
+        progressDialog.show();
+        PDFRequest request = new PDFRequest(learningModule.getData(), getActivity(), LearnFragment.this);
+        request.execute();
+    }
+
+    public void handleWebsite(LearningModule learningModule) {
+        String website_url = learningModule.getData();
+        if (URLUtil.isValidUrl(website_url)) {
+            Intent website_intent = new Intent(Intent.ACTION_VIEW);
+            website_intent.setData(Uri.parse(website_url));
+            startActivity(website_intent);
+        } else {
+            Toast.makeText(getActivity(), website_url + " is an invalid URL", Toast.LENGTH_LONG).show();
+        }
+    }
+
+    public void handleYouTube(LearningModule learningModule) {
+        String youtube_url = learningModule.getData();
+        if (URLUtil.isValidUrl(youtube_url)) {
+            Intent youtube_intent = new Intent(Intent.ACTION_VIEW);
+            youtube_intent.setData(Uri.parse(youtube_url));
+            startActivity(youtube_intent);
+        } else {
+            Toast.makeText(getActivity(), youtube_url + " is an invalid URL", Toast.LENGTH_LONG).show();
+        }
+    }
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -125,10 +147,15 @@ public class LearnFragment extends Fragment implements SwipeRefreshLayout.OnRefr
                 android.R.color.holo_orange_light,
                 android.R.color.holo_red_light);
         listView = (ListView) v.findViewById(R.id.listView);
+		pdfView = (PDFView) v.findViewById(R.id.pdfv_learn_pdf);
         Storage storage = Storage.getInstance(getActivity());
         learningModules = storage.getLearningModules().getLearningModulesArray();
         ArrayList<String> modulesNameArray = storage.getLearningModules().getModulesNamesArray();
-        listAdapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1, modulesNameArray);
+        ArrayAdapter<String> listAdapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1, modulesNameArray);
+
+        progressDialog = new ProgressDialog(getActivity());
+        progressDialog.setMessage("Loading PDF, please wait...");
+        progressDialog.setCancelable(false);
 
         listView.setAdapter(listAdapter);
         listView.setOnItemClickListener(learnModuleListener);
@@ -163,6 +190,10 @@ public class LearnFragment extends Fragment implements SwipeRefreshLayout.OnRefr
     @Override
     public void onRefresh() {
         new LearnRequest(getActivity(), this).execute();
+    public void onPDFRequestSuccess(String filename) {
+        progressDialog.hide();
+        pdfView.fromFile(new File(filename)).load();
+        pdfView.setVisibility(View.VISIBLE);
     }
 
     @Override
@@ -177,12 +208,22 @@ public class LearnFragment extends Fragment implements SwipeRefreshLayout.OnRefr
         }
         listAdapter.notifyDataSetChanged();
         swipeRefreshLayout.setRefreshing(false);
+    public void onPDFRequestFailure() {
+        progressDialog.hide();
     }
 
     @Override
     public void onLearnRequestFailure() {
         Toast.makeText(getActivity(), "Could not load from web", Toast.LENGTH_LONG).show();
         swipeRefreshLayout.setRefreshing(false);
+	}
+
+    public boolean onBackPressed() {
+        if(pdfView.getVisibility() == View.VISIBLE){
+            pdfView.setVisibility(View.GONE);
+            return false;
+        }
+        return super.onBackPressed();
     }
 
     /**
