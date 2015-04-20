@@ -18,6 +18,13 @@
     <string name="connect_question">Questions?</string>
     <string name="about_title">So who made this thing, anyway?</string>
 
+    <string-array name="fragment_titles">
+        <item>Volunteer</item>
+        <item>Donate</item>
+        <item>Connect</item>
+        <item>Learn</item>
+    </string-array>
+
     <string-array name="contributors_libraries">
         <item>Contributors</item>
         <item>Brian Wang</item>

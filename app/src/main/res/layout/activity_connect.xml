@@ -1,22 +1,29 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:weightSum="100"
     tools:context="com.afn.onthego.activities.ConnectActivity">
 
     <fragment
         android:id="@+id/mf_connect_map"
         class="com.google.android.gms.maps.SupportMapFragment"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_above="@+id/b_connect_questions"/>
+        android:layout_height="0dp"
+        android:layout_weight="62" />
+
+    <ListView
+        android:id="@+id/lv_connect_locations"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="30" />
 
     <Button
-        android:id="@id/b_connect_questions"
+        android:id="@+id/b_connect_questions"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:text="@string/connect_question"
+        android:layout_height="0dp"
+        android:layout_weight="8"
         android:background="@android:color/background_light"
-        />
-</RelativeLayout>
+        android:text="@string/connect_question" />
+</LinearLayout>

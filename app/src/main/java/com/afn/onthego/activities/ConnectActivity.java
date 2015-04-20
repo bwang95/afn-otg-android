@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ListView;
 
 import com.afn.onthego.R;
 import com.afn.onthego.storage.KeyList;
@@ -22,9 +23,12 @@ import com.google.android.gms.maps.model.MarkerOptions;
 
 public class ConnectActivity extends ActionBarActivity implements OnMapReadyCallback {
 
-    SupportMapFragment mapFragment;
-    GoogleMap map;
-    LocationManager locManager;
+    private SupportMapFragment mapFragment;
+    private GoogleMap map;
+    private LocationManager locManager;
+
+    private ListView locationList;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

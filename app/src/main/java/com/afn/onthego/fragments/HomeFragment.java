@@ -10,9 +10,12 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.GridLayout;
+import android.widget.GridView;
 import android.widget.ListView;
 
 import com.afn.onthego.R;
+import com.afn.onthego.adapters.HomeAdapter;
 import com.afn.onthego.storage.KeyList;
 
 import java.security.Key;
@@ -29,7 +32,7 @@ import java.util.Collections;
  */
 public class HomeFragment extends MainFragment {
     private OnFragmentInteractionListener mListener;
-    private ArrayAdapter<String> navAdapter;
+    private HomeAdapter navAdapter;
 
     private View.OnClickListener aboutListener = new View.OnClickListener() {
         @Override
@@ -42,7 +45,7 @@ public class HomeFragment extends MainFragment {
     private ListView.OnItemClickListener navigationListener = new AdapterView.OnItemClickListener() {
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-            String item = navAdapter.getItem(position);
+            String item = navAdapter.getItem(position).toString();
 
             String ret = "";
 
@@ -65,10 +68,6 @@ public class HomeFragment extends MainFragment {
                 mListener.onHomeFragmentSelection(ret);
 
         }
-    };
-
-    private static String[] fragmentText = {
-        "Learn", "Volunteer", "Connect", "Donate"
     };
 
     /**
@@ -100,11 +99,9 @@ public class HomeFragment extends MainFragment {
         View view = inflater.inflate(R.layout.fragment_home, container, false);
 
         Button about = (Button) view.findViewById(R.id.b_home_about);
-        ListView fragments = (ListView) view.findViewById(R.id.lv_home_fragment_list);
+        GridView fragments = (GridView) view.findViewById(R.id.gv_home_fragment_grid);
 
-        ArrayList<String> fragList = new ArrayList<>();
-        Collections.addAll(fragList, fragmentText);
-        navAdapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1, fragList);
+        navAdapter = new HomeAdapter(getActivity());
         fragments.setAdapter(navAdapter);
 
         fragments.setOnItemClickListener(navigationListener);

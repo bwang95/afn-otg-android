@@ -2,7 +2,7 @@
 <resources>
     <color name="color_divider">#FFBFBFBF</color>
     <!-- TODO Get actual color. -->
-    <color name="afn_light_blue">#ff495fd2</color>
+    <color name="afn_light_blue">#ff5296c7</color>
 
     <!-- Moving holo colors for compatibility issues -->
     <color name="holo_blue_bright">#ff00ddff</color>

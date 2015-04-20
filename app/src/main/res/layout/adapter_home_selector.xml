@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:weightSum="100"
+    android:orientation="vertical"
+    android:layout_margin="5dp"
+    android:background="@drawable/rounded_rect_white">
+
+    <ImageView
+        android:id="@+id/iv_hs_image"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="90"
+        android:scaleType="centerInside"
+        android:src="@drawable/ic_plusone_tall_off_client"
+        />
+
+    <TextView
+        android:id="@+id/tv_hs_title"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="10"
+        android:text="Test"
+        android:gravity="center"
+        android:textColor="@color/afn_light_blue"
+        android:textSize="@dimen/small_header"/>
+
+</LinearLayout>
