@@ -1,10 +1,13 @@
 package com.afn.onthego.activities;
 
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.webkit.CookieManager;
+import android.webkit.CookieSyncManager;
 import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
@@ -22,6 +25,8 @@ public class WebActivity extends ActionBarActivity {
 
     private String website_url;
 
+    private boolean purgeCookies;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,6 +36,8 @@ public class WebActivity extends ActionBarActivity {
         loadingBar.setProgress(0);
         loadingBar.setMax(100);
         loadingBar.setIndeterminate(false);
+
+        purgeCookies = getIntent().getBooleanExtra(KeyList.ActivityParams.KEY_PURGE_COOKIES, false);
 
         webView = (WebView) findViewById(R.id.wv_web_website);
         WebSettings settings = webView.getSettings();
@@ -88,10 +95,24 @@ public class WebActivity extends ActionBarActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == android.R.id.home) {
-            finish();
+            onBackPressed();
             return true;
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    public void onBackPressed() {
+        if(purgeCookies) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                CookieManager manager = CookieManager.getInstance();
+                manager.removeAllCookies(null);
+            } else {
+                CookieSyncManager.createInstance(this);
+                CookieManager manager = CookieManager.getInstance();
+                manager.removeAllCookie();
+            }
+        }
+        super.onBackPressed();
     }
 }

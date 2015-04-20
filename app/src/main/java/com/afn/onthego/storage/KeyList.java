@@ -64,6 +64,7 @@ public class KeyList {
         public static final String KEY_URL = "webactivityurl";
         public static final String KEY_FILENAME = "pdfactivityfilename";
         public static final String KEY_TITLE = "activitytitle";
+        public static final String KEY_PURGE_COOKIES = "purgecookies";
     }
 
     public static final class URL {

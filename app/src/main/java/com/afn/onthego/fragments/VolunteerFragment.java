@@ -44,6 +44,7 @@ public class VolunteerFragment extends MainFragment {
             Intent webIntent = new Intent(getActivity(), WebActivity.class);
             webIntent.putExtra(KeyList.ActivityParams.KEY_URL, KeyList.URL.VOLUNTEER_SIGN_UP);
             webIntent.putExtra(KeyList.ActivityParams.KEY_TITLE, "Sign Up");
+            webIntent.putExtra(KeyList.ActivityParams.KEY_PURGE_COOKIES, true);
             startActivity(webIntent);
         }
     };
