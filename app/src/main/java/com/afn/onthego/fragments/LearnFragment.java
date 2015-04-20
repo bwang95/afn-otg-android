@@ -2,7 +2,6 @@ package com.afn.onthego.fragments;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
-import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -14,13 +13,14 @@ import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.webkit.URLUtil;
-import android.webkit.WebView;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
 import com.afn.onthego.R;
+import com.afn.onthego.activities.PDFActivity;
+import com.afn.onthego.activities.WebActivity;
 import com.afn.onthego.async.LearnRequest;
 import com.afn.onthego.async.PDFRequest;
 import com.afn.onthego.storage.KeyList;
@@ -53,9 +53,7 @@ public class LearnFragment extends MainFragment
     public ArrayList<String> modulesNameArray;
 
     private SwipeRefreshLayout swipeRefreshLayout;
-    private PDFView pdfView;
-    private WebView webView;
-    ProgressDialog progressDialog;
+    private ProgressDialog progressDialog;
 
     /**
      * Use this factory method to create a new instance of
@@ -104,22 +102,22 @@ public class LearnFragment extends MainFragment
         }
     };
 
+    private String PDFName = "";
+
     public void handlePDF(LearningModule learningModule) {
         progressDialog.show();
         PDFRequest request = new PDFRequest(learningModule.getData(), getActivity(), LearnFragment.this);
+        PDFName = learningModule.getName();
         request.execute();
     }
 
     public void handleWebsite(LearningModule learningModule) {
         String website_url = learningModule.getData();
         if (URLUtil.isValidUrl(website_url)) {
-            webView = (WebView) getView().findViewById(R.id.wv_learn_website);
-            webView.loadUrl(website_url);
-            webView.setVisibility(View.VISIBLE);
-            swipeRefreshLayout.setEnabled(false);
-/*            Intent website_intent = new Intent(Intent.ACTION_VIEW);
-            website_intent.setData(Uri.parse(website_url));
-            startActivity(website_intent);*/
+            Intent webIntent = new Intent(getActivity(), WebActivity.class);
+            webIntent.putExtra(KeyList.ActivityParams.KEY_URL, website_url);
+            webIntent.putExtra(KeyList.ActivityParams.KEY_TITLE, learningModule.getName());
+            startActivity(webIntent);
         } else {
             Toast.makeText(getActivity(), website_url + " is an invalid URL", Toast.LENGTH_LONG).show();
         }
@@ -151,8 +149,6 @@ public class LearnFragment extends MainFragment
                 R.color.holo_orange_light,
                 R.color.holo_red_light);
         listView = (ListView) v.findViewById(R.id.lv_learn_module_list);
-        pdfView = (PDFView) v.findViewById(R.id.pdfv_learn_pdf);
-        webView = (WebView) v.findViewById(R.id.wv_learn_website);
         Storage storage = Storage.getInstance(getActivity());
         learningModules = storage.getLearningModules().getLearningModulesArray();
         ArrayList<String> modulesNameArray = storage.getLearningModules().getModulesNamesArray();
@@ -192,9 +188,10 @@ public class LearnFragment extends MainFragment
 
     public void onPDFRequestSuccess(String filename) {
         progressDialog.hide();
-        pdfView.fromFile(new File(filename)).load();
-        pdfView.setVisibility(View.VISIBLE);
-        swipeRefreshLayout.setEnabled(false);
+        Intent pdfIntent = new Intent(getActivity(), PDFActivity.class);
+        pdfIntent.putExtra(KeyList.ActivityParams.KEY_FILENAME, filename);
+        pdfIntent.putExtra(KeyList.ActivityParams.KEY_TITLE, PDFName);
+        startActivity(pdfIntent);
     }
 
     @Override
@@ -222,48 +219,7 @@ public class LearnFragment extends MainFragment
         swipeRefreshLayout.setRefreshing(false);
     }
 
-    private Animation.AnimationListener pdfViewAnimationListener = new Animation.AnimationListener() {
-        @Override
-        public void onAnimationStart(Animation animation) {}
-
-        @Override
-        public void onAnimationEnd(Animation animation) {
-            pdfView.setVisibility(View.GONE);
-            pdfView.recycle();
-        }
-        @Override
-        public void onAnimationRepeat(Animation animation) {}
-    };
-
-    private Animation.AnimationListener webViewAnimationListener = new Animation.AnimationListener() {
-        @Override
-        public void onAnimationStart(Animation animation) {}
-
-        @Override
-        public void onAnimationEnd(Animation animation) {
-            webView.setVisibility(View.GONE);
-            webView.loadUrl("about:blank");
-        }
-        @Override
-        public void onAnimationRepeat(Animation animation) {}
-    };
-
     public boolean onBackPressed() {
-        if (pdfView.getVisibility() == View.VISIBLE) {
-            swipeRefreshLayout.setEnabled(true);
-            Animation slideOut = AnimationUtils.loadAnimation(getActivity(), R.anim.slide_out_down);
-            slideOut.setAnimationListener(pdfViewAnimationListener);
-            pdfView.startAnimation(slideOut);
-            return false;
-        }
-        else if (webView.getVisibility() == View.VISIBLE)
-        {
-            swipeRefreshLayout.setEnabled(true);
-            Animation slideOut = AnimationUtils.loadAnimation(getActivity(), R.anim.slide_out_down);
-            slideOut.setAnimationListener(webViewAnimationListener);
-            webView.startAnimation(slideOut);
-            return false;
-        }
 
         return super.onBackPressed();
     }

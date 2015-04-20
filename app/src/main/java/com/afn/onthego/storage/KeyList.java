@@ -49,7 +49,7 @@ public class KeyList {
     }
 
     public static class LearningModulesKeys {
-            public static final String URL = "http://austinfreenet.pythonanywhere.com/";
+        public static final String URL = "http://austinfreenet.pythonanywhere.com/";
         public static final String PREFS_LEARNING_MODULES = "learning_modules";
         public static final String LEARNING_MODULE_NAME = "name";
         public static final String LEARNING_MODULE_TYPE = "type";
@@ -58,5 +58,11 @@ public class KeyList {
         public static final String TYPE_YOUTUBE = "YouTube";
         public static final String TYPE_WEBSITE = "Website";
         public static final String TYPE_PDF = "PDF";
+    }
+
+    public static class ActivityParams {
+        public static final String KEY_URL = "webactivityurl";
+        public static final String KEY_FILENAME = "pdfactivityfilename";
+        public static final String KEY_TITLE = "activitytitle";
     }
 }

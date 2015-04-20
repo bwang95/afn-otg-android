@@ -5,34 +5,13 @@
     android:layout_height="match_parent"
     android:background="@color/background_material_light">
 
-    <FrameLayout
+    <ListView
+        android:id="@+id/lv_learn_module_list"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <ListView
-            android:id="@+id/lv_learn_module_list"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:divider="@color/color_divider"
-            android:dividerHeight="1px"
-            android:footerDividersEnabled="true"
-            android:headerDividersEnabled="true"
-            android:visibility="visible" />
-
-        <com.joanzapata.pdfview.PDFView
-            android:id="@+id/pdfv_learn_pdf"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@color/background_material_light"
-            android:visibility="gone" />
-
-        <WebView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:id="@+id/wv_learn_website"
-            android:background="@color/background_material_dark"
-            android:visibility="gone"/>
-    </FrameLayout>
-
+        android:layout_height="wrap_content"
+        android:divider="@color/color_divider"
+        android:dividerHeight="1px"
+        android:footerDividersEnabled="true"
+        android:headerDividersEnabled="true" />
 
 </android.support.v4.widget.SwipeRefreshLayout>

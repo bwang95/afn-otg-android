@@ -9,6 +9,9 @@ import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import com.afn.onthego.R;
@@ -21,6 +24,9 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
+import java.util.ArrayList;
+import java.util.Collections;
+
 public class ConnectActivity extends ActionBarActivity implements OnMapReadyCallback {
 
     private SupportMapFragment mapFragment;
@@ -28,7 +34,21 @@ public class ConnectActivity extends ActionBarActivity implements OnMapReadyCall
     private LocationManager locManager;
 
     private ListView locationList;
+    private ArrayAdapter<String> locationAdapter;
 
+    private Marker[] markers;
+
+    private ListView.OnItemClickListener locationListener = new ListView.OnItemClickListener() {
+        @Override
+        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+            if(!(position < markers.length && position >= 0))
+                return;
+
+            Marker m = markers[position];
+            map.animateCamera(CameraUpdateFactory.newLatLngZoom(m.getPosition(), 15));
+            m.showInfoWindow();
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +60,15 @@ public class ConnectActivity extends ActionBarActivity implements OnMapReadyCall
         mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.mf_connect_map);
         mapFragment.getMapAsync(this);
+
+        locationList = (ListView) findViewById(R.id.lv_connect_locations);
+
+        ArrayList<String> locations = new ArrayList<>();
+        Collections.addAll(locations, KeyList.Locations.NAMES);
+
+        locationAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, locations);
+        locationList.setAdapter(locationAdapter);
+        locationList.setOnItemClickListener(locationListener);
 
         locManager = (LocationManager) getSystemService(LOCATION_SERVICE);
     }
@@ -107,10 +136,13 @@ public class ConnectActivity extends ActionBarActivity implements OnMapReadyCall
 
         options.snippet("Tap for directions");
 
+        markers = new Marker[KeyList.Locations.LAT_LNGS.length];
+
         for(int k = 0; k < KeyList.Locations.LAT_LNGS.length; k++) {
             options.title(KeyList.Locations.NAMES[k]);
             options.position(KeyList.Locations.LAT_LNGS[k]);
-            map.addMarker(options);
+
+            markers[k] = map.addMarker(options);
         }
 
         map.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {

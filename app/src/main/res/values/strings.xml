@@ -18,6 +18,15 @@
     <string name="connect_question">Questions?</string>
     <string name="about_title">So who made this thing, anyway?</string>
 
+    <string name="donate_text">
+        Austin Free-Net provides technology training and access for the community,
+        fostering skills that enable people to succeed in a digital age. Our computer labs
+        and classes are open to all; our focus is on under served communities. The knowledge we
+        offer helps people obtain jobs, improve their lives, and participate as active citizens.\n\n
+        Austin Free-Net, is a 501(c)(3) a nonprofit organization that has been working to bridge
+        the Digital Divide in the Austin area since 1995.
+    </string>
+
     <string-array name="fragment_titles">
         <item>Volunteer</item>
         <item>Donate</item>
@@ -62,4 +71,6 @@
         <item>https://github.com/JoanZapata/android-pdfview</item>
         <item>https://github.com/square/okhttp</item>
     </string-array>
+    <string name="title_activity_pdf">PDF</string>
+    <string name="title_activity_web">Website</string>
 </resources>

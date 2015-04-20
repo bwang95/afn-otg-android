@@ -2,14 +2,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:clickable="true"
-    tools:context="com.afn.onthego.fragments.VolunteerFragment"
-    android:background="@color/background_material_light">
+    tools:context="com.afn.onthego.activities.PDFActivity">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <com.joanzapata.pdfview.PDFView
+        android:id="@+id/pdfv_pdf"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:background="@color/background_material_light" />
 
 </FrameLayout>
