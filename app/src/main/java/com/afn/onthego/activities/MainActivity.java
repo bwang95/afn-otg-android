@@ -74,9 +74,6 @@ public class MainActivity extends ActionBarActivity
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
         if (id == android.R.id.home) {
             onBackPressed();
             return true;
@@ -103,8 +100,8 @@ public class MainActivity extends ActionBarActivity
                 getSupportActionBar().setDisplayHomeAsUpEnabled(true);
                 break;
             case KeyList.Navigation.VOLUNTEER:
-                addFragment(VolunteerFragment.newInstance());
-                getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+                addVolunteerFragment(VolunteerFragment.newInstance());
+                getSupportActionBar().setDisplayHomeAsUpEnabled(false);
                 break;
             case KeyList.Navigation.LEARN:
                 addFragment(LearnFragment.newInstance("", ""));
@@ -115,6 +112,14 @@ public class MainActivity extends ActionBarActivity
                 startActivity(i);
                 break;
         }
+    }
+
+    private void addVolunteerFragment(Fragment fragment) {
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        transaction.setCustomAnimations(R.anim.slide_in_bottom, R.anim.slide_out_down, R.anim.slide_in_bottom, R.anim.slide_out_down);
+        transaction.add(R.id.ll_main_fragment_container, fragment);
+        transaction.addToBackStack(null);
+        transaction.commit();
     }
 
     @Override

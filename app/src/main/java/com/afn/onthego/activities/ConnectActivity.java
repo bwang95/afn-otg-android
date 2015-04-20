@@ -12,6 +12,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 
 import com.afn.onthego.R;
@@ -24,6 +25,7 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
+import java.security.Key;
 import java.util.ArrayList;
 import java.util.Collections;
 
@@ -31,22 +33,35 @@ public class ConnectActivity extends ActionBarActivity implements OnMapReadyCall
 
     private SupportMapFragment mapFragment;
     private GoogleMap map;
+    private Marker[] markers;
     private LocationManager locManager;
 
     private ListView locationList;
     private ArrayAdapter<String> locationAdapter;
 
-    private Marker[] markers;
+    private LinearLayout questionLayout;
 
     private ListView.OnItemClickListener locationListener = new ListView.OnItemClickListener() {
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+            if(map == null || markers == null)
+                return;
             if(!(position < markers.length && position >= 0))
                 return;
 
             Marker m = markers[position];
             map.animateCamera(CameraUpdateFactory.newLatLngZoom(m.getPosition(), 15));
             m.showInfoWindow();
+        }
+    };
+
+    private View.OnClickListener questionListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            Intent webIntent = new Intent(ConnectActivity.this, WebActivity.class);
+            webIntent.putExtra(KeyList.ActivityParams.KEY_URL, KeyList.URL.QUESTION_URL);
+            webIntent.putExtra(KeyList.ActivityParams.KEY_TITLE, "Ask a Question");
+            startActivity(webIntent);
         }
     };
 
@@ -62,6 +77,8 @@ public class ConnectActivity extends ActionBarActivity implements OnMapReadyCall
         mapFragment.getMapAsync(this);
 
         locationList = (ListView) findViewById(R.id.lv_connect_locations);
+        questionLayout = (LinearLayout) findViewById(R.id.ll_connect_questions);
+        questionLayout.setOnClickListener(questionListener);
 
         ArrayList<String> locations = new ArrayList<>();
         Collections.addAll(locations, KeyList.Locations.NAMES);
@@ -89,9 +106,7 @@ public class ConnectActivity extends ActionBarActivity implements OnMapReadyCall
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
+
 
         return super.onOptionsItemSelected(item);
     }
@@ -134,7 +149,7 @@ public class ConnectActivity extends ActionBarActivity implements OnMapReadyCall
     private void placeMarkers() {
         MarkerOptions options = new MarkerOptions();
 
-        options.snippet("Tap for directions");
+        options.snippet("Tap here for directions");
 
         markers = new Marker[KeyList.Locations.LAT_LNGS.length];
 
@@ -156,4 +171,5 @@ public class ConnectActivity extends ActionBarActivity implements OnMapReadyCall
             }
         });
     }
+
 }

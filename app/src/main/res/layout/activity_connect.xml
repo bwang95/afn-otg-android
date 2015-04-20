@@ -16,21 +16,50 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="1px"
-        android:background="@color/color_divider"/>
+        android:background="@color/color_divider" />
 
-    <ListView
-        android:id="@+id/lv_connect_locations"
-        android:layout_width="match_parent"
-        android:divider="@color/color_divider"
-        android:dividerHeight="1px"
-        android:layout_height="0dp"
-        android:layout_weight="30" />
-
-    <Button
-        android:id="@+id/b_connect_questions"
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="8"
-        android:background="@android:color/background_light"
-        android:text="@string/connect_question" />
+        android:layout_weight="38">
+
+        <ListView
+            android:id="@+id/lv_connect_locations"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/ll_connect_questions"
+            android:divider="@color/color_divider"
+            android:background="@android:color/white"
+            android:dividerHeight="1px" />
+
+        <LinearLayout
+            android:id="@id/ll_connect_questions"
+            android:orientation="horizontal"
+            android:layout_alignParentBottom="true"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            android:background="@color/color_divider">
+
+            <ImageView
+                android:layout_marginTop="1px"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:padding="10dp"
+                android:background="@color/afn_light_blue"
+                android:src="@drawable/abc_btn_check_material"
+                />
+            <TextView
+                android:layout_marginTop="1px"
+                android:layout_width="fill_parent"
+                android:layout_height="match_parent"
+                android:text="Ask a Question"
+                android:paddingLeft="10dp"
+                android:gravity="center_vertical"
+                android:textSize="15sp"
+                android:background="@android:color/white"/>
+
+        </LinearLayout>
+    </RelativeLayout>
+
 </LinearLayout>

@@ -2,14 +2,13 @@ package com.afn.onthego.activities;
 
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.Window;
 import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
+import android.webkit.WebViewClient;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
@@ -37,16 +36,24 @@ public class WebActivity extends ActionBarActivity {
         WebSettings settings = webView.getSettings();
         settings.setJavaScriptEnabled(true);
         settings.setSupportZoom(true);
-        settings.setBuiltInZoomControls(true);
 
         webView.setWebChromeClient(new WebChromeClient() {
             public void onProgressChanged(WebView view, int progress) {
                 loadingBar.setProgress(progress);
-                if(loadingBar.getProgress() >= 100)
+                if (loadingBar.getProgress() >= 100)
                     loadingBar.setVisibility(View.GONE);
+
             }
         });
 
+        webView.setWebViewClient(new WebViewClient() {
+            public boolean shouldOverrideUrlLoading(WebView view, String url) {
+                // do your handling codes here, which url is the requested url
+                // probably you need to open that url rather than redirect:
+                view.loadUrl(url);
+                return false; // then it is not handled by default action
+            }
+        });
 
 
         website_url = getIntent().getStringExtra(KeyList.ActivityParams.KEY_URL);
@@ -80,9 +87,7 @@ public class WebActivity extends ActionBarActivity {
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        } else if (id == android.R.id.home) {
+        if (id == android.R.id.home) {
             finish();
             return true;
         }

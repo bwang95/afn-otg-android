@@ -19,7 +19,7 @@
     <GridView
         android:id="@+id/gv_home_fragment_grid"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="fill_parent"
         android:layout_above="@+id/v_home_about_border"
         android:layout_below="@id/iv_home_header"
         android:horizontalSpacing="10dp"

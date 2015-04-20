@@ -2,14 +2,49 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/bottom_gradient"
     android:clickable="true"
-    tools:context="com.afn.onthego.fragments.VolunteerFragment"
-    android:background="@color/background_material_light">
+    android:padding="25dp"
+    tools:context="com.afn.onthego.fragments.VolunteerFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <!-- TODO bring up to spec -->
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:orientation="vertical">
+
+        <Button
+            android:id="@+id/b_volunteer_sign_in"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/volunteer_top"
+            android:textSize="16sp"
+            android:text="Sign In" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:background="@color/color_divider" />
+
+        <Button
+            android:id="@+id/b_volunteer_sign_up"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/volunteer_bottom"
+            android:textSize="16sp"
+            android:text="Sign Up" />
+
+        <Button
+            android:id="@+id/b_volunteer_cancel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/home_button_background"
+            android:text="Cancel"
+            android:textSize="16sp"
+            android:textColor="@color/holo_red_light" />
+
+    </LinearLayout>
 
 </FrameLayout>
