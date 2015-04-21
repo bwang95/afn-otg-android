@@ -14,19 +14,18 @@ import com.afn.onthego.storage.Storage;
 import com.afn.onthego.util.LearningModule;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Kyle on 4/20/2015.
  */
 public class LearnAdapter extends BaseAdapter {
     Context context;
-    LearningModule learningModule;
-    ArrayList<LearningModule> learningModules;
-    public LearnAdapter(Context context, LearningModule learningModule)
+    List<LearningModule> learningModules;
+    public LearnAdapter(Context context, List<LearningModule> learningModules)
     {
         this.context = context;
-        this.learningModule = learningModule;
-        learningModules = Storage.getInstance(context).getLearningModules().getLearningModulesArray();
+        this.learningModules = learningModules;
     }
 
 
@@ -47,26 +46,33 @@ public class LearnAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        if(convertView != null)
+
+        LearningModule learningModule = learningModules.get(position);
+        View view;
+        if(convertView == null) {
+            LayoutInflater layoutInflater = (LayoutInflater) context.getSystemService(context.LAYOUT_INFLATER_SERVICE);
+            view = layoutInflater.inflate(R.layout.adapter_learn_selector, parent, false);
+        }
+        else
         {
-            return convertView;
+            view = convertView;
         }
 
-        LayoutInflater layoutInflater = (LayoutInflater) context.getSystemService(context.LAYOUT_INFLATER_SERVICE);
-        convertView = layoutInflater.inflate(R.layout.adapter_learn_selector, null);
-
-        ImageView imageView = (ImageView) convertView.findViewById(R.id.iv_learn_image);
-        TextView textView = (TextView) convertView.findViewById(R.id.tv_learn_title);
+        ImageView imageView = (ImageView) view.findViewById(R.id.iv_learn_image);
+        TextView textView = (TextView) view.findViewById(R.id.tv_learn_title);
 
         switch(learningModule.getType())
         {
             case KeyList.LearningModulesKeys.TYPE_YOUTUBE:
+                imageView.setImageResource(R.drawable.ic_plusone_small_off_client);
                 // set image here
                 break;
             case KeyList.LearningModulesKeys.TYPE_WEBSITE:
+                imageView.setImageResource(R.drawable.ic_plusone_medium_off_client);
                 // set image here
                 break;
             case KeyList.LearningModulesKeys.TYPE_PDF:
+                imageView.setImageResource(R.drawable.ic_plusone_tall_off_client);
                 // set image here
                 break;
             default:
@@ -74,6 +80,6 @@ public class LearnAdapter extends BaseAdapter {
         }
         textView.setText(learningModule.getName());
 
-        return convertView;
+        return view;
     }
 }

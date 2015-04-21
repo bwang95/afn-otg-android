@@ -10,8 +10,9 @@
         android:src="@drawable/ic_plusone_medium_off_client"/>
     <TextView
         android:id="@+id/tv_learn_title"
-        android:layout_width=""
-        android:layout_height=""
-        android:src=""/>
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Test Text!"
+        android:paddingLeft="10dp"/>
 
 </LinearLayout>
