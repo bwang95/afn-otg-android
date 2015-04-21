@@ -3,8 +3,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/afn_light_blue"
-    android:orientation="vertical"
     android:clickable="true"
+    android:orientation="vertical"
     tools:context="com.afn.onthego.fragments.HomeFragment">
 
     <ImageView
@@ -14,33 +14,45 @@
         android:gravity="center"
         android:padding="10dp"
         android:textColor="@android:color/black"
+        android:src="@drawable/l1_logo_lg"
+        android:scaleType="centerInside"
         android:textSize="@dimen/header_text" />
 
     <GridView
         android:id="@+id/gv_home_fragment_grid"
         android:layout_width="match_parent"
-        android:layout_height="fill_parent"
-        android:layout_above="@+id/v_home_about_border"
+        android:layout_height="wrap_content"
         android:layout_below="@id/iv_home_header"
         android:horizontalSpacing="10dp"
-        android:verticalSpacing="10dp"
         android:numColumns="2"
         android:padding="12dp"
+        android:verticalSpacing="10dp"
 
         />
 
-    <View
-        android:id="@id/v_home_about_border"
-        android:layout_width="match_parent"
-        android:layout_height="1px"
-        android:layout_above="@+id/b_home_about"
-        android:background="@android:color/black" />
-
-    <Button
-        android:id="@id/b_home_about"
+    <LinearLayout
+        android:layout_margin="12dp"
+        android:padding="10dp"
+        android:id="@+id/ll_home_about"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:background="@color/background_material_light"
-        android:text="@string/home_about_button" />
+        android:layout_below="@id/gv_home_fragment_grid"
+        android:background="@drawable/home_button_background"
+        android:clickable="true"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:scaleType="centerInside"
+            android:src="@drawable/l1_attributions" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:paddingLeft="5dp"
+            android:text="Attributions"
+            android:textColor="@color/afn_light_blue" />
+    </LinearLayout>
+
 </RelativeLayout>

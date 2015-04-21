@@ -2,4 +2,10 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="com.afn.onthego.activities.PDFActivity">
+    <item
+        android:title="Go to austinfree.net"
+        android:enabled="true"
+        android:icon="@drawable/navbar_logo"
+        android:onClick="openAfn"
+        app:showAsAction="always"/>
 </menu>

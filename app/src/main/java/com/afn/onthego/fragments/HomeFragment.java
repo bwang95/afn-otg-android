@@ -1,26 +1,23 @@
 package com.afn.onthego.fragments;
 
 import android.app.Activity;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.GridLayout;
 import android.widget.GridView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 
+import com.afn.onthego.OTGApplication;
 import com.afn.onthego.R;
 import com.afn.onthego.adapters.HomeAdapter;
 import com.afn.onthego.storage.KeyList;
-
-import java.security.Key;
-import java.util.ArrayList;
-import java.util.Collections;
+import com.google.android.gms.analytics.HitBuilders;
+import com.google.android.gms.analytics.Tracker;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -37,7 +34,7 @@ public class HomeFragment extends MainFragment {
     private View.OnClickListener aboutListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            if(mListener != null)
+            if (mListener != null)
                 mListener.onHomeFragmentSelection(KeyList.Navigation.ABOUT);
         }
     };
@@ -64,7 +61,7 @@ public class HomeFragment extends MainFragment {
                     break;
             }
 
-            if(mListener != null)
+            if (mListener != null)
                 mListener.onHomeFragmentSelection(ret);
 
         }
@@ -88,9 +85,21 @@ public class HomeFragment extends MainFragment {
     }
 
     @Override
+    public void onStart() {
+        super.onStart();
+
+        // Get tracker.
+        Tracker t = ((OTGApplication) getActivity().getApplication()).getTracker();
+        // Set screen name.
+        t.setScreenName("Android Home");
+        // Send a screen view.
+        t.send(new HitBuilders.ScreenViewBuilder().build());
+    }
+
+    @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null);
+        if (getArguments() != null) ;
     }
 
     @Override
@@ -98,7 +107,7 @@ public class HomeFragment extends MainFragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_home, container, false);
 
-        Button about = (Button) view.findViewById(R.id.b_home_about);
+        LinearLayout about = (LinearLayout) view.findViewById(R.id.ll_home_about);
         GridView fragments = (GridView) view.findViewById(R.id.gv_home_fragment_grid);
 
         navAdapter = new HomeAdapter(getActivity());

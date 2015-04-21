@@ -63,4 +63,7 @@ public class PDFActivity extends ActionBarActivity {
 
         return super.onOptionsItemSelected(item);
     }
+
+    public void openAfn(MenuItem item) {
+    }
 }

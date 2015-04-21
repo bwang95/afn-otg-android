@@ -172,4 +172,8 @@ public class ConnectActivity extends ActionBarActivity implements OnMapReadyCall
         });
     }
 
+    public void openAfn(MenuItem item) {
+        Intent webIntent = new Intent(Intent.ACTION_VIEW);
+
+    }
 }

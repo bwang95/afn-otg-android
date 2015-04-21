@@ -10,11 +10,8 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
 import android.webkit.URLUtil;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -27,9 +24,7 @@ import com.afn.onthego.async.PDFRequest;
 import com.afn.onthego.storage.KeyList;
 import com.afn.onthego.storage.Storage;
 import com.afn.onthego.util.LearningModule;
-import com.joanzapata.pdfview.PDFView;
 
-import java.io.File;
 import java.util.ArrayList;
 
 /**
@@ -48,7 +43,7 @@ public class LearnFragment extends MainFragment
     private OnFragmentInteractionListener mListener;
 
     public ListView listView;
-    public ArrayAdapter<String> listAdapter;
+    public LearnAdapter listAdapter;
 
     public ArrayList<LearningModule> learningModules;
     public ArrayList<String> modulesNameArray;
@@ -111,12 +106,10 @@ public class LearnFragment extends MainFragment
         PDFName = learningModule.getName();
         String fileName = learningModule.getFileName();
 
-        if(fileName == "") {
+        if (fileName == "") {
             PDFRequest request = new PDFRequest(learningModule, getActivity(), LearnFragment.this);
             request.execute();
-        }
-        else
-        {
+        } else {
             onPDFRequestSuccess(fileName);
         }
     }
@@ -166,7 +159,7 @@ public class LearnFragment extends MainFragment
         listView = (ListView) v.findViewById(R.id.lv_learn_module_list);
         Storage storage = Storage.getInstance(getActivity());
         learningModules = storage.getLearningModules().getLearningModulesArray();
-        LearnAdapter listAdapter = new LearnAdapter(getActivity(), learningModules);
+        listAdapter = new LearnAdapter(getActivity(), learningModules);
 
         listView.setAdapter(listAdapter);
         listView.setOnItemClickListener(learnModuleListener);
@@ -210,10 +203,6 @@ public class LearnFragment extends MainFragment
         storage.getLearningModules().updateModules(json);
         modulesNameArray = storage.getLearningModules().getModulesNamesArray();
         //TODO I don't think you have to clear the adapter here.
-        listAdapter.clear();
-        for (String s : modulesNameArray) {
-            listAdapter.add(s);
-        }
         listAdapter.notifyDataSetChanged();
         swipeRefreshLayout.setRefreshing(false);
     }

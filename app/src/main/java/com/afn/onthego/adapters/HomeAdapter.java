@@ -22,10 +22,10 @@ public class HomeAdapter extends BaseAdapter {
     private Context context;
     private ArrayList<String> titles;
     private int[] imageIds = {
-            R.drawable.abc_btn_rating_star_off_mtrl_alpha,
-            R.drawable.abc_btn_rating_star_off_mtrl_alpha,
-            R.drawable.abc_btn_rating_star_off_mtrl_alpha,
-            R.drawable.abc_btn_rating_star_off_mtrl_alpha
+            R.drawable.l1_volunteer,
+            R.drawable.l1_donate,
+            R.drawable.l1_connect,
+            R.drawable.l1_learn
     };
 
     public HomeAdapter(Context context) {

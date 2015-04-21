@@ -116,4 +116,7 @@ public class WebActivity extends ActionBarActivity {
         }
         super.onBackPressed();
     }
+
+    public void openAfn(MenuItem item) {
+    }
 }

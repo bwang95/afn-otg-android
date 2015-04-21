@@ -2,7 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/background_material_light"
+    android:background="@android:color/white"
     android:clickable="true"
     tools:context="com.afn.onthego.fragments.DonateFragment">
 
@@ -10,7 +10,9 @@
         android:id="@+id/iv_donate_header_image"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:src="@drawable/abc_btn_check_to_on_mtrl_015" />
+        android:src="@drawable/l2_logo_lg"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"/>
 
     <ScrollView
         android:layout_width="match_parent"
@@ -45,10 +47,11 @@
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:src="@drawable/abc_btn_check_material"
+            android:src="@drawable/l2_banner_donate"
             android:background="@color/afn_light_blue"
             android:scaleType="center"
-            android:padding="10dp"/>
+            android:padding="5dp"
+            />
 
         <TextView
             android:layout_width="fill_parent"
@@ -56,6 +59,7 @@
             android:gravity="center_vertical"
             android:padding="10dp"
             android:textSize="15sp"
+            android:background="@android:color/white"
             android:text="Make a Donation"/>
 
     </LinearLayout>

@@ -130,4 +130,7 @@ public class MainActivity extends ActionBarActivity
         getSupportActionBar().setDisplayHomeAsUpEnabled(false);
         super.onBackPressed();
     }
+
+    public void openAfn(MenuItem item) {
+    }
 }

@@ -5,6 +5,8 @@
     android:weightSum="100"
     android:orientation="vertical"
     android:layout_margin="10dp"
+    android:paddingTop="20dp"
+    android:paddingBottom="15dp"
     android:background="@drawable/home_button_background">
 
     <ImageView
@@ -23,6 +25,7 @@
         android:layout_weight="10"
         android:text="Test"
         android:gravity="center"
+        android:paddingTop="10dp"
         android:textColor="@color/afn_light_blue"
         android:textSize="@dimen/small_header"/>
 

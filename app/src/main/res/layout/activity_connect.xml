@@ -45,9 +45,10 @@
                 android:layout_marginTop="1px"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:padding="10dp"
+                android:padding="5dp"
+                android:scaleType="centerInside"
                 android:background="@color/afn_light_blue"
-                android:src="@drawable/abc_btn_check_material"
+                android:src="@drawable/l2_banner_connect"
                 />
             <TextView
                 android:layout_marginTop="1px"

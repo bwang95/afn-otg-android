@@ -53,6 +53,14 @@ public class LearningModules {
         if (json == null || json.equals("")) {
             return;
         }
+        HashMap<String, String> urlsToPdfs = new HashMap<>();
+        for(LearningModule module : learningModulesArray) {
+            if (module.getType().toLowerCase().equals("pdf") &&
+                    module.getFileName() != null) {
+                urlsToPdfs.put(module.getData(), module.getFileName());
+            }
+        }
+
         learningModulesArray.clear();
 
         // convert from json
@@ -72,6 +80,10 @@ public class LearningModules {
             learningModule.setType(m.get(KeyList.LearningModulesKeys.LEARNING_MODULE_TYPE));
             learningModule.setData(m.get(KeyList.LearningModulesKeys.LEARNING_MODULE_DATA));
             learningModule.setPosition(m.get(KeyList.LearningModulesKeys.LEARNING_MODULE_POSITION));
+
+            if(urlsToPdfs.containsKey(learningModule.getData()))
+                learningModule.setFileName(urlsToPdfs.get(learningModule.getData()));
+
             learningModulesArray.add(learningModule);
             Log.d(LOG_TAG, "Position: " + learningModule.getPosition());
         }

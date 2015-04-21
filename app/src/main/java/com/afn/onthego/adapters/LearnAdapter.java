@@ -50,7 +50,7 @@ public class LearnAdapter extends BaseAdapter {
         LearningModule learningModule = learningModules.get(position);
         View view;
         if(convertView == null) {
-            LayoutInflater layoutInflater = (LayoutInflater) context.getSystemService(context.LAYOUT_INFLATER_SERVICE);
+            LayoutInflater layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             view = layoutInflater.inflate(R.layout.adapter_learn_selector, parent, false);
         }
         else
@@ -81,5 +81,14 @@ public class LearnAdapter extends BaseAdapter {
         textView.setText(learningModule.getName());
 
         return view;
+    }
+
+    @Override
+    public void notifyDataSetChanged() {
+        learningModules = Storage.getInstance(context).
+                            getLearningModules().
+                            getLearningModulesArray();
+
+        super.notifyDataSetChanged();
     }
 }
