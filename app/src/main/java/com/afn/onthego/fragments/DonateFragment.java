@@ -1,14 +1,19 @@
 package com.afn.onthego.fragments;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 
 import com.afn.onthego.R;
+import com.afn.onthego.activities.ConnectActivity;
+import com.afn.onthego.activities.WebActivity;
+import com.afn.onthego.storage.KeyList;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -23,6 +28,8 @@ public class DonateFragment extends MainFragment {
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
+
+    private LinearLayout donateLayout;
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -48,6 +55,15 @@ public class DonateFragment extends MainFragment {
         // Required empty public constructor
     }
 
+    private View.OnClickListener donateListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            Intent webIntent = new Intent(Intent.ACTION_VIEW);
+            webIntent.setData(Uri.parse(KeyList.URL.DONATE_URL));
+            startActivity(webIntent);
+        }
+    };
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,7 +77,11 @@ public class DonateFragment extends MainFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_donate, container, false);
+        View view = inflater.inflate(R.layout.fragment_donate, container, false);
+        donateLayout = (LinearLayout) view.findViewById(R.id.ll_donate_button);
+        donateLayout.setOnClickListener(donateListener);
+
+        return view;
     }
 
     // TODO: Rename method, update argument and hook method into UI event
