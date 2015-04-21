@@ -6,6 +6,7 @@ import android.util.Log;
 
 import com.afn.onthego.storage.KeyList;
 import com.afn.onthego.storage.Storage;
+import com.afn.onthego.util.LearningModule;
 import com.squareup.okhttp.OkHttpClient;
 import com.squareup.okhttp.Request;
 import com.squareup.okhttp.Response;
@@ -28,11 +29,13 @@ public class PDFRequest extends AsyncTask<Void, Void, String> {
     private Context context;
     private PDFRequestListener callback;
     private String url;
+    private LearningModule learningModule;
 
-    public PDFRequest(String url, Context context, PDFRequestListener callback) {
+    public PDFRequest(LearningModule learningModule, Context context, PDFRequestListener callback) {
         this.callback = callback;
         this.context = context;
-        this.url = url;
+        this.learningModule = learningModule;
+        this.url = learningModule.getData();
     }
 
     @Override
@@ -81,10 +84,13 @@ public class PDFRequest extends AsyncTask<Void, Void, String> {
 
     @Override
     protected void onPostExecute(String result) {
-        if(result == null)
+        if(result == null) {
             callback.onPDFRequestFailure();
-        else
+        }
+        else {
+            learningModule.setFileName(result);
             callback.onPDFRequestSuccess(result);
+        }
     }
 
     public interface PDFRequestListener {

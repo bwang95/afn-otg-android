@@ -106,9 +106,18 @@ public class LearnFragment extends MainFragment
 
     public void handlePDF(LearningModule learningModule) {
         progressDialog.show();
-        PDFRequest request = new PDFRequest(learningModule.getData(), getActivity(), LearnFragment.this);
+
         PDFName = learningModule.getName();
-        request.execute();
+        String fileName = learningModule.getFileName();
+
+        if(fileName == "") {
+            PDFRequest request = new PDFRequest(learningModule, getActivity(), LearnFragment.this);
+            request.execute();
+        }
+        else
+        {
+            onPDFRequestSuccess(fileName);
+        }
     }
 
     public void handleWebsite(LearningModule learningModule) {

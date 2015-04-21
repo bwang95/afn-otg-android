@@ -1,5 +1,7 @@
 package com.afn.onthego.util;
 
+import java.io.File;
+
 /**
  * Created by Kyle on 4/14/2015.
  */
@@ -9,9 +11,35 @@ public class LearningModule implements Comparable<LearningModule> {
     public String type;
     public String data;
     public String position;
+    public String fileName;
 
     public LearningModule()
     {}
+
+    public void setFileName(String fileName)
+    {
+        this.fileName = fileName;
+    }
+
+    /*
+    If File exists return filename, else empty string
+     */
+    public String getFileName()
+    {
+        if(fileName == null)
+        {
+            return "";
+        }
+
+        if(new File(fileName).exists())
+        {
+            return fileName;
+        }
+        else
+        {
+            return "";
+        }
+    }
 
     public void setName(String name)
     {
