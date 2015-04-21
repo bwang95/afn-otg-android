@@ -3,6 +3,12 @@
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
         <!-- Customize your theme here. -->
+        <item name="android:actionBarStyle">@style/AFNActionBar</item>
+        <item name="actionBarStyle">@style/AFNActionBar</item>
+    </style>
+    <style name="AFNActionBar" parent="Widget.AppCompat.Light.ActionBar.Solid.Inverse">
+        <item name="android:background">@color/afn_light_blue</item>
+        <item name="background">@color/afn_light_blue</item>
     </style>
 
 </resources>

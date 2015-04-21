@@ -4,6 +4,7 @@
     android:layout_height="match_parent"
     android:background="@drawable/bottom_gradient"
     android:clickable="true"
+    android:id="@+id/fl_volunteer_main"
     android:padding="25dp"
     tools:context="com.afn.onthego.fragments.VolunteerFragment">
 
@@ -12,6 +13,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
+        android:clickable="false"
         android:orientation="vertical">
 
         <Button

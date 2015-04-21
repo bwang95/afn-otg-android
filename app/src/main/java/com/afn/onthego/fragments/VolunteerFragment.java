@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.FrameLayout;
 
 import com.afn.onthego.R;
 import com.afn.onthego.activities.WebActivity;
@@ -88,10 +89,12 @@ public class VolunteerFragment extends MainFragment {
         Button signIn = (Button) view.findViewById(R.id.b_volunteer_sign_in);
         Button signUp = (Button) view.findViewById(R.id.b_volunteer_sign_up);
         Button cancel = (Button) view.findViewById(R.id.b_volunteer_cancel);
+        FrameLayout baseLayout = (FrameLayout) view.findViewById(R.id.fl_volunteer_main);
 
         signIn.setOnClickListener(signInListener);
         signUp.setOnClickListener(signUpListener);
         cancel.setOnClickListener(cancelListener);
+        baseLayout.setOnClickListener(cancelListener);
 
         return view;
     }
