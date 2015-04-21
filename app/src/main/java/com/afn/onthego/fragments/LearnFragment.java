@@ -21,6 +21,7 @@ import android.widget.Toast;
 import com.afn.onthego.R;
 import com.afn.onthego.activities.PDFActivity;
 import com.afn.onthego.activities.WebActivity;
+import com.afn.onthego.adapters.LearnAdapter;
 import com.afn.onthego.async.LearnRequest;
 import com.afn.onthego.async.PDFRequest;
 import com.afn.onthego.storage.KeyList;
@@ -157,15 +158,15 @@ public class LearnFragment extends MainFragment
                 R.color.holo_green_light,
                 R.color.holo_orange_light,
                 R.color.holo_red_light);
-        listView = (ListView) v.findViewById(R.id.lv_learn_module_list);
-        Storage storage = Storage.getInstance(getActivity());
-        learningModules = storage.getLearningModules().getLearningModulesArray();
-        ArrayList<String> modulesNameArray = storage.getLearningModules().getModulesNamesArray();
-        listAdapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_list_item_1, modulesNameArray);
 
         progressDialog = new ProgressDialog(getActivity());
         progressDialog.setMessage("Loading PDF, please wait...");
         progressDialog.setCancelable(false);
+
+        listView = (ListView) v.findViewById(R.id.lv_learn_module_list);
+        Storage storage = Storage.getInstance(getActivity());
+        learningModules = storage.getLearningModules().getLearningModulesArray();
+        LearnAdapter listAdapter = new LearnAdapter(getActivity(), learningModules);
 
         listView.setAdapter(listAdapter);
         listView.setOnItemClickListener(learnModuleListener);
