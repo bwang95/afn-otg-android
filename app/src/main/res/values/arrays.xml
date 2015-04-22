@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="fragment_titles">
+        <item>Volunteer</item>
+        <item>Donate</item>
+        <item>Connect</item>
+        <item>Learn</item>
+    </string-array>
+
+    <string-array name="about_contributors">
+        <item>Brian Wang - Android Developer</item>
+        <item>Kyle Nicola - Android Developer</item>
+        <item>Kelsey Mayfield - iOS Developer</item>
+        <item>Lauren McKenna - iOS Developer</item>
+        <item>Faisal Aldilaijan - General Support</item>
+        <item>Will Aldridge - Technical Writer</item>
+        <item>Wil Nichols - Designer</item>
+
+        <item>Android Repository</item>
+        <item>iOS Repository</item>
+        <item>MIT License</item>
+
+        <item>Nine Old Androids</item>
+        <item>PDFView</item>
+        <item>OkHttp</item>
+        <item>GSON</item>
+        <item>StickyListHeaders</item>
+    </string-array>
+
+    <integer-array name="about_header_ids">
+        <item>7</item>
+        <item>3</item>
+        <item>5</item>
+    </integer-array>
+
+    <string-array name="about_headers">
+        <item>Contributors</item>
+        <item>Our Repositories</item>
+        <item>Library Attributions</item>
+    </string-array>
+
+    <string-array name="about_actions">
+        <item>http://github.com/bwang95</item>
+        <item>http://github.com/kylenicola</item>
+        <item>http://github.com/kelseymayfield</item>
+        <item>http://github.com/mckennatx</item>
+        <item>http://github.com/aldilaff</item>
+        <item>http://github.com/scionix</item>
+        <item>http://wilnichols.com</item>
+
+        <item>http://github.com/bwang95/afn-otg-android</item>
+        <item>http://github.com/mckennatx/afn-otg-ios</item>
+        <item>https://github.com/bwang95/afn-otg-android/blob/master/LICENSE</item>
+
+        <item>https://github.com/JakeWharton/NineOldAndroids</item>
+        <item>https://github.com/JoanZapata/android-pdfview</item>
+        <item>https://github.com/square/okhttp</item>
+        <item>https://github.com/google/gson</item>
+        <item>https://github.com/emilsjolander/StickyListHeaders</item>
+    </string-array>
+</resources>

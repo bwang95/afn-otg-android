@@ -56,7 +56,8 @@ public class LearningModules {
         HashMap<String, String> urlsToPdfs = new HashMap<>();
         for(LearningModule module : learningModulesArray) {
             if (module.getType().toLowerCase().equals("pdf") &&
-                    module.getFileName() != null) {
+                    module.getFileName() != null &&
+                    !module.getFileName().isEmpty()) {
                 urlsToPdfs.put(module.getData(), module.getFileName());
             }
         }

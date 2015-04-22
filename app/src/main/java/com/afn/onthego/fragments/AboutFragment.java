@@ -13,9 +13,12 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import com.afn.onthego.R;
+import com.afn.onthego.adapters.AboutAdapter;
 
 import java.util.ArrayList;
 import java.util.Collections;
+
+import se.emilsjolander.stickylistheaders.StickyListHeadersListView;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -27,29 +30,17 @@ import java.util.Collections;
  */
 public class AboutFragment extends MainFragment {
     // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    private ListView aboutList;
-    private ArrayAdapter<String> listAdapter;
-    private ArrayList<Uri> urls;
-    private ArrayList<String> titles;
+    private StickyListHeadersListView aboutList;
+    private AboutAdapter listAdapter;
 
     private final ListView.OnItemClickListener itemListener = new AdapterView.OnItemClickListener() {
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-            if(urls.get(position).toString().isEmpty())
-                return;
             Intent i = new Intent(Intent.ACTION_VIEW);
-            i.setData(urls.get(position));
+            i.setData(listAdapter.getAction(position));
             startActivity(i);
         }
     };
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
 
     private OnFragmentInteractionListener mListener;
 
@@ -74,10 +65,7 @@ public class AboutFragment extends MainFragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
+
     }
 
     @Override
@@ -86,19 +74,9 @@ public class AboutFragment extends MainFragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_about, container, false);
 
-        aboutList = (ListView) view.findViewById(R.id.lv_about_contributors);
+        aboutList = (StickyListHeadersListView) view.findViewById(R.id.lv_about_contributors);
 
-        String[] names = getActivity().getResources().getStringArray(R.array.contributors_libraries);
-        String[] actions = getActivity().getResources().getStringArray(R.array.cl_actions);
-
-        titles = new ArrayList<>();
-        urls = new ArrayList<>();
-        Collections.addAll(titles, names);
-
-        for(String s : actions)
-            urls.add(Uri.parse(s));
-
-        listAdapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1, titles);
+        listAdapter = new AboutAdapter(getActivity());
         aboutList.setAdapter(listAdapter);
         aboutList.setOnItemClickListener(itemListener);
 

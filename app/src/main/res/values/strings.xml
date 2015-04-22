@@ -27,50 +27,6 @@
         the Digital Divide in the Austin area since 1995.
     </string>
 
-    <string-array name="fragment_titles">
-        <item>Volunteer</item>
-        <item>Donate</item>
-        <item>Connect</item>
-        <item>Learn</item>
-    </string-array>
-
-    <string-array name="contributors_libraries">
-        <item>Contributors</item>
-        <item>Brian Wang</item>
-        <item>Kyle Nicola</item>
-        <item>Kelsey Mayfield</item>
-        <item>Lauren McKenna</item>
-        <item>Faisal Aldilaijan</item>
-        <item>Will Aldridge</item>
-        <item></item>
-        <item>Android Repository</item>
-        <item>iOS Repository</item>
-        <item>MIT License</item>
-        <item></item>
-        <item>Library Attributions</item>
-        <item>Nine Old Androids</item>
-        <item>PDFView</item>
-        <item>OkHttp</item>
-    </string-array>
-
-    <string-array name="cl_actions">
-        <item></item>
-        <item>http://github.com/bwang95</item>
-        <item>http://github.com/kylenicola</item>
-        <item>http://github.com/kelseymayfield</item>
-        <item>http://github.com/mckennatx</item>
-        <item>http://github.com/aldilaff</item>
-        <item>http://github.com/scionix</item>
-        <item></item>
-        <item>http://github.com/bwang95/afn-otg-android</item>
-        <item>http://github.com/mckennatx/afn-otg-ios</item>
-        <item>https://github.com/bwang95/afn-otg-android/blob/master/LICENSE</item>
-        <item></item>
-        <item></item>
-        <item>https://github.com/JakeWharton/NineOldAndroids</item>
-        <item>https://github.com/JoanZapata/android-pdfview</item>
-        <item>https://github.com/square/okhttp</item>
-    </string-array>
     <string name="title_activity_pdf">PDF</string>
     <string name="title_activity_web">Website</string>
 </resources>
