@@ -32,40 +32,19 @@
             android:divider="@color/color_divider"
             android:dividerHeight="1px" />
 
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:background="@color/color_divider"
+            android:layout_above="@id/fl_connect_questions"/>
+
         <FrameLayout
             android:id="@id/fl_connect_questions"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:clickable="true"
+            android:background="@drawable/white_button"
             android:layout_alignParentBottom="true">
-
-            <LinearLayout
-                android:id="@+id/ll_connect_questions"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@color/color_divider"
-                android:clickable="true"
-                android:orientation="horizontal">
-
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_marginTop="1px"
-                    android:background="@drawable/blue_button"
-                    android:scaleType="center"
-                    android:src="@drawable/l2_banner_connect" />
-
-                <TextView
-                    android:layout_width="fill_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginTop="1px"
-                    android:background="@drawable/white_button"
-                    android:gravity="center_vertical"
-                    android:paddingLeft="10dp"
-                    android:text="Ask a Question"
-                    android:textColor="@color/color_link"
-                    android:textSize="15sp" />
-
-            </LinearLayout>
 
             <ImageView
                 android:layout_width="wrap_content"
@@ -74,6 +53,31 @@
                 android:paddingRight="10dp"
                 android:scaleType="centerInside"
                 android:src="@drawable/l2_caret" />
+
+            <LinearLayout
+                android:id="@+id/ll_connect_questions"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/blue_button"
+                    android:scaleType="center"
+                    android:src="@drawable/l2_banner_connect" />
+
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="10dp"
+                    android:text="Ask a Question"
+                    android:textColor="@color/color_link"
+                    android:textSize="15sp" />
+
+            </LinearLayout>
+
         </FrameLayout>
     </RelativeLayout>
 

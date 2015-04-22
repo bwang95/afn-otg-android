@@ -12,6 +12,9 @@
         android:layout_height="wrap_content"
         android:paddingBottom="10dp"
         android:paddingTop="10dp"
+        android:clickable="true"
+        android:onClick="openAfn"
+        android:background="@drawable/white_button"
         android:src="@drawable/l2_logo_lg" />
 
     <View
@@ -49,8 +52,17 @@
         android:id="@id/fl_donate_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:clickable="true"
+        android:background="@drawable/white_button"
         android:layout_alignParentBottom="true">
 
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="right"
+            android:paddingRight="10dp"
+            android:scaleType="centerInside"
+            android:src="@drawable/l2_caret" />
 
         <LinearLayout
             android:id="@+id/ll_donate_button"
@@ -68,7 +80,6 @@
             <TextView
                 android:layout_width="fill_parent"
                 android:layout_height="match_parent"
-                android:background="@drawable/white_button"
                 android:gravity="center_vertical"
                 android:padding="10dp"
                 android:text="Make a Donation"
@@ -77,13 +88,7 @@
 
         </LinearLayout>
 
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_gravity="right"
-            android:paddingRight="10dp"
-            android:scaleType="centerInside"
-            android:src="@drawable/l2_caret" />
+
     </FrameLayout>
 
 </RelativeLayout>

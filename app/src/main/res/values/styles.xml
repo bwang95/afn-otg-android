@@ -6,9 +6,48 @@
         <item name="android:actionBarStyle">@style/AFNActionBar</item>
         <item name="actionBarStyle">@style/AFNActionBar</item>
     </style>
+
     <style name="AFNActionBar" parent="Widget.AppCompat.Light.ActionBar.Solid.Inverse">
         <item name="android:background">@color/afn_light_blue</item>
         <item name="background">@color/afn_light_blue</item>
+    </style>
+
+    <style name="ll_home_button">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_weight">50</item>
+        <item name="android:weightSum">100</item>
+        <item name="android:orientation">vertical</item>
+        <item name="android:paddingTop">10dp</item>
+        <item name="android:paddingBottom">5dp</item>
+        <item name="android:layout_margin">6dp</item>
+        <item name="android:clickable">true</item>
+        <item name="android:background">@drawable/home_button_background</item>
+    </style>
+
+    <style name="iv_home_button_image">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">0dp</item>
+        <item name="android:layout_weight">85</item>
+        <item name="android:scaleType">centerInside</item>
+    </style>
+
+    <style name="tv_home_button_text">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">0dp</item>
+        <item name="android:layout_weight">15</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textColor">@color/afn_light_blue</item>
+        <item name="android:textSize">@dimen/small_header</item>
+    </style>
+
+    <style name="ll_home_button_parent">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">0dp</item>
+        <item name="android:weightSum">100</item>
+        <item name="android:layout_weight">35</item>
+        <item name="android:paddingLeft">6dp</item>
+        <item name="android:paddingRight">6dp</item>
     </style>
 
 </resources>

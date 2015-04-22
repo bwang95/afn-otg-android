@@ -12,6 +12,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 
@@ -40,7 +41,7 @@ public class ConnectActivity extends ActionBarActivity implements OnMapReadyCall
     private ListView locationList;
     private ConnectAdapter locationAdapter;
 
-    private LinearLayout questionLayout;
+    private FrameLayout questionLayout;
 
     private ListView.OnItemClickListener locationListener = new ListView.OnItemClickListener() {
         @Override
@@ -78,7 +79,7 @@ public class ConnectActivity extends ActionBarActivity implements OnMapReadyCall
         mapFragment.getMapAsync(this);
 
         locationList = (ListView) findViewById(R.id.lv_connect_locations);
-        questionLayout = (LinearLayout) findViewById(R.id.ll_connect_questions);
+        questionLayout = (FrameLayout) findViewById(R.id.fl_connect_questions);
         questionLayout.setOnClickListener(questionListener);
 
         ArrayList<String> locations = new ArrayList<>();

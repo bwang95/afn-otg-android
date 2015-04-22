@@ -118,7 +118,7 @@ public class WebActivity extends ActionBarActivity {
         }
         super.onBackPressed();
     }
-6
+
     public void openAfn(MenuItem item) {
         Intent webIntent = new Intent(Intent.ACTION_VIEW);
         webIntent.setData(Uri.parse(KeyList.URL.AFN));

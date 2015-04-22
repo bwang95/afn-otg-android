@@ -13,13 +13,6 @@
         android:layout_height="match_parent"
         android:gravity="center_vertical"
         android:text="Test"
-        android:textColor="@color/color_list_text"/>
-
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:layout_alignParentRight="true"
-        android:src="@drawable/l2_caret"
-        android:scaleType="centerInside"/>
+        android:textColor="@color/color_list_text" />
 
 </RelativeLayout>

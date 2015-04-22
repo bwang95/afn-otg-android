@@ -72,6 +72,6 @@ public class KeyList {
         public static final String VOLUNTEER_SIGN_UP = "https://ctk.apricot.info/auth/autologin/org_id/1643/hash/ec0b5d74087f76195cdeb3a30ab1a6195a17f541";
         public static final String VOLUNTEER_SIGN_IN = "https://ctk.apricot.info";
         public static final String DONATE_URL = "https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=HPV6ZMGRW5VWU";
-        public static final String AFN = "http://austin-free.net";
+        public static final String AFN = "http://austinfree.net";
     }
 }

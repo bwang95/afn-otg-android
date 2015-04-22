@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
@@ -15,7 +16,6 @@ import com.afn.onthego.storage.KeyList;
 
 public class DonateActivity extends ActionBarActivity {
 
-    private LinearLayout donateLayout;
     private View.OnClickListener donateListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
@@ -32,7 +32,7 @@ public class DonateActivity extends ActionBarActivity {
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        donateLayout = (LinearLayout) findViewById(R.id.ll_donate_button);
+        FrameLayout donateLayout = (FrameLayout) findViewById(R.id.fl_donate_button);
         donateLayout.setOnClickListener(donateListener);
     }
 
@@ -45,6 +45,12 @@ public class DonateActivity extends ActionBarActivity {
     }
 
     public void openAfn(MenuItem item) {
+        Intent webIntent = new Intent(Intent.ACTION_VIEW);
+        webIntent.setData(Uri.parse(KeyList.URL.AFN));
+        startActivity(webIntent);
+    }
+
+    public void openAfn(View view) {
         Intent webIntent = new Intent(Intent.ACTION_VIEW);
         webIntent.setData(Uri.parse(KeyList.URL.AFN));
         startActivity(webIntent);

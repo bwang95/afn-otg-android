@@ -10,15 +10,11 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.FrameLayout;
-import android.widget.GridView;
 import android.widget.LinearLayout;
-import android.widget.ListView;
 
-import com.afn.onthego.app.OTGApplication;
 import com.afn.onthego.R;
-import com.afn.onthego.adapters.HomeAdapter;
+import com.afn.onthego.app.OTGApplication;
 import com.afn.onthego.fragments.VolunteerFragment;
 import com.afn.onthego.storage.KeyList;
 import com.afn.onthego.storage.Storage;
@@ -31,39 +27,10 @@ public class MainActivity extends ActionBarActivity {
     private static final String LOG_TAG = "MainActivity";
     private FrameLayout fragmentContainer;
 
-    private HomeAdapter navAdapter;
-
     private View.OnClickListener aboutListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
             onNavigationSelection(KeyList.Navigation.ABOUT);
-        }
-    };
-
-    private ListView.OnItemClickListener navigationListener = new AdapterView.OnItemClickListener() {
-        @Override
-        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-            String item = navAdapter.getItem(position).toString();
-
-            String ret = "";
-
-            switch (item) {
-                case "Learn":
-                    ret = KeyList.Navigation.LEARN;
-                    break;
-                case "Connect":
-                    ret = KeyList.Navigation.CONNECT;
-                    break;
-                case "Volunteer":
-                    ret = KeyList.Navigation.VOLUNTEER;
-                    break;
-                case "Donate":
-                    ret = KeyList.Navigation.DONATE;
-                    break;
-            }
-
-            onNavigationSelection(ret);
-
         }
     };
 
@@ -85,12 +52,6 @@ public class MainActivity extends ActionBarActivity {
         setContentView(R.layout.activity_main);
 
         LinearLayout about = (LinearLayout) findViewById(R.id.ll_home_about);
-        GridView fragments = (GridView) findViewById(R.id.gv_home_fragment_grid);
-
-        navAdapter = new HomeAdapter(this);
-        fragments.setAdapter(navAdapter);
-
-        fragments.setOnItemClickListener(navigationListener);
         about.setOnClickListener(aboutListener);
 
         Storage.getInstance(this);
@@ -137,6 +98,28 @@ public class MainActivity extends ActionBarActivity {
     }
 
     public void openAfn(MenuItem item) {
+        Intent webIntent = new Intent(Intent.ACTION_VIEW);
+        webIntent.setData(Uri.parse(KeyList.URL.AFN));
+        startActivity(webIntent);
+    }
+
+    public void navLearn(View view) {
+        onNavigationSelection(KeyList.Navigation.LEARN);
+    }
+
+    public void navVolunteer(View view) {
+        onNavigationSelection(KeyList.Navigation.VOLUNTEER);
+    }
+
+    public void navDonate(View view) {
+        onNavigationSelection(KeyList.Navigation.DONATE);
+    }
+
+    public void navConnect(View view) {
+        onNavigationSelection(KeyList.Navigation.CONNECT);
+    }
+
+    public void openAfn(View view) {
         Intent webIntent = new Intent(Intent.ACTION_VIEW);
         webIntent.setData(Uri.parse(KeyList.URL.AFN));
         startActivity(webIntent);
