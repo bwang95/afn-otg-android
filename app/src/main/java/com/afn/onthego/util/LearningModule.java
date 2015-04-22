@@ -82,6 +82,20 @@ public class LearningModule implements Comparable<LearningModule> {
     }
 
     public int compareTo(LearningModule another) {
-        return this.position.compareTo(another.getPosition());
+        int this_pos = Integer.parseInt(this.getPosition());
+        int another_pos = Integer.parseInt(another.getPosition());
+        if(this_pos < another_pos)
+        {
+            return -1;
+        }
+        else if(this_pos == another_pos)
+        {
+            return 0;
+        }
+        else
+        {
+            return 1;
+        }
+
     }
 }
