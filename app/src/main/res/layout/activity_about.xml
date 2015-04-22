@@ -2,33 +2,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:weightSum="100"
     android:orientation="vertical"
     android:clickable="true"
     tools:context="com.afn.onthego.fragments.AboutFragment"
     android:background="@color/background_material_light"
     >
-
-    <!--<TextView-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="0dp"-->
-        <!--android:layout_weight="10"-->
-        <!--android:text="@string/about_title"-->
-        <!--android:gravity="center"-->
-        <!--android:padding="5dp"-->
-        <!--android:textSize="@dimen/header_text"/>-->
-
-    <!--<View-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="1px"-->
-        <!--android:background="@android:color/black"-->
-        <!--/>-->
-
     <se.emilsjolander.stickylistheaders.StickyListHeadersListView
         android:id="@+id/lv_about_contributors"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="100"
+        android:layout_height="match_parent"
         android:divider="@color/color_divider"
         android:background="@android:color/white"
         android:dividerHeight="1px"/>

@@ -13,10 +13,9 @@
     <string name="hello_world">Hello world!</string>
     <string name="title_activity_connect">Connect</string>
     <string name="maps_api_key">AIzaSyDcryPqFu_Hh18XA5UkgecTqX1EztIQEm4</string>
-    <string name="home_about_button">About this Application</string>
+    <string name="home_about_button">Attributions</string>
     <string name="home_header">Home</string>
     <string name="connect_question">Questions?</string>
-    <string name="about_title">So who made this thing, anyway?</string>
 
     <string name="donate_text">
         Austin Free-Net provides technology training and access for the community,
@@ -29,4 +28,5 @@
 
     <string name="title_activity_pdf">PDF</string>
     <string name="title_activity_web">Website</string>
+    <string name="title_activity_donate">Donate</string>
 </resources>

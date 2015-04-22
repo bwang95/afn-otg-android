@@ -1,10 +1,10 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/fl_volunteer_main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/bottom_gradient"
     android:clickable="true"
-    android:id="@+id/fl_volunteer_main"
     android:padding="25dp"
     tools:context="com.afn.onthego.fragments.VolunteerFragment">
 
@@ -21,8 +21,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/volunteer_top"
-            android:textSize="16sp"
-            android:text="Sign In" />
+            android:text="Sign In"
+            android:textAllCaps="false"
+            android:textColor="@color/wallet_link_text_light"
+            android:textSize="16sp" />
 
         <View
             android:layout_width="match_parent"
@@ -34,8 +36,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/volunteer_bottom"
-            android:textSize="16sp"
-            android:text="Sign Up" />
+            android:text="Sign Up"
+            android:textAllCaps="false"
+            android:textColor="@color/wallet_link_text_light"
+            android:textSize="16sp" />
 
         <Button
             android:id="@+id/b_volunteer_cancel"
@@ -44,8 +48,9 @@
             android:layout_marginTop="10dp"
             android:background="@drawable/home_button_background"
             android:text="Cancel"
-            android:textSize="16sp"
-            android:textColor="@color/holo_red_light" />
+            android:textAllCaps="false"
+            android:textColor="@color/holo_red_light"
+            android:textSize="16sp" />
 
     </LinearLayout>
 

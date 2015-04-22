@@ -1,7 +1,8 @@
-package com.afn.onthego;
+package com.afn.onthego.app;
 
 import android.app.Application;
 
+import com.afn.onthego.R;
 import com.google.android.gms.analytics.GoogleAnalytics;
 import com.google.android.gms.analytics.Tracker;
 

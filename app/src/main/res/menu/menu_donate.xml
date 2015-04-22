@@ -1,0 +1,11 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.afn.onthego.activities.DonateActivity">
+    <item
+        android:enabled="true"
+        android:icon="@drawable/navbar_logo"
+        android:onClick="openAfn"
+        android:title="Go to austinfree.net"
+        app:showAsAction="always" />
+</menu>

@@ -8,13 +8,13 @@
     </string-array>
 
     <string-array name="about_contributors">
-        <item>Brian Wang - Android Developer</item>
-        <item>Kyle Nicola - Android Developer</item>
-        <item>Kelsey Mayfield - iOS Developer</item>
-        <item>Lauren McKenna - iOS Developer</item>
-        <item>Faisal Aldilaijan - General Support</item>
-        <item>Will Aldridge - Technical Writer</item>
-        <item>Wil Nichols - Designer</item>
+        <item>Brian Wang/Android Developer</item>
+        <item>Kyle Nicola/Android Developer</item>
+        <item>Kelsey Mayfield/iOS Developer</item>
+        <item>Lauren McKenna/iOS Developer</item>
+        <item>Faisal Aldilaijan/General Support</item>
+        <item>Will Aldridge/Technical Writer</item>
+        <item>Wil Nichols/Designer</item>
 
         <item>Android Repository</item>
         <item>iOS Repository</item>

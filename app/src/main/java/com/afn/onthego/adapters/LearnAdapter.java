@@ -64,15 +64,15 @@ public class LearnAdapter extends BaseAdapter {
         switch(learningModule.getType())
         {
             case KeyList.LearningModulesKeys.TYPE_YOUTUBE:
-                imageView.setImageResource(R.drawable.ic_plusone_small_off_client);
+                imageView.setImageResource(R.drawable.l2_media_mov);
                 // set image here
                 break;
             case KeyList.LearningModulesKeys.TYPE_WEBSITE:
-                imageView.setImageResource(R.drawable.ic_plusone_medium_off_client);
+                imageView.setImageResource(R.drawable.l2_media_rtxt);
                 // set image here
                 break;
             case KeyList.LearningModulesKeys.TYPE_PDF:
-                imageView.setImageResource(R.drawable.ic_plusone_tall_off_client);
+                imageView.setImageResource(R.drawable.l2_media_rtxt);
                 // set image here
                 break;
             default:

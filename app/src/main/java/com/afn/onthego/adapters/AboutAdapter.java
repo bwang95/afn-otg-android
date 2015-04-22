@@ -44,8 +44,10 @@ public class AboutAdapter extends BaseAdapter implements StickyListHeadersAdapte
 
         int t = 0;
         for (int h = 0; h < entryPairs.length; h++) {
-            for (int k = 0; k < entryPairs[h]; k++)
-                items.add(new ListItem(entries[t + k], actions[t + k], h));
+            for (int k = 0; k < entryPairs[h]; k++) {
+                String[] person = entries[t + k].split("/");
+                items.add(new ListItem(person[0], person.length >= 2 ? person[1] : "", actions[t + k], h));
+            }
             t += entryPairs[h];
         }
 
@@ -83,9 +85,13 @@ public class AboutAdapter extends BaseAdapter implements StickyListHeadersAdapte
             convertView = inflater.inflate(R.layout.adapter_about_entry, null);
         }
 
-        TextView text = (TextView) convertView.findViewById(R.id.tv_aboutentry_text);
+        TextView name = (TextView) convertView.findViewById(R.id.tv_aboutentry_name);
+        TextView role = (TextView) convertView.findViewById(R.id.tv_aboutentry_role);
 
-        text.setText(getItem(position).toString());
+        ListItem here = items.get(position);
+
+        name.setText(here.item);
+        role.setText(here.role);
 
         return convertView;
     }
@@ -99,18 +105,20 @@ public class AboutAdapter extends BaseAdapter implements StickyListHeadersAdapte
 
         TextView text = (TextView) view.findViewById(R.id.tv_aboutheader_text);
 
-        text.setText(headers.get(items.get(i).headerId));
+        text.setText(headers.get(items.get(i).headerId).toUpperCase());
 
         return view;
     }
 
     private class ListItem {
         public String item;
+        public String role;
         public Uri action;
         public int headerId;
 
-        public ListItem(String item, String action, int headerId) {
+        public ListItem(String item, String role, String action, int headerId) {
             this.item = item;
+            this.role = role;
             this.headerId = headerId;
             this.action = Uri.parse(action);
         }

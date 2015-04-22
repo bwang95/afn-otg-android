@@ -16,6 +16,7 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 
 import com.afn.onthego.R;
+import com.afn.onthego.adapters.ConnectAdapter;
 import com.afn.onthego.storage.KeyList;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -37,7 +38,7 @@ public class ConnectActivity extends ActionBarActivity implements OnMapReadyCall
     private LocationManager locManager;
 
     private ListView locationList;
-    private ArrayAdapter<String> locationAdapter;
+    private ConnectAdapter locationAdapter;
 
     private LinearLayout questionLayout;
 
@@ -83,7 +84,7 @@ public class ConnectActivity extends ActionBarActivity implements OnMapReadyCall
         ArrayList<String> locations = new ArrayList<>();
         Collections.addAll(locations, KeyList.Locations.NAMES);
 
-        locationAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, locations);
+        locationAdapter = new ConnectAdapter(this, locations);
         locationList.setAdapter(locationAdapter);
         locationList.setOnItemClickListener(locationListener);
 
@@ -174,6 +175,7 @@ public class ConnectActivity extends ActionBarActivity implements OnMapReadyCall
 
     public void openAfn(MenuItem item) {
         Intent webIntent = new Intent(Intent.ACTION_VIEW);
-
+        webIntent.setData(Uri.parse(KeyList.URL.AFN));
+        startActivity(webIntent);
     }
 }

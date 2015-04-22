@@ -11,7 +11,7 @@
         class="com.google.android.gms.maps.SupportMapFragment"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="62" />
+        android:layout_weight="60" />
 
     <View
         android:layout_width="match_parent"
@@ -21,46 +21,61 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="38">
+        android:layout_weight="40">
 
         <ListView
             android:id="@+id/lv_connect_locations"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_above="@+id/ll_connect_questions"
-            android:divider="@color/color_divider"
+            android:layout_above="@+id/fl_connect_questions"
             android:background="@android:color/white"
+            android:divider="@color/color_divider"
             android:dividerHeight="1px" />
 
-        <LinearLayout
-            android:id="@id/ll_connect_questions"
-            android:orientation="horizontal"
-            android:layout_alignParentBottom="true"
+        <FrameLayout
+            android:id="@id/fl_connect_questions"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:clickable="true"
-            android:background="@color/color_divider">
+            android:layout_alignParentBottom="true">
+
+            <LinearLayout
+                android:id="@+id/ll_connect_questions"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/color_divider"
+                android:clickable="true"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="1px"
+                    android:background="@drawable/blue_button"
+                    android:scaleType="center"
+                    android:src="@drawable/l2_banner_connect" />
+
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="1px"
+                    android:background="@drawable/white_button"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="10dp"
+                    android:text="Ask a Question"
+                    android:textColor="@color/color_link"
+                    android:textSize="15sp" />
+
+            </LinearLayout>
 
             <ImageView
-                android:layout_marginTop="1px"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:padding="5dp"
+                android:layout_gravity="right"
+                android:paddingRight="10dp"
                 android:scaleType="centerInside"
-                android:background="@color/afn_light_blue"
-                android:src="@drawable/l2_banner_connect"
-                />
-            <TextView
-                android:layout_marginTop="1px"
-                android:layout_width="fill_parent"
-                android:layout_height="match_parent"
-                android:text="Ask a Question"
-                android:paddingLeft="10dp"
-                android:gravity="center_vertical"
-                android:textSize="15sp"
-                android:background="@android:color/white"/>
-
-        </LinearLayout>
+                android:src="@drawable/l2_caret" />
+        </FrameLayout>
     </RelativeLayout>
+
 
 </LinearLayout>

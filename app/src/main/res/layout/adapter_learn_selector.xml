@@ -11,17 +11,23 @@
         android:layout_weight="18"
         android:layout_height="match_parent"
         android:src="@drawable/ic_plusone_medium_off_client"
-        android:padding="10dp"
         android:scaleType="centerInside"/>
     <TextView
         android:id="@+id/tv_learn_title"
         android:layout_width="0dp"
-        android:layout_weight="82"
+        android:layout_weight="72"
         android:layout_height="match_parent"
         android:gravity="center_vertical"
         android:text="Test Text!"
         android:paddingLeft="10dp"
-        android:paddingTop="15dp"
-        android:paddingBottom="15dp"/>
+        android:paddingTop="14dp"
+        android:paddingBottom="14dp"/>
+
+    <ImageView
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="10"
+        android:src="@drawable/l2_caret"
+        android:scaleType="centerInside"/>
 
 </LinearLayout>

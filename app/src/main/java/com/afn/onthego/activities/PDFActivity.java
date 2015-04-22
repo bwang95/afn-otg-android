@@ -1,5 +1,7 @@
 package com.afn.onthego.activities;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
@@ -65,5 +67,8 @@ public class PDFActivity extends ActionBarActivity {
     }
 
     public void openAfn(MenuItem item) {
+        Intent webIntent = new Intent(Intent.ACTION_VIEW);
+        webIntent.setData(Uri.parse(KeyList.URL.AFN));
+        startActivity(webIntent);
     }
 }
