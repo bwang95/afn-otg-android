@@ -13,7 +13,7 @@
         android:id="@+id/tv_aboutheader_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textColor="@color/color_header"
+        android:textColor="@color/afn_dark_blue"
         android:background="@android:color/white"
         android:gravity="center_vertical"
         android:paddingBottom="3dp"

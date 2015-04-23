@@ -3,7 +3,7 @@
     <color name="color_divider">#FFBFBFBF</color>
     <!-- TODO Get actual color. -->
     <color name="afn_light_blue">#ff5296c7</color>
-    <color name="afn_dark_blue">#ff323372</color>
+    <color name="afn_dark_blue">#ff000056</color>
 
     <!-- Moving holo colors for compatibility issues -->
     <color name="holo_blue_bright">#ff00ddff</color>
@@ -11,7 +11,7 @@
     <color name="holo_red_light">#ffff4444</color>
     <color name="holo_orange_light">#ffffbb33</color>
 
-    <color name="color_header">#ff00067b</color>
+    <!--<color name="color_header">#ff00067b</color>-->
     <color name="color_link">#ff3e96c7</color>
     <color name="color_list_text">#ff99b8cc</color>
     <color name="color_hint">#ffc2c8cf</color>

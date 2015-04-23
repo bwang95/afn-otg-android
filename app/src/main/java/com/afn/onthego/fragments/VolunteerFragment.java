@@ -1,6 +1,7 @@
 package com.afn.onthego.fragments;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -19,10 +20,13 @@ public class VolunteerFragment extends Fragment {
         @Override
         public void onClick(View v) {
             getActivity().onBackPressed();
-            Intent webIntent = new Intent(getActivity(), WebActivity.class);
-            webIntent.putExtra(KeyList.ActivityParams.KEY_URL, KeyList.URL.VOLUNTEER_SIGN_IN);
-            webIntent.putExtra(KeyList.ActivityParams.KEY_TITLE, "Sign In");
-            startActivity(webIntent);
+            Intent i = new Intent(Intent.ACTION_VIEW);
+            i.setData(Uri.parse(KeyList.URL.VOLUNTEER_SIGN_IN));
+            startActivity(i);
+//            Intent webIntent = new Intent(getActivity(), WebActivity.class);
+//            webIntent.putExtra(KeyList.ActivityParams.KEY_URL, KeyList.URL.VOLUNTEER_SIGN_IN);
+//            webIntent.putExtra(KeyList.ActivityParams.KEY_TITLE, "Sign In");
+//            startActivity(webIntent);
         }
     };
 
@@ -30,11 +34,14 @@ public class VolunteerFragment extends Fragment {
         @Override
         public void onClick(View v) {
             getActivity().onBackPressed();
-            Intent webIntent = new Intent(getActivity(), WebActivity.class);
-            webIntent.putExtra(KeyList.ActivityParams.KEY_URL, KeyList.URL.VOLUNTEER_SIGN_UP);
-            webIntent.putExtra(KeyList.ActivityParams.KEY_TITLE, "Sign Up");
-            webIntent.putExtra(KeyList.ActivityParams.KEY_PURGE_COOKIES, true);
-            startActivity(webIntent);
+            Intent i = new Intent(Intent.ACTION_VIEW);
+            i.setData(Uri.parse(KeyList.URL.VOLUNTEER_SIGN_UP));
+            startActivity(i);
+//            Intent webIntent = new Intent(getActivity(), WebActivity.class);
+//            webIntent.putExtra(KeyList.ActivityParams.KEY_URL, KeyList.URL.VOLUNTEER_SIGN_UP);
+//            webIntent.putExtra(KeyList.ActivityParams.KEY_TITLE, "Sign Up");
+//            webIntent.putExtra(KeyList.ActivityParams.KEY_PURGE_COOKIES, true);
+//            startActivity(webIntent);
         }
     };
 
