@@ -1,5 +1,7 @@
 package com.afn.onthego.util;
 
+import android.util.Log;
+
 import java.io.File;
 
 /**
@@ -13,89 +15,69 @@ public class LearningModule implements Comparable<LearningModule> {
     public String position;
     public String fileName;
 
-    public LearningModule()
-    {}
+    public static final String LOG_TAG = "LearningModule";
 
-    public void setFileName(String fileName)
-    {
+    public LearningModule() {
+    }
+
+    public void setFileName(String fileName) {
         this.fileName = fileName;
     }
 
     /*
     If File exists return filename, else empty string
      */
-    public String getFileName()
-    {
-        if(fileName == null)
-        {
+    public String getFileName() {
+        if (fileName == null) {
             return "";
         }
 
-        if(new File(fileName).exists())
-        {
+        if (new File(fileName).exists()) {
             return fileName;
-        }
-        else
-        {
+        } else {
             return "";
         }
     }
 
-    public void setName(String name)
-    {
+    public void setName(String name) {
         this.name = name;
     }
 
-    public void setType(String type)
-    {
+    public void setType(String type) {
         this.type = type;
     }
 
-    public void setData(String data)
-    {
+    public void setData(String data) {
         this.data = data;
     }
 
-    public void setPosition(String position)
-    {
+    public void setPosition(String position) {
         this.position = position;
     }
 
-    public String getName()
-    {
+    public String getName() {
         return name;
     }
 
-    public String getType()
-    {
+    public String getType() {
         return type;
     }
 
-    public String getData()
-    {
+    public String getData() {
         return data;
     }
 
-    public String getPosition()
-    {
+    public String getPosition() {
         return position;
     }
 
     public int compareTo(LearningModule another) {
-        int this_pos = Integer.parseInt(this.getPosition());
-        int another_pos = Integer.parseInt(another.getPosition());
-        if(this_pos < another_pos)
-        {
-            return -1;
-        }
-        else if(this_pos == another_pos)
-        {
+        try {
+            return new Integer(Integer.parseInt(position))
+                    .compareTo(Integer.parseInt(another.position));
+        } catch (Exception e) {
+            Log.e(LOG_TAG, "Integer exception caught!", e);
             return 0;
         }
-        else
-        {
-            return 1;
-        }
-
     }
 }
