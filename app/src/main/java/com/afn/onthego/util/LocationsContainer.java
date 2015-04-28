@@ -24,33 +24,33 @@ public class LocationsContainer {
     private ArrayList<Location> locationsArrays;
     private String json;
 
-    public static final String LOG_TAG = "LearningModules";
+    public static final String LOG_TAG = "LocationsContainer";
 
     public LocationsContainer(Context context) {
         prefs = PreferenceManager.getDefaultSharedPreferences(context);
         locationsArrays = new ArrayList<Location>();
         setJsonFromPrefs();
-        setLearningModules();
+        setLocations();
     }
 
     public boolean setJsonFromPrefs() {
-        json = prefs.getString(KeyList.LearningModulesKeys.PREFS_LEARNING_MODULES, "");
+        json = prefs.getString(KeyList.LocationsKeys.PREFS_LOCATIONS, "");
         return true;
     }
 
     public void updateModules(String newJson) {
         json = newJson;
-        setLearningModules();
+        setLocations();
         setJsonToPrefs();
     }
 
     public void setJsonToPrefs() {
         SharedPreferences.Editor editor = prefs.edit();
-        editor.putString(KeyList.LearningModulesKeys.PREFS_LEARNING_MODULES, json);
+        editor.putString(KeyList.LocationsKeys.PREFS_LOCATIONS, json);
         editor.apply();
     }
 
-    private void setLearningModules() {
+    private void setLocations() {
         if (json == null || json.equals("")) {
             return;
         }
@@ -79,12 +79,10 @@ public class LocationsContainer {
                 location.setPosition(m.get(KeyList.LocationsKeys.LOCATION_POSITION));
 
                 locationsArrays.add(location);
-
-
             }
             catch (Exception e)
             {
-
+                Log.e(LOG_TAG, "Double exception caught", e);
             }
         }
 
@@ -97,14 +95,14 @@ public class LocationsContainer {
         Collections.sort(locationsArrays);
     }
 
-    public ArrayList<LearningModule> getLocationsArrays() {
+    public ArrayList<Location> getLocationsArrays() {
         return locationsArrays;
     }
 
     public ArrayList<String> getModulesNamesArray() {
         ArrayList<String> modulesNamesArray = new ArrayList<String>();
-        for (LearningModule learningModule : locationsArrays) {
-            modulesNamesArray.add(learningModule.getName());
+        for (Location location : locationsArrays) {
+            modulesNamesArray.add(location.getName());
         }
         return modulesNamesArray;
     }

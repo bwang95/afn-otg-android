@@ -6,6 +6,7 @@ import com.afn.onthego.async.LearnRequest;
 import com.afn.onthego.async.LocationRequest;
 import com.afn.onthego.util.LearningModules;
 import com.afn.onthego.util.Location;
+import com.afn.onthego.util.LocationsContainer;
 import com.squareup.okhttp.OkHttpClient;
 
 
@@ -17,11 +18,13 @@ public class Storage implements LearnRequest.LearnRequestListener, LocationReque
 
     private Context context;
     private LearningModules learningModules;
+    private LocationsContainer locationsContainer;
     private OkHttpClient httpClient;
 
     private Storage(Context context) {
         this.context = context;
         learningModules = new LearningModules(context);
+        locationsContainer = new LocationsContainer(context);
         httpClient = new OkHttpClient();
 
         new LearnRequest(context, this).execute();
@@ -31,6 +34,11 @@ public class Storage implements LearnRequest.LearnRequestListener, LocationReque
     public LearningModules getLearningModules()
     {
         return learningModules;
+    }
+
+    public LocationsContainer getLocationsContainer()
+    {
+        return locationsContainer;
     }
 
     public static Storage getInstance(Context context) {
@@ -53,7 +61,7 @@ public class Storage implements LearnRequest.LearnRequestListener, LocationReque
 
     @Override
     public void onLocationRequestSuccess(String s) {
-
+        locationsContainer.updateModules(s);
     }
 
     @Override
