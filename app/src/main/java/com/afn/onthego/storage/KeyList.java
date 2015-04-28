@@ -60,6 +60,10 @@ public class KeyList {
         public static final String TYPE_PDF = "PDF";
     }
 
+    public static class LocationsKeys {
+        public static final String URL = "http://austinfreenet.pythonanywhere.com/mobile_data/locations/";
+    }
+
     public static class ActivityParams {
         public static final String KEY_URL = "webactivityurl";
         public static final String KEY_FILENAME = "pdfactivityfilename";
