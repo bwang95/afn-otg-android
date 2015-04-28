@@ -62,6 +62,11 @@ public class KeyList {
 
     public static class LocationsKeys {
         public static final String URL = "http://austinfreenet.pythonanywhere.com/mobile_data/locations/";
+        public static final String LOCATION_NAME = "name";
+        public static final String LOCATION_LONGITUDE = "longitude";
+        public static final String LOCATION_LATITUDE = "latitude";
+        public static final String LOCATION_POSITION = "position";
+
     }
 
     public static class ActivityParams {
