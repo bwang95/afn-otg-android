@@ -72,10 +72,10 @@ public class LearnActivity extends ActionBarActivity
         swipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.srl_learn_swipe_container);
         swipeRefreshLayout.setOnRefreshListener(this);
         swipeRefreshLayout.setColorSchemeResources(
-                R.color.holo_blue_bright,
-                R.color.holo_green_light,
+                R.color.afn_blue_bright,
+                R.color.afn_green_light,
                 R.color.holo_orange_light,
-                R.color.holo_red_light);
+                R.color.red_light);
 
         progressDialog = new ProgressDialog(this);
         progressDialog.setMessage("Loading PDF, please wait...");
