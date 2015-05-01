@@ -54,6 +54,12 @@ public class PDFRequest extends AsyncTask<Void, Void, String> {
                 Thread.sleep(250);
                 return null;
             }
+            else if(!request.url().equals(response.request().url()))
+            {
+                Log.e(LOG_TAG, "Request URL is not the same as Response URL");
+                Thread.sleep(250);
+                return null;
+            }
 
 
             output = "temp";//url.substring(url.lastIndexOf('/'));
