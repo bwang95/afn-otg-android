@@ -12,6 +12,8 @@ import com.squareup.okhttp.Request;
 import com.squareup.okhttp.Response;
 
 import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
 
 
 /**
@@ -45,7 +47,16 @@ public class LearnRequest extends AsyncTask<Void, Void, String> {
         try {
             response = client.newCall(request).execute();
             if(!response.isSuccessful())
+            {
+                Log.e(LOG_TAG, "Response not successful");
                 return null;
+            }
+            else if(!request.url().equals(response.request().url()))
+            {
+                Log.e(LOG_TAG, "Request URL is not the same as Response URL");
+                return null;
+            }
+
 
             output = response.body().string();
             response.body().close();
