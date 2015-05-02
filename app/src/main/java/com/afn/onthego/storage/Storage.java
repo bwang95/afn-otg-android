@@ -3,31 +3,41 @@ package com.afn.onthego.storage;
 import android.content.Context;
 
 import com.afn.onthego.async.LearnRequest;
+import com.afn.onthego.async.LocationRequest;
 import com.afn.onthego.util.LearningModules;
+import com.afn.onthego.util.LocationsContainer;
 import com.squareup.okhttp.OkHttpClient;
 
 
 /**
  * Created by brian on 4/8/15.
  */
-public class Storage implements LearnRequest.LearnRequestListener {
+public class Storage implements LearnRequest.LearnRequestListener, LocationRequest.LocationRequestListener{
     private static Storage instance;
 
     private Context context;
     private LearningModules learningModules;
+    private LocationsContainer locationsContainer;
     private OkHttpClient httpClient;
 
     private Storage(Context context) {
         this.context = context;
         learningModules = new LearningModules(context);
+        locationsContainer = new LocationsContainer(context);
         httpClient = new OkHttpClient();
 
         new LearnRequest(context, this).execute();
+        new LocationRequest(context, this).execute();
     }
 
     public LearningModules getLearningModules()
     {
         return learningModules;
+    }
+
+    public LocationsContainer getLocationsContainer()
+    {
+        return locationsContainer;
     }
 
     public static Storage getInstance(Context context) {
@@ -46,5 +56,15 @@ public class Storage implements LearnRequest.LearnRequestListener {
 
     public OkHttpClient getHttpClient() {
         return httpClient;
+    }
+
+    @Override
+    public void onLocationRequestSuccess(String s) {
+        locationsContainer.updateLocations(s);
+    }
+
+    @Override
+    public void onLocationRequestFailure() {
+
     }
 }

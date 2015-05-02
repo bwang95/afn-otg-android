@@ -8,6 +8,7 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.afn.onthego.R;
+import com.afn.onthego.util.Location;
 
 import java.util.ArrayList;
 
@@ -17,9 +18,9 @@ import java.util.ArrayList;
 public class ConnectAdapter extends BaseAdapter {
     private Context context;
 
-    private ArrayList<String> locations;
+    private ArrayList<Location> locations;
 
-    public ConnectAdapter(Context context, ArrayList<String> locations) {
+    public ConnectAdapter(Context context, ArrayList<Location> locations) {
         this.context = context;
         this.locations = locations;
     }
@@ -48,7 +49,7 @@ public class ConnectAdapter extends BaseAdapter {
 
         TextView text = (TextView) convertView.findViewById(R.id.tv_maploc_text);
 
-        text.setText(locations.get(position));
+        text.setText(locations.get(position).getName());
 
         return convertView;
     }
