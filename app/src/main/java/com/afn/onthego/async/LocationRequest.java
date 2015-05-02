@@ -41,8 +41,15 @@ public class LocationRequest extends AsyncTask<Void, Void, String> {
         String output = null;
         try {
             response = client.newCall(request).execute();
-            if(!response.isSuccessful())
+            if(!response.isSuccessful()) {
+                Log.e(LOG_TAG, "Response not successful");
                 return null;
+            }
+            else if(!request.url().equals(response.request().url()))
+            {
+                Log.e(LOG_TAG, "Request URL is not the same as Response URL");
+                return null;
+            }
 
             output = response.body().string();
             response.body().close();

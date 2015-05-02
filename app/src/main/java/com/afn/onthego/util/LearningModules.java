@@ -64,7 +64,7 @@ public class LearningModules {
         else
         {
             Toast.makeText(context, "Failed updating learning modules", Toast.LENGTH_SHORT).show();
-            Log.e(LOG_TAG, "Failed to updateModules because JSON is not valid");
+            Log.e(LOG_TAG, "Failed to updateLocations because JSON is not valid");
         }
     }
 

@@ -19,6 +19,7 @@ import android.widget.ListView;
 import com.afn.onthego.R;
 import com.afn.onthego.adapters.ConnectAdapter;
 import com.afn.onthego.storage.KeyList;
+import com.afn.onthego.storage.Storage;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -38,7 +39,9 @@ public class ConnectActivity extends ActionBarActivity implements OnMapReadyCall
     private Marker[] markers;
     private LocationManager locManager;
 
+    private Storage storage;
     private ListView locationList;
+    private ArrayList<com.afn.onthego.util.Location> locations;
     private ConnectAdapter locationAdapter;
 
     private FrameLayout questionLayout;
@@ -82,8 +85,9 @@ public class ConnectActivity extends ActionBarActivity implements OnMapReadyCall
         questionLayout = (FrameLayout) findViewById(R.id.fl_connect_questions);
         questionLayout.setOnClickListener(questionListener);
 
-        ArrayList<String> locations = new ArrayList<>();
-        Collections.addAll(locations, KeyList.Locations.NAMES);
+
+        storage = Storage.getInstance(this);
+        locations = storage.getLocationsContainer().getLocationsArrays();
 
         locationAdapter = new ConnectAdapter(this, locations);
         locationList.setAdapter(locationAdapter);
@@ -135,10 +139,17 @@ public class ConnectActivity extends ActionBarActivity implements OnMapReadyCall
         String provider = locManager.getBestProvider(criteria, true);
 
         Location location = locManager.getLastKnownLocation(provider);
+        int i = 0;
 
-        int i = KeyList.Locations.AFN_ROSEWOOD.index;
-
-        LatLng latLngLocation = KeyList.Locations.LAT_LNGS[i];
+        for(int k = 0; k < locations.size(); k++)
+        {
+            if(locations.get(i).getName().equals("Rosewood Zaragosa Neighborhood Center"))
+            {
+                i = k;
+                break;
+            }
+        }
+        LatLng latLngLocation = locations.get(i).getLatLng();
 
         if (location != null) {
             latLngLocation = new LatLng(
@@ -153,11 +164,11 @@ public class ConnectActivity extends ActionBarActivity implements OnMapReadyCall
 
         options.snippet("Tap here for directions");
 
-        markers = new Marker[KeyList.Locations.LAT_LNGS.length];
+        markers = new Marker[locations.size()];
 
-        for(int k = 0; k < KeyList.Locations.LAT_LNGS.length; k++) {
-            options.title(KeyList.Locations.NAMES[k]);
-            options.position(KeyList.Locations.LAT_LNGS[k]);
+        for(int k = 0; k < locations.size(); k++) {
+            options.title(locations.get(k).getName());
+            options.position(locations.get(k).getLatLng());
 
             markers[k] = map.addMarker(options);
         }

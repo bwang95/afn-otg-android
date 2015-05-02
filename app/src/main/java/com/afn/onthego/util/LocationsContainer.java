@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.afn.onthego.storage.KeyList;
 import com.google.android.gms.maps.model.LatLng;
@@ -23,25 +24,47 @@ public class LocationsContainer {
     private SharedPreferences prefs;
     private ArrayList<Location> locationsArrays;
     private String json;
+    private Context context;
+    private Type listType;
+    private Gson gson;
 
     public static final String LOG_TAG = "LocationsContainer";
 
     public LocationsContainer(Context context) {
+        this.context = context;
+
+        // prefs will set/get locations from prefs
         prefs = PreferenceManager.getDefaultSharedPreferences(context);
+
+        // to store locations
         locationsArrays = new ArrayList<Location>();
+
+        // This will convert string json to the correct type
+        this.listType = new TypeToken<ArrayList<HashMap<String, String>>>() {
+        }.getType();
+        this.gson = new Gson();
+
+        // To initialize locations we get json from prefs and set them.
         setJsonFromPrefs();
         setLocations();
     }
 
     public boolean setJsonFromPrefs() {
-        json = prefs.getString(KeyList.LocationsKeys.PREFS_LOCATIONS, "");
+        json = prefs.getString(KeyList.LocationsKeys.PREFS_LOCATIONS, "[]");
         return true;
     }
 
-    public void updateModules(String newJson) {
-        json = newJson;
-        setLocations();
-        setJsonToPrefs();
+    public void updateLocations(String newJson) {
+        if(checkValidJsonType(newJson)) {
+            json = newJson;
+            setLocations();
+            setJsonToPrefs();
+        }
+        else
+        {
+            Toast.makeText(context, "Failed updating learning modules", Toast.LENGTH_SHORT).show();
+            Log.e(LOG_TAG, "Failed to updateLocations because JSON is not valid");
+        }
     }
 
     public void setJsonToPrefs() {
@@ -50,16 +73,25 @@ public class LocationsContainer {
         editor.apply();
     }
 
+    private boolean checkValidJsonType(String json)
+    {
+        try
+        {
+            gson.fromJson(json, listType);
+            return true;
+        }
+        catch (Exception e)
+        {
+            return false;
+        }
+    }
+
     private void setLocations() {
         if (json == null || json.equals("")) {
             return;
         }
         locationsArrays.clear();
 
-        // convert from json
-        Type listType = new TypeToken<ArrayList<HashMap<String, String>>>() {
-        }.getType();
-        Gson gson = new Gson();
 
         ArrayList<HashMap<String, String>> myList = gson.fromJson(json, listType);
 
@@ -99,7 +131,7 @@ public class LocationsContainer {
         return locationsArrays;
     }
 
-    public ArrayList<String> getModulesNamesArray() {
+    public ArrayList<String> getLocationsNamesArray() {
         ArrayList<String> modulesNamesArray = new ArrayList<String>();
         for (Location location : locationsArrays) {
             modulesNamesArray.add(location.getName());

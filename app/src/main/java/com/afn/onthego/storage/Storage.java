@@ -5,7 +5,6 @@ import android.content.Context;
 import com.afn.onthego.async.LearnRequest;
 import com.afn.onthego.async.LocationRequest;
 import com.afn.onthego.util.LearningModules;
-import com.afn.onthego.util.Location;
 import com.afn.onthego.util.LocationsContainer;
 import com.squareup.okhttp.OkHttpClient;
 
@@ -61,7 +60,7 @@ public class Storage implements LearnRequest.LearnRequestListener, LocationReque
 
     @Override
     public void onLocationRequestSuccess(String s) {
-        locationsContainer.updateModules(s);
+        locationsContainer.updateLocations(s);
     }
 
     @Override
