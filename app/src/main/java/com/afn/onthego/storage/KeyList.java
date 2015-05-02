@@ -63,8 +63,12 @@ public class KeyList {
 
     public static class LinkKeys {
         public static final String URL = "http://austinfreenet.pythonanywhere.com/mobile_data/links/";
+        public static final String PREFS_LINKS = "links";
+        public static final String LINK_NAME = "name";
+        public static final String LINK_URL = "url";
+
     }
-    
+
     public static class LocationsKeys {
         public static final String URL = "http://austinfreenet.pythonanywhere.com/mobile_data/locations/";
         public static final String PREFS_LOCATIONS = "locations";
