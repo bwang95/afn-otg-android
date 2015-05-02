@@ -18,6 +18,7 @@ import com.afn.onthego.app.OTGApplication;
 import com.afn.onthego.fragments.VolunteerFragment;
 import com.afn.onthego.storage.KeyList;
 import com.afn.onthego.storage.Storage;
+import com.afn.onthego.util.Links;
 import com.google.android.gms.analytics.HitBuilders;
 import com.google.android.gms.analytics.Tracker;
 
@@ -99,7 +100,7 @@ public class MainActivity extends ActionBarActivity {
 
     public void openAfn(MenuItem item) {
         Intent webIntent = new Intent(Intent.ACTION_VIEW);
-        webIntent.setData(Uri.parse(KeyList.URL.AFN));
+        webIntent.setData(Uri.parse(Storage.getInstance(getBaseContext()).getLinks().getURLS().get(Links.AFN)));
         startActivity(webIntent);
     }
 
@@ -121,7 +122,7 @@ public class MainActivity extends ActionBarActivity {
 
     public void openAfn(View view) {
         Intent webIntent = new Intent(Intent.ACTION_VIEW);
-        webIntent.setData(Uri.parse(KeyList.URL.AFN));
+        webIntent.setData(Uri.parse(Storage.getInstance(getBaseContext()).getLinks().getURLS().get(Links.AFN)));
         startActivity(webIntent);
     }
 }

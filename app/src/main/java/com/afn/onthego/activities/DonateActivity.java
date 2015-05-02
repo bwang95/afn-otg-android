@@ -13,6 +13,8 @@ import android.widget.RelativeLayout;
 
 import com.afn.onthego.R;
 import com.afn.onthego.storage.KeyList;
+import com.afn.onthego.storage.Storage;
+import com.afn.onthego.util.Links;
 
 public class DonateActivity extends ActionBarActivity {
 
@@ -20,7 +22,7 @@ public class DonateActivity extends ActionBarActivity {
         @Override
         public void onClick(View v) {
             Intent webIntent = new Intent(Intent.ACTION_VIEW);
-            webIntent.setData(Uri.parse(KeyList.URL.DONATE_URL));
+            webIntent.setData(Uri.parse(Storage.getInstance(getBaseContext()).getLinks().getURLS().get(Links.DONATE)));
             startActivity(webIntent);
         }
     };
@@ -46,13 +48,13 @@ public class DonateActivity extends ActionBarActivity {
 
     public void openAfn(MenuItem item) {
         Intent webIntent = new Intent(Intent.ACTION_VIEW);
-        webIntent.setData(Uri.parse(KeyList.URL.AFN));
+        webIntent.setData(Uri.parse(Storage.getInstance(getBaseContext()).getLinks().getURLS().get(Links.AFN)));
         startActivity(webIntent);
     }
 
     public void openAfn(View view) {
         Intent webIntent = new Intent(Intent.ACTION_VIEW);
-        webIntent.setData(Uri.parse(KeyList.URL.AFN));
+        webIntent.setData(Uri.parse(Storage.getInstance(getBaseContext()).getLinks().getURLS().get(Links.AFN)));
         startActivity(webIntent);
     }
 }

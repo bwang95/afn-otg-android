@@ -13,6 +13,8 @@ import android.widget.ListView;
 import com.afn.onthego.R;
 import com.afn.onthego.adapters.AboutAdapter;
 import com.afn.onthego.storage.KeyList;
+import com.afn.onthego.storage.Storage;
+import com.afn.onthego.util.Links;
 
 import se.emilsjolander.stickylistheaders.StickyListHeadersListView;
 
@@ -54,7 +56,7 @@ public class AboutActivity extends ActionBarActivity {
 
     public void openAfn(MenuItem item) {
         Intent webIntent = new Intent(Intent.ACTION_VIEW);
-        webIntent.setData(Uri.parse(KeyList.URL.AFN));
+        webIntent.setData(Uri.parse(Storage.getInstance(getBaseContext()).getLinks().getURLS().get(Links.AFN)));
         startActivity(webIntent);
     }
 }

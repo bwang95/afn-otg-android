@@ -47,6 +47,8 @@ public class Links {
         this.listType = new TypeToken<ArrayList<HashMap<String, String>>>() {
         }.getType();
         this.gson = new Gson();
+
+        URLS = new HashMap<String, String>();
     }
 
     public boolean setJsonFromPrefs() {

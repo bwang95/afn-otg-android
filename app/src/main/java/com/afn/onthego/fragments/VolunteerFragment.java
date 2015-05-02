@@ -13,6 +13,8 @@ import android.widget.FrameLayout;
 import com.afn.onthego.R;
 import com.afn.onthego.activities.WebActivity;
 import com.afn.onthego.storage.KeyList;
+import com.afn.onthego.storage.Storage;
+import com.afn.onthego.util.Links;
 
 public class VolunteerFragment extends Fragment {
 
@@ -21,7 +23,7 @@ public class VolunteerFragment extends Fragment {
         public void onClick(View v) {
             getActivity().onBackPressed();
             Intent i = new Intent(Intent.ACTION_VIEW);
-            i.setData(Uri.parse(KeyList.URL.VOLUNTEER_SIGN_IN));
+            i.setData(Uri.parse(Storage.getInstance(getActivity()).getLinks().getURLS().get(Links.VOLUNTEER_SIGN_IN)));
             startActivity(i);
 //            Intent webIntent = new Intent(getActivity(), WebActivity.class);
 //            webIntent.putExtra(KeyList.ActivityParams.KEY_URL, KeyList.URL.VOLUNTEER_SIGN_IN);
@@ -35,7 +37,7 @@ public class VolunteerFragment extends Fragment {
         public void onClick(View v) {
             getActivity().onBackPressed();
             Intent i = new Intent(Intent.ACTION_VIEW);
-            i.setData(Uri.parse(KeyList.URL.VOLUNTEER_SIGN_UP));
+            i.setData(Uri.parse(Storage.getInstance(getActivity()).getLinks().getURLS().get(Links.VOLUNTEER_SIGN_UP)));
             startActivity(i);
 //            Intent webIntent = new Intent(getActivity(), WebActivity.class);
 //            webIntent.putExtra(KeyList.ActivityParams.KEY_URL, KeyList.URL.VOLUNTEER_SIGN_UP);

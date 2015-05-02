@@ -20,6 +20,7 @@ import com.afn.onthego.R;
 import com.afn.onthego.adapters.ConnectAdapter;
 import com.afn.onthego.storage.KeyList;
 import com.afn.onthego.storage.Storage;
+import com.afn.onthego.util.Links;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -64,7 +65,8 @@ public class ConnectActivity extends ActionBarActivity implements OnMapReadyCall
         @Override
         public void onClick(View v) {
             Intent webIntent = new Intent(ConnectActivity.this, WebActivity.class);
-            webIntent.putExtra(KeyList.ActivityParams.KEY_URL, KeyList.URL.QUESTION_URL);
+
+            webIntent.putExtra(KeyList.ActivityParams.KEY_URL, Storage.getInstance(getBaseContext()).getLinks().getURLS().get(Links.QUESTION));
             webIntent.putExtra(KeyList.ActivityParams.KEY_TITLE, "Ask a Question");
             startActivity(webIntent);
         }
@@ -187,7 +189,7 @@ public class ConnectActivity extends ActionBarActivity implements OnMapReadyCall
 
     public void openAfn(MenuItem item) {
         Intent webIntent = new Intent(Intent.ACTION_VIEW);
-        webIntent.setData(Uri.parse(KeyList.URL.AFN));
+        webIntent.setData(Uri.parse(Storage.getInstance(getBaseContext()).getLinks().getURLS().get(Links.AFN)));
         startActivity(webIntent);
     }
 }

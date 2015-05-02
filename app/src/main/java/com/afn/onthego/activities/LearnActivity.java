@@ -21,6 +21,7 @@ import com.afn.onthego.async.PDFRequest;
 import com.afn.onthego.storage.KeyList;
 import com.afn.onthego.storage.Storage;
 import com.afn.onthego.util.LearningModule;
+import com.afn.onthego.util.Links;
 
 import java.util.ArrayList;
 
@@ -171,7 +172,7 @@ public class LearnActivity extends ActionBarActivity
 
     public void openAfn(MenuItem item) {
         Intent webIntent = new Intent(Intent.ACTION_VIEW);
-        webIntent.setData(Uri.parse(KeyList.URL.AFN));
+        webIntent.setData(Uri.parse(Storage.getInstance(getBaseContext()).getLinks().getURLS().get(Links.AFN)));
         startActivity(webIntent);
     }
 }
