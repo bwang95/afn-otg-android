@@ -1,18 +1,10 @@
 package com.afn.onthego.util;
 
 import android.content.Context;
-import android.content.SharedPreferences;
-import android.preference.PreferenceManager;
 import android.util.Log;
-import android.widget.Toast;
 
 import com.afn.onthego.storage.KeyList;
-import com.google.gson.Gson;
-import com.google.gson.JsonParseException;
-import com.google.gson.reflect.TypeToken;
 
-import java.lang.reflect.Type;
-import java.security.KeyException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -21,73 +13,26 @@ import java.util.Map;
 /**
  * Created by Kyle on 4/14/2015.
  */
-public class LearningModules {
-    private SharedPreferences prefs;
+public class LearningModulesContainer extends JsonObjectContainer {
     private ArrayList<LearningModule> learningModulesArray;
-    private String json;
-    private Context context;
-    private Type listType;
-    private Gson gson;
 
     public static final String LOG_TAG = "LearningModules";
 
-    public LearningModules(Context context) {
-        this.context = context;
+    public LearningModulesContainer(Context context) {
+        super(context);
 
-        // Prefs will get/set learning modules to memory
-        prefs = PreferenceManager.getDefaultSharedPreferences(context);
+        this.prefsLocation = KeyList.LearningModulesKeys.PREFS_LEARNING_MODULES;
 
         // Stores learning modules
         learningModulesArray = new ArrayList<LearningModule>();
 
-        // This will convert string json to the correct type
-        this.listType = new TypeToken<ArrayList<HashMap<String, String>>>() {
-        }.getType();
-        this.gson = new Gson();
-
         // To initialize learning modules we get json from prefs and set them.
         setJsonFromPrefs();
-        setLearningModules();
+        setJsonObjects();
     }
 
-    public boolean setJsonFromPrefs() {
-        json = prefs.getString(KeyList.LearningModulesKeys.PREFS_LEARNING_MODULES, "[]");
-        return true;
-    }
-
-    public void updateModules(String newJson) {
-        if(checkValidJsonType(newJson)) {
-            json = newJson;
-            setLearningModules();
-            setJsonToPrefs();
-        }
-        else
-        {
-            Toast.makeText(context, "Failed updating learning modules", Toast.LENGTH_SHORT).show();
-            Log.e(LOG_TAG, "Failed to updateLocations because JSON is not valid");
-        }
-    }
-
-    public void setJsonToPrefs() {
-        SharedPreferences.Editor editor = prefs.edit();
-        editor.putString(KeyList.LearningModulesKeys.PREFS_LEARNING_MODULES, json);
-        editor.apply();
-    }
-
-    private boolean checkValidJsonType(String json)
-    {
-        try
-        {
-            gson.fromJson(json, listType);
-            return true;
-        }
-        catch (Exception e)
-        {
-            return false;
-        }
-    }
-
-    private void setLearningModules() {
+    @Override
+    public void setJsonObjects() {
         if (json == null || json.equals("")) {
             return;
         }
@@ -134,18 +79,8 @@ public class LearningModules {
         // sort learning modules
         Collections.sort(learningModulesArray);
     }
-
     public ArrayList<LearningModule> getLearningModulesArray() {
         return learningModulesArray;
     }
-
-    public ArrayList<String> getModulesNamesArray() {
-        ArrayList<String> modulesNamesArray = new ArrayList<String>();
-        for (LearningModule learningModule : learningModulesArray) {
-            modulesNamesArray.add(learningModule.getName());
-        }
-        return modulesNamesArray;
-    }
-
 
 }

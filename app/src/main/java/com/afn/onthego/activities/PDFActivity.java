@@ -11,7 +11,7 @@ import android.widget.Toast;
 import com.afn.onthego.R;
 import com.afn.onthego.storage.KeyList;
 import com.afn.onthego.storage.Storage;
-import com.afn.onthego.util.Links;
+import com.afn.onthego.util.LinksContainer;
 import com.joanzapata.pdfview.PDFView;
 
 import java.io.File;
@@ -70,7 +70,7 @@ public class PDFActivity extends ActionBarActivity {
 
     public void openAfn(MenuItem item) {
         Intent webIntent = new Intent(Intent.ACTION_VIEW);
-        webIntent.setData(Uri.parse(Storage.getInstance(getBaseContext()).getLinks().getURLS().get(Links.AFN)));
+        webIntent.setData(Uri.parse(Storage.getInstance(getBaseContext()).getLinks().getURLS().get(LinksContainer.AFN)));
         startActivity(webIntent);
     }
 }

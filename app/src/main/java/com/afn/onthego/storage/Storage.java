@@ -5,8 +5,8 @@ import android.content.Context;
 import com.afn.onthego.async.LearnRequest;
 import com.afn.onthego.async.LinkRequest;
 import com.afn.onthego.async.LocationRequest;
-import com.afn.onthego.util.LearningModules;
-import com.afn.onthego.util.Links;
+import com.afn.onthego.util.LearningModulesContainer;
+import com.afn.onthego.util.LinksContainer;
 import com.afn.onthego.util.LocationsContainer;
 import com.squareup.okhttp.OkHttpClient;
 
@@ -20,16 +20,16 @@ public class Storage implements LearnRequest.LearnRequestListener,
     private static Storage instance;
 
     private Context context;
-    private LearningModules learningModules;
+    private LearningModulesContainer learningModules;
     private LocationsContainer locationsContainer;
-    private Links links;
+    private LinksContainer links;
     private OkHttpClient httpClient;
 
     private Storage(Context context) {
         this.context = context;
-        learningModules = new LearningModules(context);
+        learningModules = new LearningModulesContainer(context);
         locationsContainer = new LocationsContainer(context);
-        links = new Links(context);
+        links = new LinksContainer(context);
         httpClient = new OkHttpClient();
 
         new LearnRequest(context, this).execute();
@@ -37,7 +37,7 @@ public class Storage implements LearnRequest.LearnRequestListener,
         new LinkRequest(context, this).execute();
     }
 
-    public LearningModules getLearningModules()
+    public LearningModulesContainer getLearningModules()
     {
         return learningModules;
     }
@@ -47,7 +47,7 @@ public class Storage implements LearnRequest.LearnRequestListener,
         return locationsContainer;
     }
 
-    public Links getLinks() { return links; }
+    public LinksContainer getLinks() { return links; }
 
     public static Storage getInstance(Context context) {
         return instance == null ? instance = new Storage(context) : instance;
@@ -55,7 +55,7 @@ public class Storage implements LearnRequest.LearnRequestListener,
 
     @Override
     public void onLearnRequestSuccess(String s) {
-        learningModules.updateModules(s);
+        learningModules.update(s);
     }
 
     @Override
@@ -69,7 +69,7 @@ public class Storage implements LearnRequest.LearnRequestListener,
 
     @Override
     public void onLocationRequestSuccess(String s) {
-        locationsContainer.updateLocations(s);
+        locationsContainer.update(s);
     }
 
     @Override
@@ -79,7 +79,7 @@ public class Storage implements LearnRequest.LearnRequestListener,
 
     @Override
     public void onLinkRequestSuccess(String s) {
-        links.updateLinks(s);
+        links.update(s);
     }
 
     @Override

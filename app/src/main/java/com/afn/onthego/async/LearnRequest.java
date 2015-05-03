@@ -6,14 +6,9 @@ import android.util.Log;
 
 import com.afn.onthego.storage.KeyList;
 import com.afn.onthego.storage.Storage;
-import com.afn.onthego.util.LearningModules;
 import com.squareup.okhttp.OkHttpClient;
 import com.squareup.okhttp.Request;
 import com.squareup.okhttp.Response;
-
-import java.io.IOException;
-import java.net.MalformedURLException;
-import java.net.URL;
 
 
 /**

@@ -21,7 +21,7 @@ import com.afn.onthego.async.PDFRequest;
 import com.afn.onthego.storage.KeyList;
 import com.afn.onthego.storage.Storage;
 import com.afn.onthego.util.LearningModule;
-import com.afn.onthego.util.Links;
+import com.afn.onthego.util.LinksContainer;
 
 import java.util.ArrayList;
 
@@ -34,7 +34,6 @@ public class LearnActivity extends ActionBarActivity
     public LearnAdapter listAdapter;
 
     public ArrayList<LearningModule> learningModules;
-    public ArrayList<String> modulesNameArray;
 
     private SwipeRefreshLayout swipeRefreshLayout;
     private ProgressDialog progressDialog;
@@ -152,8 +151,8 @@ public class LearnActivity extends ActionBarActivity
     @Override
     public void onLearnRequestSuccess(String json) {
         Storage storage = Storage.getInstance(this);
-        storage.getLearningModules().updateModules(json);
-        modulesNameArray = storage.getLearningModules().getModulesNamesArray();
+        storage.getLearningModules().update(json);
+
         //TODO I don't think you have to clear the adapter here.
         listAdapter.notifyDataSetChanged();
         swipeRefreshLayout.setRefreshing(false);
@@ -172,7 +171,7 @@ public class LearnActivity extends ActionBarActivity
 
     public void openAfn(MenuItem item) {
         Intent webIntent = new Intent(Intent.ACTION_VIEW);
-        webIntent.setData(Uri.parse(Storage.getInstance(getBaseContext()).getLinks().getURLS().get(Links.AFN)));
+        webIntent.setData(Uri.parse(Storage.getInstance(getBaseContext()).getLinks().getURLS().get(LinksContainer.AFN)));
         startActivity(webIntent);
     }
 }

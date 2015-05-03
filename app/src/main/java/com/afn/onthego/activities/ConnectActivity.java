@@ -11,16 +11,14 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.FrameLayout;
-import android.widget.LinearLayout;
 import android.widget.ListView;
 
 import com.afn.onthego.R;
 import com.afn.onthego.adapters.ConnectAdapter;
 import com.afn.onthego.storage.KeyList;
 import com.afn.onthego.storage.Storage;
-import com.afn.onthego.util.Links;
+import com.afn.onthego.util.LinksContainer;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -29,9 +27,7 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
-import java.security.Key;
 import java.util.ArrayList;
-import java.util.Collections;
 
 public class ConnectActivity extends ActionBarActivity implements OnMapReadyCallback {
 
@@ -66,7 +62,7 @@ public class ConnectActivity extends ActionBarActivity implements OnMapReadyCall
         public void onClick(View v) {
             Intent webIntent = new Intent(ConnectActivity.this, WebActivity.class);
 
-            webIntent.putExtra(KeyList.ActivityParams.KEY_URL, Storage.getInstance(getBaseContext()).getLinks().getURLS().get(Links.QUESTION));
+            webIntent.putExtra(KeyList.ActivityParams.KEY_URL, Storage.getInstance(getBaseContext()).getLinks().getURLS().get(LinksContainer.QUESTION));
             webIntent.putExtra(KeyList.ActivityParams.KEY_TITLE, "Ask a Question");
             startActivity(webIntent);
         }
@@ -189,7 +185,7 @@ public class ConnectActivity extends ActionBarActivity implements OnMapReadyCall
 
     public void openAfn(MenuItem item) {
         Intent webIntent = new Intent(Intent.ACTION_VIEW);
-        webIntent.setData(Uri.parse(Storage.getInstance(getBaseContext()).getLinks().getURLS().get(Links.AFN)));
+        webIntent.setData(Uri.parse(Storage.getInstance(getBaseContext()).getLinks().getURLS().get(LinksContainer.AFN)));
         startActivity(webIntent);
     }
 }
