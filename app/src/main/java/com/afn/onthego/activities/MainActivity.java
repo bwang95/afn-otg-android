@@ -39,12 +39,12 @@ public class MainActivity extends ActionBarActivity {
     public void onStart() {
         super.onStart();
 
-        // Get tracker.
-        Tracker t = ((OTGApplication) getApplication()).getTracker();
-        // Set screen name.
-        t.setScreenName("Android Home");
-        // Send a screen view.
-        t.send(new HitBuilders.ScreenViewBuilder().build());
+//        // Get tracker.
+//        Tracker t = ((OTGApplication) getApplication()).getTracker();
+//        // Set screen name.
+//        t.setScreenName("Android Home");
+//        // Send a screen view.
+//        t.send(new HitBuilders.ScreenViewBuilder().build());
     }
 
     @Override

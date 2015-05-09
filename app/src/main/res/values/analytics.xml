@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <integer name="ga_sessionTimeout">300</integer>
+
+    <!-- Enable automatic Activity measurement -->
+    <bool name="ga_autoActivityTracking">true</bool>
+    <!--Enable automatic exception tracking-->
+    <bool name="ga_reportUncaughtExceptions">true</bool>
+
+    <!-- The screen names that will appear in reports -->
+    <screenName name="com.afn.onthego.activities.MainActivity">
+        Android Home
+    </screenName>
+    <screenName name="com.afn.onthego.activities.LearnActivity">
+        Android Learn
+    </screenName>
+    <screenName name="com.afn.onthego.activities.AboutActivity">
+        Android Attributions
+    </screenName>
+    <screenName name="com.afn.onthego.activities.DonateActivity">
+        Android Donate
+    </screenName>
+    <screenName name="com.afn.onthego.activities.ConnectActivity">
+        Android Connect
+    </screenName>
+    <screenName name="com.afn.onthego.activities.WebActivity">
+        Android Web View
+    </screenName>
+    <screenName name="com.afn.onthego.activities.SplashActivity">
+        Android Splash Screen
+    </screenName>
+    <screenName name="com.afn.onthego.activities.PDFActivity">
+        Android PDF View
+    </screenName>
+    <screenName name="com.afn.onthego.fragments.VolunteerFragment">
+        Android Volunteer
+    </screenName>
+    <!--  The following value should be replaced with correct property id. -->
+    <string name="ga_trackingId">UA-61798957-2</string>
+</resources>
