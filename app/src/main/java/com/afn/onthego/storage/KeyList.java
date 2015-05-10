@@ -51,4 +51,18 @@ public class KeyList {
         public static final String KEY_TITLE = "activitytitle";
         public static final String KEY_PURGE_COOKIES = "purgecookies";
     }
+
+    public static class Analytics {
+        public static final String CATEGORY_VOLUNTEER = "Volunteering";
+        public static final String CATEGORY_LEARN = "Learning Modules";
+        public static final String CATEGORY_DONATE = "Donations";
+        public static final String CATEGORY_CONNECT = "Connect";
+        public static final String KEY_OPT_OUT = "optout";
+
+        public static final String ACTION_VOLUNTEER_SIGNIN = "Volunteer Sign In Button Click";
+        public static final String LABEL_VOLUNTEER_SIGNIN = "Volunteer Sign In Button Click";
+        public static final String ACTION_VOLUNTEER_SIGNUP = "Volunteer Sign Up Button Click";
+        public static final String LABEL_VOLUNTEER_SIGNUP = "Volunteer Sign Up Button Click";
+        public static final String ACTION_LEARNING_MODULE = "Learning Module View";
+    }
 }

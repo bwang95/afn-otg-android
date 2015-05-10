@@ -11,14 +11,25 @@ import android.widget.Button;
 import android.widget.FrameLayout;
 
 import com.afn.onthego.R;
+import com.afn.onthego.app.OTGApplication;
+import com.afn.onthego.storage.KeyList;
 import com.afn.onthego.storage.Storage;
 import com.afn.onthego.util.LinksContainer;
+import com.google.android.gms.analytics.HitBuilders;
+import com.google.android.gms.analytics.Tracker;
 
 public class VolunteerFragment extends Fragment {
 
     private View.OnClickListener signInListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
+            Tracker t = ((OTGApplication) (getActivity().getApplication())).getTracker();
+            t.send(new HitBuilders.EventBuilder()
+                    .setAction(KeyList.Analytics.ACTION_VOLUNTEER_SIGNIN)
+                    .setCategory(KeyList.Analytics.CATEGORY_VOLUNTEER)
+                    .setLabel(KeyList.Analytics.LABEL_VOLUNTEER_SIGNIN)
+                    .build());
+
             getActivity().onBackPressed();
             Intent i = new Intent(Intent.ACTION_VIEW);
             i.setData(Uri.parse(Storage.getInstance(getActivity()).getLinks().getURLS().get(LinksContainer.VOLUNTEER_SIGN_IN)));
@@ -33,6 +44,13 @@ public class VolunteerFragment extends Fragment {
     private View.OnClickListener signUpListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
+            Tracker t = ((OTGApplication) (getActivity().getApplication())).getTracker();
+            t.send(new HitBuilders.EventBuilder()
+                    .setAction(KeyList.Analytics.ACTION_VOLUNTEER_SIGNUP)
+                    .setCategory(KeyList.Analytics.CATEGORY_VOLUNTEER)
+                    .setLabel(KeyList.Analytics.LABEL_VOLUNTEER_SIGNUP)
+                    .build());
+
             getActivity().onBackPressed();
             Intent i = new Intent(Intent.ACTION_VIEW);
             i.setData(Uri.parse(Storage.getInstance(getActivity()).getLinks().getURLS().get(LinksContainer.VOLUNTEER_SIGN_UP)));

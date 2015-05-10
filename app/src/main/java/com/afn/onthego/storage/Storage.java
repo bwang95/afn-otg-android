@@ -1,6 +1,8 @@
 package com.afn.onthego.storage;
 
 import android.content.Context;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 
 import com.afn.onthego.async.LearnRequest;
 import com.afn.onthego.async.LinkRequest;
@@ -24,6 +26,8 @@ public class Storage implements LearnRequest.LearnRequestListener,
     private LocationsContainer locationsContainer;
     private LinksContainer links;
     private OkHttpClient httpClient;
+    private boolean analyticsOptOut;
+    private boolean analyticsInit;
 
     private Storage(Context context) {
         this.context = context;
@@ -85,5 +89,22 @@ public class Storage implements LearnRequest.LearnRequestListener,
     @Override
     public void onLinkRequestFailure() {
 
+    }
+
+    public boolean getAnalyticsOptOut() {
+        if(analyticsInit)
+            return analyticsOptOut;
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
+
+        return (analyticsOptOut = prefs.getBoolean(KeyList.Analytics.KEY_OPT_OUT, false));
+    }
+
+    public void setAnalyticsOptOut(boolean analyticsOptOut) {
+        this.analyticsOptOut = analyticsOptOut;
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
+        SharedPreferences.Editor edit = prefs.edit();
+
+        edit.putBoolean(KeyList.Analytics.KEY_OPT_OUT, analyticsOptOut);
+        edit.apply();
     }
 }

@@ -29,4 +29,9 @@
     <string name="title_activity_pdf">PDF</string>
     <string name="title_activity_web">Website</string>
     <string name="title_activity_donate">Donate</string>
+    <string name="analytics_message">
+        This application collects basic demographic information to help Austin Free-Net better
+        understand the community that it serves. This data is anonymous and will be aggregated
+        with other users of this application, but you may turn this feature off if you would like.
+    </string>
 </resources>

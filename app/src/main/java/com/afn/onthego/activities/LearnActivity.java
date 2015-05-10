@@ -3,9 +3,9 @@ package com.afn.onthego.activities;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.net.Uri;
+import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.ActionBarActivity;
-import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -16,12 +16,15 @@ import android.widget.Toast;
 
 import com.afn.onthego.R;
 import com.afn.onthego.adapters.LearnAdapter;
+import com.afn.onthego.app.OTGApplication;
 import com.afn.onthego.async.LearnRequest;
 import com.afn.onthego.async.PDFRequest;
 import com.afn.onthego.storage.KeyList;
 import com.afn.onthego.storage.Storage;
 import com.afn.onthego.util.LearningModule;
 import com.afn.onthego.util.LinksContainer;
+import com.google.android.gms.analytics.HitBuilders;
+import com.google.android.gms.analytics.Tracker;
 
 import java.util.ArrayList;
 
@@ -43,6 +46,12 @@ public class LearnActivity extends ActionBarActivity
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
             LearningModule learningModule = learningModules.get(position);
+
+            Tracker t = ((OTGApplication) getApplication()).getTracker();
+            t.send(new HitBuilders.EventBuilder()
+                    .setCategory(KeyList.Analytics.CATEGORY_LEARN)
+                    .setAction(KeyList.Analytics.ACTION_LEARNING_MODULE)
+                    .setAction(learningModule.getName()).build());
 
             switch (learningModule.getType()) {
                 case KeyList.LearningModulesKeys.TYPE_PDF:

@@ -8,4 +8,14 @@
         android:onClick="openAfn"
         android:title="Go to austinfree.net"
         app:showAsAction="always" />
+
+    <item
+        android:enabled="true"
+        android:title="Demographics"
+        app:showAsAction="never"
+        android:onClick="analyticsOptOut"
+        android:checkable="true"
+        android:checked="true"
+        android:id="@+id/mi_about_analytics"
+        />
 </menu>

@@ -3,6 +3,7 @@ package com.afn.onthego.app;
 import android.app.Application;
 
 import com.afn.onthego.R;
+import com.afn.onthego.storage.Storage;
 import com.google.android.gms.analytics.GoogleAnalytics;
 import com.google.android.gms.analytics.Tracker;
 
@@ -28,8 +29,11 @@ public class OTGApplication extends Application {
     public synchronized Tracker getTracker() {
         if(analytics == null)
             analytics = GoogleAnalytics.getInstance(this);
+
+        analytics.setAppOptOut(Storage.getInstance(this).getAnalyticsOptOut());
+
         if(appTracker == null)
-            appTracker = analytics.newTracker(R.xml.analytics_tracker);
+            appTracker = analytics.newTracker(R.xml.analytics);
         return appTracker;
     }
 }
