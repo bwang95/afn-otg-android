@@ -23,7 +23,6 @@ public class OTGApplication extends Application {
     public void onCreate() {
         super.onCreate();
         getTracker();
-        appTracker.enableAdvertisingIdCollection(true);
     }
 
     public synchronized Tracker getTracker() {
@@ -34,6 +33,8 @@ public class OTGApplication extends Application {
 
         if(appTracker == null)
             appTracker = analytics.newTracker(R.xml.analytics);
+
+        appTracker.enableAdvertisingIdCollection(true);
         return appTracker;
     }
 }
