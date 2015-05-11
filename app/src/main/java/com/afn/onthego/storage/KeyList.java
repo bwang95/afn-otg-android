@@ -64,5 +64,6 @@ public class KeyList {
         public static final String ACTION_VOLUNTEER_SIGNUP = "Volunteer Sign Up Button Click";
         public static final String LABEL_VOLUNTEER_SIGNUP = "Volunteer Sign Up Button Click";
         public static final String ACTION_LEARNING_MODULE = "Learning Module View";
+        public static final String ACTION_CONNECT_MAP = "Training Location Click";
     }
 }

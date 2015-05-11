@@ -16,9 +16,12 @@ import android.widget.ListView;
 
 import com.afn.onthego.R;
 import com.afn.onthego.adapters.ConnectAdapter;
+import com.afn.onthego.app.OTGApplication;
 import com.afn.onthego.storage.KeyList;
 import com.afn.onthego.storage.Storage;
 import com.afn.onthego.util.LinksContainer;
+import com.google.android.gms.analytics.HitBuilders;
+import com.google.android.gms.analytics.Tracker;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -27,6 +30,7 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
+import java.security.Key;
 import java.util.ArrayList;
 
 public class ConnectActivity extends ActionBarActivity implements OnMapReadyCallback {
@@ -174,9 +178,16 @@ public class ConnectActivity extends ActionBarActivity implements OnMapReadyCall
         map.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
             @Override
             public void onInfoWindowClick(Marker marker) {
+                Tracker t = ((OTGApplication) getApplication()).getTracker();
+
+                t.send(new HitBuilders.EventBuilder()
+                        .setCategory(KeyList.Analytics.CATEGORY_CONNECT)
+                        .setAction(KeyList.Analytics.ACTION_CONNECT_MAP)
+                        .setLabel(marker.getTitle()));
+
                 Uri gmmIntentUri = Uri.parse("http://maps.google.com/maps?daddr=" +
                         marker.getPosition().latitude + "," +
-                        marker.getPosition().longitude);
+                        marker.getPosition().longitude + "&mode=transit");
                 Intent navIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
                 startActivity(navIntent);
             }
