@@ -37,12 +37,6 @@
 
 
         <activity
-            android:name=".activities.SplashActivity"
-            android:label="@string/title_activity_splash"
-            android:screenOrientation="portrait"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
-
-        <activity
             android:name=".activities.PDFActivity"
             android:label="@string/title_activity_pdf"
             android:screenOrientation="portrait" />

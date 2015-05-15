@@ -183,7 +183,7 @@ public class ConnectActivity extends ActionBarActivity implements OnMapReadyCall
                 t.send(new HitBuilders.EventBuilder()
                         .setCategory(KeyList.Analytics.CATEGORY_CONNECT)
                         .setAction(KeyList.Analytics.ACTION_CONNECT_MAP)
-                        .setLabel(marker.getTitle()));
+                        .setLabel(marker.getTitle()).build());
 
                 Uri gmmIntentUri = Uri.parse("http://maps.google.com/maps?daddr=" +
                         marker.getPosition().latitude + "," +

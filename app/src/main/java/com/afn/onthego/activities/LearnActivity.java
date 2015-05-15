@@ -51,7 +51,7 @@ public class LearnActivity extends ActionBarActivity
             t.send(new HitBuilders.EventBuilder()
                     .setCategory(KeyList.Analytics.CATEGORY_LEARN)
                     .setAction(KeyList.Analytics.ACTION_LEARNING_MODULE)
-                    .setAction(learningModule.getName()).build());
+                    .setLabel(learningModule.getName()).build());
 
             switch (learningModule.getType()) {
                 case KeyList.LearningModulesKeys.TYPE_PDF:

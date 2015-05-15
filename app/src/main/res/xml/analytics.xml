@@ -26,9 +26,6 @@
     <screenName name="com.afn.onthego.activities.WebActivity">
         Android Web View
     </screenName>
-    <screenName name="com.afn.onthego.activities.SplashActivity">
-        Android Splash Screen
-    </screenName>
     <screenName name="com.afn.onthego.activities.PDFActivity">
         Android PDF View
     </screenName>

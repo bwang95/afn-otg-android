@@ -72,7 +72,7 @@ public class AboutActivity extends ActionBarActivity {
         AlertDialog dialog = new AlertDialog.Builder(this)
                 .setMessage(getResources().getString(R.string.analytics_message))
                 .setCancelable(true)
-                .setPositiveButton("Turn it on", new DialogInterface.OnClickListener() {
+                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         demographics.setChecked(true);
@@ -80,7 +80,7 @@ public class AboutActivity extends ActionBarActivity {
                         Storage.getInstance(AboutActivity.this).setAnalyticsOptOut(false);
                         GoogleAnalytics.getInstance(getApplicationContext()).setAppOptOut(false);
                     }
-                }).setNegativeButton("Turn it off", new DialogInterface.OnClickListener() {
+                }).setNegativeButton("No", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         demographics.setChecked(false);
