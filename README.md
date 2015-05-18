@@ -4,7 +4,9 @@ Created Tuesday, 03/03/2015
 
 CS378 Behavioral Ethics: Digital Age; Dr. Karen Landolt
 
-Team 7
+Non-Profit Partner: [Austin Free-Net](http://austinfree.net)
+
+Created by: Team 7
 
 | Name               |   Github        |  Email                    |
 |--------------------|-----------------|---------------------------|
