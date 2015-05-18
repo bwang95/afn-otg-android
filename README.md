@@ -11,3 +11,5 @@ Kelsey Mayfield		kelseymayfield	kelsey.mayfield@gmail.com
 Lauren McKenna		mckennatx	laurenmckenna@utexas.edu
 Kyle Nicola		kylenicola 	kyle.a.nicola@gmail.com
 Brian Wang		bwang95		b.wang@utexas.edu
+
+[<img src="https://developer.android.com/images/brand/en_app_rgb_wo_45.png">](https://play.google.com/store/apps/details?id=com.afn.onthego)
