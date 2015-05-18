@@ -17,4 +17,6 @@ Created by: Team 7
 | Kyle Nicola        | kylenicola      | kyle.a.nicola@gmail.com   |
 | Brian Wang         | bwang95         | b.wang@utexas.edu         |
 
+[iOS Repository](https://github.com/mckennatx/afn-otg-ios)
+
 [<img src="https://developer.android.com/images/brand/en_app_rgb_wo_45.png">](https://play.google.com/store/apps/details?id=com.afn.onthego)
