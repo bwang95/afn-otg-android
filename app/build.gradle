@@ -12,15 +12,15 @@ android {
 
     signingConfigs {
        release {
-           //Redacted.
+           // Redacted.
        }
     }
     defaultConfig {
         applicationId "com.afn.onthego"
         minSdkVersion 10
         targetSdkVersion 21
-        versionCode 10200
-        versionName "1.2.0R"
+        versionCode 12100
+        versionName "1.2.1R"
     }
     buildTypes {
         debug {
