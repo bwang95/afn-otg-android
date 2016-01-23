@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ripple xmlns:android="http://schemas.android.com/apk/res/android"
-        android:color="@color/afn_dark_green">
+        android:color="@color/afn_light_green">
     <item
         android:id="@android:id/mask"
         android:drawable="@drawable/rounded_rect_green">
-        <color android:color="@color/afn_dark_green"/>
+        <color android:color="@color/afn_light_green"/>
     </item>
     <item android:drawable="@drawable/rounded_rect_white" />
 </ripple>
