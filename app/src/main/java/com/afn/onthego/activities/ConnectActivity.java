@@ -30,7 +30,6 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
-import java.security.Key;
 import java.util.ArrayList;
 
 public class ConnectActivity extends ActionBarActivity implements OnMapReadyCallback {
@@ -50,9 +49,9 @@ public class ConnectActivity extends ActionBarActivity implements OnMapReadyCall
     private ListView.OnItemClickListener locationListener = new ListView.OnItemClickListener() {
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-            if(map == null || markers == null)
+            if (map == null || markers == null)
                 return;
-            if(!(position < markers.length && position >= 0))
+            if (!(position < markers.length && position >= 0))
                 return;
 
             Marker m = markers[position];
@@ -107,19 +106,6 @@ public class ConnectActivity extends ActionBarActivity implements OnMapReadyCall
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-
-
-        return super.onOptionsItemSelected(item);
-    }
-
-    @Override
     public void onMapReady(GoogleMap googleMap) {
         map = googleMap;
         setInitialMapState();
@@ -143,10 +129,8 @@ public class ConnectActivity extends ActionBarActivity implements OnMapReadyCall
         Location location = locManager.getLastKnownLocation(provider);
         int i = 0;
 
-        for(int k = 0; k < locations.size(); k++)
-        {
-            if(locations.get(i).getName().equals("Rosewood Zaragosa Neighborhood Center"))
-            {
+        for (int k = 0; k < locations.size(); k++) {
+            if (locations.get(i).getName().equals("Rosewood Zaragosa Neighborhood Center")) {
                 i = k;
                 break;
             }
@@ -168,7 +152,7 @@ public class ConnectActivity extends ActionBarActivity implements OnMapReadyCall
 
         markers = new Marker[locations.size()];
 
-        for(int k = 0; k < locations.size(); k++) {
+        for (int k = 0; k < locations.size(); k++) {
             options.title(locations.get(k).getName());
             options.position(locations.get(k).getLatLng());
 

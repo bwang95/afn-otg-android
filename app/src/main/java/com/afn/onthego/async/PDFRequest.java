@@ -79,7 +79,7 @@ public class PDFRequest extends AsyncTask<Void, Void, String> {
             out.close();
             response.body().close();
 
-            Log.e(LOG_TAG, output);
+            Log.d(LOG_TAG, output);
         } catch (Exception e) {
             Log.e(LOG_TAG, "Error getting data!", e);
             return null;

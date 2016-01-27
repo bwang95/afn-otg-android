@@ -26,7 +26,6 @@ import com.google.android.gms.analytics.Tracker;
 public class MainActivity extends ActionBarActivity {
 
     private static final String LOG_TAG = "MainActivity";
-    private FrameLayout fragmentContainer;
 
     private View.OnClickListener aboutListener = new View.OnClickListener() {
         @Override
@@ -34,18 +33,6 @@ public class MainActivity extends ActionBarActivity {
             onNavigationSelection(KeyList.Navigation.ABOUT);
         }
     };
-
-    @Override
-    public void onStart() {
-        super.onStart();
-
-//        // Get tracker.
-//        Tracker t = ((OTGApplication) getApplication()).getTracker();
-//        // Set screen name.
-//        t.setScreenName("Android Home");
-//        // Send a screen view.
-//        t.send(new HitBuilders.ScreenViewBuilder().build());
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -162,7 +162,6 @@ public class LearnActivity extends ActionBarActivity
         Storage storage = Storage.getInstance(this);
         storage.getLearningModules().update(json);
 
-        //TODO I don't think you have to clear the adapter here.
         listAdapter.notifyDataSetChanged();
         swipeRefreshLayout.setRefreshing(false);
     }

@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="color_divider">#FFBFBFBF</color>
-    <!-- TODO Get actual color. -->
     <color name="afn_light_blue">#ff3e96c7</color>
     <color name="afn_dark_blue">#ff247cad</color>
     <color name="afn_light_green">#ff40c738</color>
@@ -13,7 +12,6 @@
     <color name="red_light">#ffff3633</color>3
     <color name="holo_orange_light">#ffffbb33</color>
 
-    <!--<color name="color_header">#ff00067b</color>-->
     <color name="color_link">#ff3e96c7</color>
     <color name="color_list_text">#ff99b8cc</color>
     <color name="color_hint">#ffc2c8cf</color>

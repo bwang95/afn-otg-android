@@ -34,10 +34,6 @@ public class VolunteerFragment extends Fragment {
             Intent i = new Intent(Intent.ACTION_VIEW);
             i.setData(Uri.parse(Storage.getInstance(getActivity()).getLinks().getURLS().get(LinksContainer.VOLUNTEER_SIGN_IN)));
             startActivity(i);
-//            Intent webIntent = new Intent(getActivity(), WebActivity.class);
-//            webIntent.putExtra(KeyList.ActivityParams.KEY_URL, KeyList.URL.VOLUNTEER_SIGN_IN);
-//            webIntent.putExtra(KeyList.ActivityParams.KEY_TITLE, "Sign In");
-//            startActivity(webIntent);
         }
     };
 
@@ -55,11 +51,6 @@ public class VolunteerFragment extends Fragment {
             Intent i = new Intent(Intent.ACTION_VIEW);
             i.setData(Uri.parse(Storage.getInstance(getActivity()).getLinks().getURLS().get(LinksContainer.VOLUNTEER_SIGN_UP)));
             startActivity(i);
-//            Intent webIntent = new Intent(getActivity(), WebActivity.class);
-//            webIntent.putExtra(KeyList.ActivityParams.KEY_URL, KeyList.URL.VOLUNTEER_SIGN_UP);
-//            webIntent.putExtra(KeyList.ActivityParams.KEY_TITLE, "Sign Up");
-//            webIntent.putExtra(KeyList.ActivityParams.KEY_PURGE_COOKIES, true);
-//            startActivity(webIntent);
         }
     };
 
@@ -76,7 +67,6 @@ public class VolunteerFragment extends Fragment {
      *
      * @return A new instance of fragment VolunteerFragment.
      */
-    // TODO: Rename and change types and number of parameters
     public static VolunteerFragment newInstance() {
         VolunteerFragment fragment = new VolunteerFragment();
         Bundle args = new Bundle();

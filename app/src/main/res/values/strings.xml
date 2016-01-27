@@ -4,12 +4,7 @@
     <string name="action_settings">Settings</string>
     <string name="title_activity_learn">Learn</string>
     <string name="title_activity_about">Attributions</string>
-    <string name="header_about">So who made this thing, anyway?</string>
 
-<!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-
-    <string name="hello_world">Hello world!</string>
     <string name="title_activity_connect">Connect</string>
     <string name="maps_api_key">AIzaSyDcryPqFu_Hh18XA5UkgecTqX1EztIQEm4</string>
     <string name="home_about_button">Attributions</string>
